@@ -1,0 +1,9 @@
+
+
+.first-slide, .second-slide, .third-slide {
+    height: 500px;
+    width: 100%;
+    position: relative;
+    align-content: center;
+    background-attachment: fixed;
+}
