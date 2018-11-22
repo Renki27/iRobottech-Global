@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-//import Slide1 from '../images/slide1.jpg';
-//import Slide2 from '../images/slide2.jpg';
-//import Slide3 from '../images/slide3.jpg';
+import Slide1 from '../images/slide1.jpg';
+import Slide2 from '../images/slide2.jpg';
+import Slide3 from '../images/slide3.jpg';
 import { Container, Carousel, CarouselInner, CarouselItem, View, Mask, CarouselCaption } from 'mdbreact';
 import './Carousel.css';
 
@@ -19,7 +19,7 @@ class HomeCarousel extends Component {
                     <CarouselInner>
                         <CarouselItem itemId="1">
                             <View>
-                                <img className="d-block w-100"  alt="First slide" />
+                                <img className="d-block w-100"  src={Slide1} alt="First slide" />
                                 <Mask overlay="black-light"></Mask>
                             </View>
                             <CarouselCaption>
@@ -29,7 +29,7 @@ class HomeCarousel extends Component {
                         </CarouselItem>
                         <CarouselItem itemId="2">
                             <View>
-                                <img className="d-block w-100"  alt="Second slide" />
+                                <img className="d-block w-100"   src={Slide2} alt="Second slide" />
                                 <Mask overlay="black-light"></Mask>
                             </View>
                             <CarouselCaption>
@@ -39,7 +39,7 @@ class HomeCarousel extends Component {
                         </CarouselItem>
                         <CarouselItem itemId="3">
                             <View>
-                                <img className="d-block w-100"  alt="Third slide" />
+                                <img className="d-block w-100"  src={Slide3} alt="Third slide" />
                                 <Mask overlay="black-light"></Mask>
                             </View>
                             <CarouselCaption>

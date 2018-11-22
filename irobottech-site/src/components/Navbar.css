@@ -1,20 +1,18 @@
-
 a.navbar-brand {
-    color: #ffffff;
-    font-weight: 200;
-  }
-    /*deep cyan*/
-  a.navbar-brand:hover {
-    color: #00bcd4;
-    font-weight: 200;
-  }
+  color: #ffffff;
+  font-weight: 200;
+}
+/*deep-cyan*/
+a.navbar-brand:hover {
+  color: #00bcd4;
+  font-weight: 200;
+}
 
+/*deep-orange*/
+a.nav-link:hover {
+  color: #ff5722;
+}
 
 a.nav-link {
-    color: #ffffff;
-  }
-
-  /*deep orange*/
-a.nav-link:hover {
-    color: #ff5722;
-  }
+  color: #ffffff;
+}

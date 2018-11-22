@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 
 
-class AdminDashboard extends Component {
+class ProfessorDashboard extends Component {
   render() {
     return (
       <div>
         <div className="container">
-          <h1>ADMIN DASHBOARD --------------------------------------------------</h1>
+          <h1>PROFESSOR DASHBOARD------------------</h1>
         </div>
       </div>
     );
   }
 }
 
-export default AdminDashboard;
+export default ProfessorDashboard;

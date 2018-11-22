@@ -2,6 +2,15 @@ const express = require("express");
 const router = express.Router();
 
 const mysqlConnection = require("../connectionDataBase/databaseConnection");
+
+
+//rutas del servidor
+
+//router: definir rutas del servidor
+//intentan devolver algo
+//Ej: al intentar pedir la ruta inicial de la aplicación, se va a intentar responder con algo
+//las rutas sirven para peticiones
+
 // GET all Students Acc
 router.get("/", (req, res) => {
   mysqlConnection.query("SELECT * FROM STUDENT", (err, rows, fields) => {

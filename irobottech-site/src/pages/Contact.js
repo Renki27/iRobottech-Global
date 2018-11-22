@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Navbar from '../components/Navbar.js';
-import FooterPage from '../components/Footer.js';
 import { Container, Row, Col, Input, Button, Fa, Card, CardBody } from 'mdbreact';
 import './Contact.css';
 
@@ -24,7 +22,6 @@ class Contact extends Component {
     render() {
         return (
             <div>
-                <Navbar />
                 <div className="container-contact">
                     <Container>
                         <Row>
@@ -49,7 +46,6 @@ class Contact extends Component {
                         </Row>
                     </Container>
                 </div>
-                <FooterPage />
             </div>
         );
     }

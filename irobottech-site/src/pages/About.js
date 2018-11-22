@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import Navbar from '../components/Navbar.js';
-import FooterPage from '../components/Footer.js';
 
 
 class About extends Component {
     render() {
         return (
             <div>
-                <Navbar />
                 <div className="container">
                     <h2>About</h2>
                     <p>
@@ -16,7 +13,6 @@ class About extends Component {
                         asdig gaisdg ausydg uasdg uasgd uaysgduy gayguyg uyguy gusyag dqg8wd gasd 8gasd 8g8q2 gd87wgdqwgdasidg isa7gd as7isas
                 </p>
                 </div>
-                <FooterPage />
             </div>
         );
     }

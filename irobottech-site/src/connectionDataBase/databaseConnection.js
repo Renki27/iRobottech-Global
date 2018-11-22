@@ -1,5 +1,33 @@
-const mysql = require('mysql');
+const mysql = require("mysql");
+const Sequelize = require("sequelize");
+const mysqlConnection = {};
+const sequelize = new Sequelize("irobottechdb", "root", "", {
+  host: "localhost",
+  dialect: "mysql",
+  operatorsAliases: false,
 
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  }
+});
+
+
+mysqlConnection.sequelize = sequelize;
+
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log("Connection has been established successfully.");
+  })
+  .catch(err => {
+    console.error("Unable to connect to the database:", err);
+  });
+
+module.exports = mysqlConnection;
+/*
 const mysqlConnection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -17,4 +45,7 @@ mysqlConnection.connect(function (err) {
   }
 });
 
-module.exports = mysqlConnection; 
+
+
+*/
+//module.exports = mysqlConnection;
