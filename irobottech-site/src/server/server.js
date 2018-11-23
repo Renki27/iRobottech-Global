@@ -14,6 +14,7 @@ app.use(express.urlencoded({ extended: false }));
 
 
 // Routes
+app.use('/download',require('../routes/downloadRoutes'));
 app.use("/RegisterStudentRoute", require("../routes/registerStudentRoute"));
 app.use("/RegisterProfessorRoute", require("../routes/RegisterProfessorRoute"));
 app.use("/RegisterAdminRoute", require("../routes/RegisterAdminRoute"));

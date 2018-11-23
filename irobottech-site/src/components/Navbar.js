@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Navbar.css";
 import { Link, withRouter } from "react-router-dom";
 import { NavbarBrand, DropdownToggle, DropdownMenu, DropdownItem, Dropdown} from "mdbreact";
+import DropdownPage from './buttonDowload';
 
 class MyNavbar extends Component {
   logOut = evt => {
@@ -62,6 +63,7 @@ class MyNavbar extends Component {
           <NavbarBrand href="/">
             <strong>iRobottech</strong>
           </NavbarBrand>
+          <DropdownPage></DropdownPage>
           <div className="collapse navbar-collapse" id="navbarCollapse">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item active">
