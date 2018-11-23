@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Navbar.css";
 import { Link, withRouter } from "react-router-dom";
-import { NavbarBrand } from "mdbreact";
+import { NavbarBrand, DropdownToggle, DropdownMenu, DropdownItem, Dropdown} from "mdbreact";
 
 class MyNavbar extends Component {
   logOut = evt => {
@@ -12,25 +12,34 @@ class MyNavbar extends Component {
 
   render() {
     const noUserAuth = (
-      <ul  className="navbar-nav ml-auto">
+      <ul className="navbar-nav ml-auto">
         <li className="nav-item">
           <Link className="nav-link" to="/login">
-            Login
+            Iniciar Sesion
           </Link>
         </li>
       </ul>
     );
 
+
+
     const userAuth = (
-      <ul  className="navbar-nav ml-auto">
+      <ul className="navbar-nav ml-auto">
         <li className="nav-item">
-          <Link className="nav-link" to="/profile">
-            Profile
+          <Dropdown>
+            <DropdownToggle nav caret>
+              <Link className="nav-link d-none d-md-inline" to="/profile">
+                Mi cuenta
           </Link>
+            </DropdownToggle>
+            <DropdownMenu right>
+              <DropdownItem href="#!">Editar Datos</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
         </li>
         <li className="nav-item">
           <Link to="" className="nav-link" onClick={this.logOut.bind(this)}>
-            LogOut
+            Cerrar Sesion
           </Link>
         </li>
       </ul>

@@ -12,8 +12,9 @@ import RegisterSecretary from "../pages/RegisterSecretary";
 import RegisterAdmin from "../pages/RegisterAdmin";
 import Profile from "../pages/Profile";
 import Navbar from "../components/Navbar";
-
+import RecoverPage from '../pages/RecoverPage';
 import "./App.css";
+
 
 class App extends Component {
   render() {
@@ -24,6 +25,7 @@ class App extends Component {
           <Navbar />
           <Route exact path="/" component={Home} />
           <div className="Container">
+            <Route exact path="/RecoverPage" component={RecoverPage} />
             <Route exact path="/About" component={About} />
             <Route exact path="/Contact" component={Contact} />
             <Route exact path="/Login" component={Login} />
@@ -39,6 +41,7 @@ class App extends Component {
               path="/RegisterSecretary"
               component={RegisterSecretary}
             />
+            
             <Route exact path="/RegisterAdmin" component={RegisterAdmin} />
           </div>
           <FooterPage />

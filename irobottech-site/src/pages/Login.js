@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Input, Button, Card, label } from "mdbreact";
+import { Container, Row, Col, Input, Button, Card, label, NavLink } from "mdbreact";
 import "./Login.css";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
@@ -112,6 +112,7 @@ class Login extends Component {
                           >
                             Ingresar
                           </Button>
+                          <NavLink to="/RecoverPage"> Haz olvidado la contraseña? </NavLink>
                         </div>
                       </Row>
                     </form>
