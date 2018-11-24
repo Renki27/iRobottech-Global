@@ -13,6 +13,8 @@ import RegisterAdmin from "../pages/RegisterAdmin";
 import Profile from "../pages/Profile";
 import Navbar from "../components/Navbar";
 import RecoverPage from '../pages/RecoverPage';
+import EditProfile from "../pages/EditProfile";
+import EditPass from "../pages/EditPass";
 import "./App.css";
 
 
@@ -31,18 +33,11 @@ class App extends Component {
             <Route exact path="/Login" component={Login} />
             <Route exact path="/RegisterStudent" component={RegisterStudent} />
             <Route exact path="/profile" component={Profile} />
-            <Route
-              exact
-              path="/RegisterProfessor"
-              component={RegisterProfessor}
-            />
-            <Route
-              exact
-              path="/RegisterSecretary"
-              component={RegisterSecretary}
-            />
-            
+            <Route exact path="/RegisterProfessor"component={RegisterProfessor}/>
+            <Route exact path="/RegisterSecretary"component={RegisterSecretary}/> 
             <Route exact path="/RegisterAdmin" component={RegisterAdmin} />
+            <Route exact path="/editProfile" component={EditProfile} />
+            <Route exact path="/EditPass" component={EditPass} />
           </div>
           <FooterPage />
         </div>

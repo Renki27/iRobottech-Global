@@ -21,6 +21,7 @@ app.use("/RegisterAdminRoute", require("../routes/RegisterAdminRoute"));
 app.use("/RegisterSecretaryRoute", require("../routes/RegisterSecretaryRoute"));
 app.use("/users", require("../routes/Users"));
 app.use("/RecoverPass", require("../routes/recoverPass"));
+app.use("/EditProfileRoute", require("../routes/EditProfileRoute"));
 //APP USE LOGIN
 
 // Static Files

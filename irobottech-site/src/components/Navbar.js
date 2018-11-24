@@ -34,7 +34,20 @@ class MyNavbar extends Component {
           </Link>
             </DropdownToggle>
             <DropdownMenu right>
-              <DropdownItem href="#!">Editar Datos</DropdownItem>
+            <DropdownItem>
+            <Link className="nav-link d-none d-md-inline" to="/EditProfile">
+                Editar Datos
+          </Link>
+              </DropdownItem>
+
+            <DropdownItem>
+            <Link className="nav-link d-none d-md-inline" to="/EditPass">
+                Editar Contraseña
+          </Link>
+              </DropdownItem>
+
+
+
             </DropdownMenu>
           </Dropdown>
         </li>
