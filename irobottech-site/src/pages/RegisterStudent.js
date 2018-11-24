@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Card, CardBody, Input } from "mdbreact";
+import { registerStudent } from "../components/UserFunctions";
 
 class RegisterStudent extends Component {
   constructor(props) {
@@ -63,25 +64,26 @@ class RegisterStudent extends Component {
   }
 
   handleSubmit = evt => {
-    
-    fetch("/RegisterStudentRoute", {
-      method: "POST",
-      body: JSON.stringify(this.state),
-
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-      })
-      .catch(err => console.error(err));
     evt.preventDefault();
+    const newStudent = {
+      firstName: this.state.firstName,
+      secondName: this.state.secondName,
+      lastName1: this.state.lastName1,
+      lastName2: this.state.lastName2,
+      idNumber: this.state.idNumber,
+      birthDate: this.state.birthDate,
+      phone: this.state.phone,
+      address: this.state.address,
+      guardianName: this.state.guardianName,
+      guardianID: this.state.guardianID,
+      emergencyPhone: this.state.emergencyPhone,
+      email: this.state.email
+    };
+    registerStudent(newStudent);
+
     // console.log(this.state);
-    
-   /*
+
+    /*
     let emailOk = this.compareEmails(this.state.email, this.state.emailConfirm);
     if (emailOk === true) {
       alert("OK EMAIL");
@@ -102,10 +104,9 @@ class RegisterStudent extends Component {
   render() {
     return (
       <div>
-
         <Container className="mt-5">
           <Row className="mt-6">
-            <Col md="8" className="mx-auto">
+            <Col md="10" className="ml-5">
               <Card>
                 <h3 className="text-center font-weight-bold pl-0 my-4">
                   Registro de estudiante

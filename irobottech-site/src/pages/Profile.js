@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import jwt_decode from "jwt-decode";
 import AdminDashboard from "./AdminDashboard";
 import ProfessorDashboard from "./ProfessorDashboard";
+import SecretaryDashboard from "./SecretaryDashboard";
+import StudentDashboard from "./StudentDashboard";
 
 const adminView = <AdminDashboard />;
+const secretaryView = <SecretaryDashboard />;
 const professorView = <ProfessorDashboard />;
-const selection = "";
-const selector = "";
+const studentView = <StudentDashboard />;
 
 class Profile extends Component {
   constructor() {
@@ -35,6 +37,10 @@ class Profile extends Component {
         return adminView;
       case "PROFESSOR":
         return professorView;
+      case "SECRETARY":
+        return secretaryView;
+      case "STUDENT":
+        return studentView;
       default:
         return "";
     }

@@ -9,7 +9,7 @@ const registerStudent = <RegisterStudent />;
 const registerProfessor = <RegisterProfessor />;
 const registerSecretary = <RegisterSecretary />;
 
-class AdminDashboard extends Component {
+class SecretaryDashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,9 +33,12 @@ class AdminDashboard extends Component {
             <ListGroupItem hover onClick={this.loaderRegSec.bind(this)}>
               Registrar Secretaria/o
             </ListGroupItem>
-            <ListGroupItem hover>Crear Curso</ListGroupItem>
-            <ListGroupItem hover>Crear Grupo</ListGroupItem>
-            <ListGroupItem hover>Deshabilitar Cuenta</ListGroupItem>
+            <ListGroupItem hover>
+              Crear Curso
+            </ListGroupItem>
+            <ListGroupItem hover>
+              Crear Grupo
+            </ListGroupItem>
           </ListGroup>
         </div>
         <div className="align-box">
@@ -69,6 +72,4 @@ class AdminDashboard extends Component {
   }
 }
 
-export default AdminDashboard;
-
-
+export default SecretaryDashboard;

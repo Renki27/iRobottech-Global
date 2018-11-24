@@ -2,7 +2,15 @@ import React, { Component } from "react";
 import { ListGroup, ListGroupItem, Link } from "mdbreact";
 import "./AdminDashboard.css";
 
-class ProfessorDashboard extends Component {
+class StudentDashboard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      componentSelector: ""
+    };
+
+  }
+
   render() {
     return (
       <div>
@@ -24,4 +32,4 @@ class ProfessorDashboard extends Component {
   }
 }
 
-export default ProfessorDashboard;
+export default StudentDashboard;

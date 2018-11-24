@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Card, CardBody, Input } from "mdbreact";
+import { registerProfessor } from "../components/UserFunctions";
 
 class RegisterProfessor extends Component {
   constructor(props) {
@@ -45,6 +46,7 @@ class RegisterProfessor extends Component {
   }
 
   handleSubmit = evt => {
+    /*
     fetch("/RegisterProfessorRoute", {
       method: "POST",
       body: JSON.stringify(this.state),
@@ -61,6 +63,20 @@ class RegisterProfessor extends Component {
       .catch(err => console.error(err));
     evt.preventDefault();
     // console.log(this.state);
+    */
+    evt.preventDefault();
+    const newProfessor = {
+      firstName: this.state.firstName,
+      secondName: this.state.secondName,
+      lastName1: this.state.lastName1,
+      lastName2: this.state.lastName2,
+      idNumber: this.state.idNumber,
+      birthDate: this.state.birthDate,
+      phone: this.state.phone,
+      address: this.state.address,
+      email: this.state.email
+    };
+    registerProfessor(newProfessor);
   };
 
   render() {

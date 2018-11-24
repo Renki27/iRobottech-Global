@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Card, CardBody, Input } from "mdbreact";
+import { registerSecretary } from "../components/UserFunctions";
 
 class RegisterSecretary extends Component {
   constructor(props) {
@@ -45,22 +46,20 @@ class RegisterSecretary extends Component {
   }
 
   handleSubmit = evt => {
-    fetch("/RegisterSecretaryRoute", {
-      method: "POST",
-      body: JSON.stringify(this.state),
-
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-      })
-      .catch(err => console.error(err));
     evt.preventDefault();
-    // console.log(this.state);
+    const newSecretary = {
+      firstName: this.state.firstName,
+      secondName: this.state.secondName,
+      lastName1: this.state.lastName1,
+      lastName2: this.state.lastName2,
+      idNumber: this.state.idNumber,
+      birthDate: this.state.birthDate,
+      phone: this.state.phone,
+      address: this.state.address,
+      email: this.state.email
+    };
+    registerSecretary(newSecretary);
+  
   };
 
   render() {
@@ -71,7 +70,7 @@ class RegisterSecretary extends Component {
             <Col md="8" className="mx-auto">
               <Card>
                 <h3 className="text-center font-weight-bold pl-0 my-4">
-                  Registro de Usuario Secretario
+                  Registro de Secretario/a
                 </h3>
                 <CardBody>
                   <form

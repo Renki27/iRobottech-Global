@@ -15,10 +15,6 @@ app.use(express.urlencoded({ extended: false }));
 
 // Routes
 app.use('/download',require('../routes/downloadRoutes'));
-app.use("/RegisterStudentRoute", require("../routes/registerStudentRoute"));
-app.use("/RegisterProfessorRoute", require("../routes/RegisterProfessorRoute"));
-app.use("/RegisterAdminRoute", require("../routes/RegisterAdminRoute"));
-app.use("/RegisterSecretaryRoute", require("../routes/RegisterSecretaryRoute"));
 app.use("/users", require("../routes/Users"));
 app.use("/RecoverPass", require("../routes/recoverPass"));
 app.use("/EditProfileRoute", require("../routes/EditProfileRoute"));
