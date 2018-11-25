@@ -11,15 +11,26 @@ const professorView = <ProfessorDashboard />;
 const studentView = <StudentDashboard />;
 
 class Profile extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       username: "",
       email: "",
-      accountType: ""
+      account_type: ""
     };
     this.dashboardSelector = this.dashboardSelector.bind(this);
   }
+
+  componentWillMount() {
+    const token = localStorage.usertoken;
+    const decoded = jwt_decode(token);
+    this.setState({
+      username: decoded.username,
+      email: decoded.email,
+      account_type: decoded.account_type
+    });
+  }
+
 
   componentDidMount() {
     const token = localStorage.usertoken;
@@ -29,6 +40,11 @@ class Profile extends Component {
       email: decoded.email,
       account_type: decoded.account_type
     });
+  }
+
+
+  shouldComponentUpdate (next_props, next_state) {
+    return false;
   }
 
   dashboardSelector(account_type) {

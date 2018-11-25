@@ -171,10 +171,11 @@ router.post("/login", (req, res) => {
 
 //Get  account
 router.get("/verifyAccount/:email", (req, res) => {
-  Account.findOne({
+  Account.find({
     where: {
       status: "ACTIVE",
-      email: req.params.email
+      email: req.params.email,
+      account_type: ["SECRETARY", "PROFESSOR", "STUDENT"]
     }
   }).then(function(account) {
     if (account) {
@@ -200,14 +201,13 @@ router.get("/getPersonData/:id", (req, res) => {
   });
 });
 
-//Disable Account
-router
-  .put("/disableAccount/:email", (req, res) => {
-    Account.update(
-      { status: "INACTIVE" },
-      { where: { email: req.params.email } }
-    );
-  })
+//Disable Account Admin
+router.put("/disableAccount/:email", (req, res) => {
+  Account.update(
+    { status: "INACTIVE" },
+    { where: { email: req.params.email } }
+  );
+});
 
 
 module.exports = router;

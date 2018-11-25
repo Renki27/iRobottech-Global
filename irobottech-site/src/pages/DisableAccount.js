@@ -7,7 +7,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-class DisableAccount extends Component {
+class DisableAccountAdmin extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,6 +29,7 @@ class DisableAccount extends Component {
   }*/
 
   async verifyAccount() {
+    this.setState({ person_data: "" });
     try {
       const response = await axios.get(
         `users/verifyAccount/${this.state.emailD}`
@@ -113,6 +114,7 @@ class DisableAccount extends Component {
                     Verificar
                   </Button>
                   <Button
+                    hidden={!this.state.person_data}
                     className="btn btn-outline-deep-orange"
                     onClick={this.handleClickOpen}
                   >
@@ -138,7 +140,10 @@ class DisableAccount extends Component {
                         Cancelar
                       </Button>
                       <Button
-                        onClick={() => {this.disableAccount(); this.handleClose()}}
+                        onClick={() => {
+                          this.disableAccount();
+                          this.handleClose();
+                        }}
                         color="primary"
                         autoFocus
                       >
@@ -155,4 +160,4 @@ class DisableAccount extends Component {
     );
   }
 }
-export default DisableAccount;
+export default DisableAccountAdmin;

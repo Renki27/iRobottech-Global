@@ -22,7 +22,8 @@ class AdminDashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      componentSelector: ""
+      componentSelector: "",
+      accT: this.props.account_type
     };
     this.selector = this.selector.bind(this);
   }
