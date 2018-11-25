@@ -1,8 +1,15 @@
 import React, { Component } from "react";
 import "./Navbar.css";
 import { Link, withRouter } from "react-router-dom";
-import { NavbarBrand, DropdownToggle, DropdownMenu, DropdownItem, Dropdown} from "mdbreact";
-import DropdownPage from './buttonDowload';
+import {
+  NavbarBrand,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  Dropdown,
+  Navbar
+} from "mdbreact";
+import DropdownPage from "./buttonDowload";
 
 class MyNavbar extends Component {
   logOut = evt => {
@@ -22,8 +29,6 @@ class MyNavbar extends Component {
       </ul>
     );
 
-
-
     const userAuth = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
@@ -31,23 +36,19 @@ class MyNavbar extends Component {
             <DropdownToggle nav caret>
               <Link className="nav-link d-none d-md-inline" to="/profile">
                 Mi cuenta
-          </Link>
+              </Link>
             </DropdownToggle>
             <DropdownMenu right>
-            <DropdownItem>
-            <Link className="nav-link d-none d-md-inline" to="/EditProfile">
-                Editar Datos
-          </Link>
+              <DropdownItem>
+                <Link className="nav-link d-none d-md-inline" to="/EditProfile">
+                  Editar Datos
+                </Link>
               </DropdownItem>
-
-            <DropdownItem>
-            <Link className="nav-link d-none d-md-inline" to="/EditPass">
-                Editar Contraseña
-          </Link>
+              <DropdownItem>
+                <Link className="nav-link d-none d-md-inline" to="/EditPass">
+                  Editar Contraseña
+                </Link>
               </DropdownItem>
-
-
-
             </DropdownMenu>
           </Dropdown>
         </li>
@@ -60,7 +61,7 @@ class MyNavbar extends Component {
     );
 
     return (
-      <nav className="navbar navbar-expand elegant-color-dark">
+      <Navbar className="navbar navbar-expand elegant-color-dark">
         <button
           className="navbar-toggler navbar-toggler-right"
           type="button"
@@ -76,13 +77,15 @@ class MyNavbar extends Component {
           <NavbarBrand href="/">
             <strong>iRobottech</strong>
           </NavbarBrand>
-          <DropdownPage></DropdownPage>
           <div className="collapse navbar-collapse" id="navbarCollapse">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item active">
                 <Link className="nav-link" to="/">
                   Home <span className="sr-only">(current)</span>
                 </Link>
+              </li>
+              <li className="nav-item">
+                <DropdownPage />
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/RegisterStudent">
@@ -98,7 +101,7 @@ class MyNavbar extends Component {
             </ul>
           </div>
         </div>
-      </nav>
+      </Navbar>
     );
   }
 }
