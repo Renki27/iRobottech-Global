@@ -5,6 +5,7 @@ const cors = require("cors");
 const jwt = require("jsonwebtoken");
 //const bcrypt = require("bcrypt");
 const Account = require("../models/Account");
+const Person = require("../models/Person");
 router.use(cors());
 
 process.env.SECRET_KEY = "secret";
@@ -139,8 +140,6 @@ router.post("/registerStudent", (req, res) => {
   });
 });
 
-
-
 //LOGIN
 router.post("/login", (req, res) => {
   Account.findOne({
@@ -169,5 +168,46 @@ router.post("/login", (req, res) => {
       res.status(400).json({ error: err });
     });
 });
+
+//Get  account
+router.get("/verifyAccount/:email", (req, res) => {
+  Account.findOne({
+    where: {
+      status: "ACTIVE",
+      email: req.params.email
+    }
+  }).then(function(account) {
+    if (account) {
+      res.send(account);
+    } else {
+      console.log(res.err);
+    }
+  });
+});
+
+//Get Person Data
+router.get("/getPersonData/:id", (req, res) => {
+  Person.findOne({
+    where: {
+      id_person: req.params.id
+    }
+  }).then(function(person) {
+    if (person) {
+      res.send(person);
+    } else {
+      console.log(res.err);
+    }
+  });
+});
+
+//Disable Account
+router
+  .put("/disableAccount/:email", (req, res) => {
+    Account.update(
+      { status: "INACTIVE" },
+      { where: { email: req.params.email } }
+    );
+  })
+
 
 module.exports = router;

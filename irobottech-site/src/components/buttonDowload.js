@@ -12,7 +12,7 @@ class DropdownPage extends React.Component {
           <DropdownItem  className="nav-link d-none d-md-inline" href="/download/formularioEstudiante.pdf">
             Descargar Folmulario Estudiante
           </DropdownItem>
-          <DropdownItem href="/download/CurriculumDePersonal.zip">
+          <DropdownItem className="nav-link d-none d-md-inline" href="/download/CurriculumDePersonal.zip">
             Descargar currículum de personal
           </DropdownItem>
           {/*<DropdownItem href="#">Something else here</DropdownItem>

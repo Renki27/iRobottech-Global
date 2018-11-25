@@ -14,7 +14,6 @@ import DropdownPage from "./buttonDowload";
 class MyNavbar extends Component {
   constructor(props) {
     super(props);
-    this.logOut = this.logOut.bind(this);
   }
 
   logOut = evt => {
@@ -59,7 +58,7 @@ class MyNavbar extends Component {
               <DropdownItem>
                 <Link
                   to=""
-                  className="nav-link"
+                  className="nav-link d-none d-md-inline"
                   onClick={this.logOut.bind(this)}
                 >
                   Cerrar Sesión
