@@ -20,18 +20,13 @@ class FooterPage extends Component {
               <h5 className="title">Links</h5>
               <ul>
                 <li className="list-unstyled">
-                  <Link className="nav-link" to="/RegisterProfessor">
-                    LINK 1
+                  <Link className="nav-link" to="/about">
+                    Acerca de nosotros
                   </Link>
                 </li>
                 <li className="list-unstyled">
-                <Link className="nav-link" to="/RegisterAdmin">
-                  LINK 2
-                </Link>
-                </li>
-                <li className="list-unstyled">
-                <Link className="nav-link" to="/RegisterSecretary">
-                  LINK 3
+                <Link className="nav-link" to="/Contact">
+                  Contáctanos
                 </Link>
                 </li>
               </ul>

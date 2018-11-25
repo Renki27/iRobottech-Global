@@ -12,6 +12,11 @@ import {
 import DropdownPage from "./buttonDowload";
 
 class MyNavbar extends Component {
+  constructor(props) {
+    super(props);
+    this.logOut = this.logOut.bind(this);
+  }
+
   logOut = evt => {
     evt.preventDefault();
     localStorage.removeItem("usertoken");
@@ -31,12 +36,14 @@ class MyNavbar extends Component {
 
     const userAuth = (
       <ul className="navbar-nav ml-auto">
+        <Link className="nav-link d-none d-md-inline" to="/profile">
+          Mi Perfil
+        </Link>
+
         <li className="nav-item">
           <Dropdown>
             <DropdownToggle nav caret>
-              <Link className="nav-link d-none d-md-inline" to="/profile">
-                Mi cuenta
-              </Link>
+              Mi Cuenta
             </DropdownToggle>
             <DropdownMenu right>
               <DropdownItem>
@@ -49,13 +56,17 @@ class MyNavbar extends Component {
                   Editar Contraseña
                 </Link>
               </DropdownItem>
+              <DropdownItem>
+                <Link
+                  to=""
+                  className="nav-link"
+                  onClick={this.logOut.bind(this)}
+                >
+                  Cerrar Sesión
+                </Link>
+              </DropdownItem>
             </DropdownMenu>
           </Dropdown>
-        </li>
-        <li className="nav-item">
-          <Link to="" className="nav-link" onClick={this.logOut.bind(this)}>
-            Cerrar Sesion
-          </Link>
         </li>
       </ul>
     );
@@ -86,16 +97,6 @@ class MyNavbar extends Component {
               </li>
               <li className="nav-item">
                 <DropdownPage />
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/RegisterStudent">
-                  Acerca de nosotros
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/contact">
-                  Contacto
-                </Link>
               </li>
               {localStorage.usertoken ? userAuth : noUserAuth};
             </ul>
