@@ -51,4 +51,35 @@ router.put("/recover", (req, res) => {
         res.status(400).json({ error: err });
       });
   });
+
+
+
+  
+router.post("/message", (req, res) => {  
+        var transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+            user: 'centralirobottech@gmail.com',
+            pass: 'occidente'
+          }
+        });
+        
+        var mailOptions = {
+          from: 'centralirobottech@gmail.com',
+          to: 'centralirobottech@gmail.com',
+          subject: req.body.asunto,
+          text:"El usuario: " + req.body.nombre + "\nCorreo: " + req.body.correo +  "\nSolicita un cambio de clase por este motivo:\n" +req.body.mensaje
+        };
+
+        transporter.sendMail(mailOptions, function(error, info){
+          if (error) {
+            console.log(error);
+          } else {
+            console.log('Email enviado: ' + info.response);
+          }
+        });
+      
+});
+
+  
 module.exports = router;
