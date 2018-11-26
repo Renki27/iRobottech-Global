@@ -7,22 +7,18 @@ class StudentAttendance extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      students: [{}],
-      classNumber: "",
-      courseName: "",
-      groupNumber: ""
+      students: [{}]
     };
-    this.getStudents = this.getStudents.bind(this);
+    // this.getClassesList = this.getClassesList.bind(this);
   }
-
   async getStudents() {
     try {
       const response = await axios
-        .get(`users/getStudentsFromGroupAndCourse/1/quimica`)//cambiar por parametros
+        .get(`users/getStudentsFromGroupAndCourse`)
         .then(response => {
-          this.state.students = response.data;
+          this.state.classes = response.data;
           this.setState({
-            students: response.data
+            classes: response.data
           });
         });
     } catch (err) {
@@ -31,31 +27,24 @@ class StudentAttendance extends Component {
   }
 
   render() {
-    const selectRowProp = {
-      mode: "radio",
-      bgColor: "pink", // you should give a bgcolor, otherwise, you can't regonize which row has been selected
-      hideSelectColumn: true, // enable hide selection column.
-      clickToSelect: true // you should enable clickToSelect, otherwise, you can't select column.
-      //onSelect: this.handleRowSelect
-    };
     return (
       <div>
         <Row className="mt-6">
           <Col md="10" className="ml-5">
             <Card>
               <h3 className="text-center font-weight-bold pl-0 my-4">
-                Asistencia
+                Registro de estudiante
               </h3>
               <CardBody>
-                <form className="needs-validation" noValidate>
-                  <label className="cyan-text">Datos de:</label>
+                <form className="needs-validation" onSubmit={this.handleSubmit}>
+                  <label className="cyan-text">Datos personales:</label>
                   <div className="row">
                     <div className="col">
                       <Input
-                        name="classNumber"
-                        label="Número de clase"
+                        name="firstName"
+                        label="Primer Nombre"
                         maxLength="25"
-                        value={this.state.classNumber}
+                        value={this.state.firstName}
                         onChange={this.handleInputChange}
                         className="form-control"
                         type="text"
@@ -65,10 +54,10 @@ class StudentAttendance extends Component {
                     </div>
                     <div className="col">
                       <Input
-                        name="courseName"
-                        label="Nombre del curso"
+                        name="secondName"
+                        label="Segundo Nombre"
                         maxLength="25"
-                        value={this.state.courseName}
+                        value={this.state.secondName}
                         onChange={this.handleInputChange}
                         className="form-control"
                         type="text"
@@ -77,10 +66,10 @@ class StudentAttendance extends Component {
                     </div>
                     <div className="col">
                       <Input
-                        label="Número de grupo"
-                        name="groupNumber"
+                        label="Primer Apellido"
+                        name="lastName1"
                         maxLength="25"
-                        value={this.state.groupNumber}
+                        value={this.state.lastName1}
                         onChange={this.handleInputChange}
                         type="text"
                         required
@@ -89,71 +78,13 @@ class StudentAttendance extends Component {
                   </div>
                   <div className="text-center py-4 mt-3">
                     <button
-                      onClick={this.getStudents}
                       className="btn btn-outline-deep-orange"
+                      type="submit"
                     >
                       Registrar
                     </button>
                   </div>
                 </form>
-                <div>
-                  <BootstrapTable
-                    data={this.state.students}
-                    exportCSV={true}
-                    selectRow={selectRowProp}
-                    pagination
-                  >
-                    <TableHeaderColumn
-                      dataField="number_class"
-                      width="100"
-                      dataAlign="center"
-                      headerAlign="center"
-                      isKey
-                    >
-                      N°
-                    </TableHeaderColumn>
-                    <TableHeaderColumn
-                      dataField="st_group_number"
-                      width="100"
-                      dataAlign="center"
-                      headerAlign="center"
-                    >
-                      Grupo
-                    </TableHeaderColumn>
-                    <TableHeaderColumn
-                      dataField="course_name"
-                      width="100"
-                      dataAlign="center"
-                      headerAlign="center"
-                    >
-                      Curso
-                    </TableHeaderColumn>
-                    <TableHeaderColumn
-                      dataField="time"
-                      width="100"
-                      dataAlign="center"
-                      headerAlign="center"
-                    >
-                      Hora de inicio
-                    </TableHeaderColumn>
-                    <TableHeaderColumn
-                      dataField="date"
-                      width="100"
-                      dataAlign="center"
-                      headerAlign="center"
-                    >
-                      Fecha
-                    </TableHeaderColumn>
-                    <TableHeaderColumn
-                      dataField="date"
-                      width="100"
-                      dataAlign="center"
-                      headerAlign="center"
-                    >
-                      Fecha
-                    </TableHeaderColumn>
-                  </BootstrapTable>
-                </div>
               </CardBody>
             </Card>
           </Col>

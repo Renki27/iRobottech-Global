@@ -18,18 +18,6 @@ router.get("/", (req, res) => {
 
 });
 
-router.get("/group/:name", (req, res) => {
-    groupData.count({ where: { COURSE_NAME: req.params.name} }
-    ).then(function (account) {
-        if (account) {
-            res.json(account);
-            res.send(account);
-        } else {
-            console.log(res.err);
-        }
-    });
-});
-
 
 router.post("/", (req, res) => {
     groupData.create(req.body)
