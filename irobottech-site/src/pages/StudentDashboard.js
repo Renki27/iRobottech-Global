@@ -25,7 +25,7 @@ class StudentDashboard extends Component {
           </ListGroup>
         </div>
         <div className="align-box">
-          <h1>DIME QUIEN TE CONOCE PAPAH!</h1>
+          <h1>PERFIL DE ESTUDIANTE</h1>
         </div>
       </div>
     );
