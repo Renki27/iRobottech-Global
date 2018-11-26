@@ -14,15 +14,11 @@ import RegisterProfessor from "./RegisterProfessor";
 import RegisterSecretary from "./RegisterSecretary";
 import DisableAccount from "./DisableAccount";
 import Enrollment from "./Enrollment";
-import DisableCourse from "./DisableCourse";
-import DeleteCourse from "./DeleteCourse";
 const registerStudent = <RegisterStudent />;
 const registerProfessor = <RegisterProfessor />;
 const registerSecretary = <RegisterSecretary />;
 const disableAccount = <DisableAccount />;
 const enrollmentStudent = <Enrollment />;
-const disableCourse = <DisableCourse />;
-const deleteCourse = <DeleteCourse />;
 
 class AdminDashboard extends Component {
   constructor(props) {
@@ -71,12 +67,6 @@ class AdminDashboard extends Component {
                     </label>
                     <ListGroupItem hover>Crear Curso</ListGroupItem>
                     <ListGroupItem hover>Crear Grupo</ListGroupItem>
-                    <ListGroupItem hover onClick={this.disableCourse.bind(this)}>
-                      Deshabilitar Curso
-                    </ListGroupItem>
-                    <ListGroupItem hover onClick={this.deleteCourse.bind(this)}>
-                      Eliminar Curso
-                    </ListGroupItem>
                     <label className="mt-2 font-weight-bold deep-orange-text">
                       Cuenta
                     </label>
@@ -108,10 +98,6 @@ class AdminDashboard extends Component {
         return disableAccount;
       case "ENROLL":
         return enrollmentStudent;
-        case "DIS_COU":
-        return disableCourse;
-        case "DEL_COU":
-        return deleteCourse;
       default:
         return "";
     }
@@ -131,12 +117,6 @@ class AdminDashboard extends Component {
   }
   enrollment() {
     this.setState({ componentSelector: "ENROLL" });
-  }
-  disableCourse() {
-    this.setState({ componentSelector: "DIS_COU" });
-  }
-  deleteCourse() {
-    this.setState({ componentSelector: "DEL_COU" });
   }
 }
 
