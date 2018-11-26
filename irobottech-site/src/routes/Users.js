@@ -9,6 +9,7 @@ const Person = require("../models/Person");
 const Class = require("../models/Class");
 const Student = require("../models/Student");
 const Enrollment = require("../models/Enrollment");
+const Enrollment_Report = require("../models/Enrollment_Report");
 router.use(cors());
 
 process.env.SECRET_KEY = "secret";
@@ -223,8 +224,6 @@ router.get("/getClasses", (req, res) => {
   });
 });
 
-//Get all students in a course
-
 //Get Students from group and course
 router.get("/getStudentsFromGroupAndCourse/:group/:course", (req, res) => {
   const enrollment = {
@@ -243,6 +242,56 @@ router.get("/getStudentsFromGroupAndCourse/:group/:course", (req, res) => {
         res.send(students);
       } else {
         console.log(res.err);
+      }
+    });
+});
+
+//enrollment
+router.post("/matricular", (req, res) => {
+  Enrollment.create({
+    ST_GROUP_NUMBER: req.body.numberCurse,
+    COURSE_NAME: req.body.curseName,
+    STU_ID_ACCOUNT: req.body.id_account,
+    STU_ID_PERSON: req.body.id_person
+  });
+
+  if (req.body.accountType == "ADMIN") {
+    Enrollment_Report.create({
+      STU_ID_ACCOUNT: req.body.id_account,
+      STU_ID_PERSON: req.body.id_person,
+      ADM_ID_ACCOUNT: req.body.id_accountUser,
+      ADM_ID_PERSON: req.body.id_personUser,
+      START_DATE: req.body.startDate,
+      END_DATE: req.body.endDate,
+      NUMBER_WEEKS: req.body.number_weeks
+    });
+    res.send("Mensaje");
+  }
+  if (req.body.accountType == "SECRETARY") {
+    Enrollment_Report.create({
+      STU_ID_ACCOUNT: req.body.id_account,
+      STU_ID_PERSON: req.body.id_person,
+      SEC_ID_ACCOUNT: req.body.id_accountUser,
+      SEC_ID_PERSON: req.body.id_personUser,
+      START_DATE: req.body.startDate,
+      END_DATE: req.body.endDate,
+      NUMBER_WEEKS: req.body.number_weeks
+    });
+    res.send("Mensaje");
+  }
+});
+
+//enrollment report
+router.get("/inform/:id", (req, res) => {
+  mysqlConnection.sequelize
+    .query("CALL SELECT_ENROLLMENT(:p0)", {
+      replacements: {
+        p0: req.params.id
+      }
+    })
+    .then(function(inform) {
+      if (inform) {
+        res.send(inform);
       }
     });
 });

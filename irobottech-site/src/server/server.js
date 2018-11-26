@@ -19,6 +19,9 @@ app.use("/users", require("../routes/Users"));
 app.use("/RecoverPass", require("../routes/recoverPass"));
 app.use("/EditProfileRoute", require("../routes/EditProfileRoute"));
 //APP USE LOGIN
+app.use("/RegisterCourse", require("../routes/RegisterCourseRoute"));
+app.use("/RegisterGroup", require("../routes/RegisterGroupRoute"));
+//app.use("/RegisterPerson", require("../routes/RegisterPersonRoute"));
 
 // Static Files
 app.use(express.static("dist"));

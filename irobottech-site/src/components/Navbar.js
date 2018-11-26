@@ -97,6 +97,9 @@ class MyNavbar extends Component {
               <li className="nav-item">
                 <DropdownPage />
               </li>
+              <Link className="nav-link" to="/Enrollment">
+                Matricula
+              </Link>
               {localStorage.usertoken ? userAuth : noUserAuth};
             </ul>
           </div>
