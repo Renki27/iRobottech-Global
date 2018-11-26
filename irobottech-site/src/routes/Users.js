@@ -6,6 +6,9 @@ const jwt = require("jsonwebtoken");
 //const bcrypt = require("bcrypt");
 const Account = require("../models/Account");
 const Person = require("../models/Person");
+const Class = require("../models/Class");
+const Student = require("../models/Student");
+const Enrollment = require("../models/Enrollment");
 router.use(cors());
 
 process.env.SECRET_KEY = "secret";
@@ -209,5 +212,39 @@ router.put("/disableAccount/:email", (req, res) => {
   );
 });
 
+//Get  Classes
+router.get("/getClasses", (req, res) => {
+  Class.findAll().then(function(classes) {
+    if (classes) {
+      res.send(classes);
+    } else {
+      console.log(res.err);
+    }
+  });
+});
+
+//Get all students in a course
+
+//Get Students from group and course
+router.get("/getStudentsFromGroupAndCourse/:group/:course", (req, res) => {
+  const enrollment = {
+    group: req.params.group,
+    course: req.params.course
+  };
+  mysqlConnection.sequelize
+    .query("CALL `SELECT_GET_GROUP_STUDENTS`(:p0, :p1)", {
+      replacements: {
+        p0: enrollment.group,
+        p1: enrollment.course
+      }
+    })
+    .then(function(students) {
+      if (students) {
+        res.send(students);
+      } else {
+        console.log(res.err);
+      }
+    });
+});
 
 module.exports = router;
