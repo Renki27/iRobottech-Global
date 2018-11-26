@@ -2,32 +2,22 @@ const express = require("express");
 const router = express.Router();
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
-const group = require("../models/Group");
+const person = require("../models/Person");
+const professor = require("../models/Professor");
 router.use(cors());
 process.env.SECRET_KEY = "secret";
+const mysqlConnection = require("../connectionDataBase/databaseConnection");
 
-const groupData = group;
+const groupData = person;
 
 
 router.get("/", (req, res) => {
 
-    groupData.findAll()
+    mysqlConnection.sequelize.query("CALL SELECT_PROFESSOR")
         .then(function (group) {
             res.json(group);
         })
 
-});
-
-router.get("/group/:name", (req, res) => {
-    groupData.count({ where: { COURSE_NAME: req.params.name} }
-    ).then(function (account) {
-        if (account) {
-            res.json(account);
-            res.send(account);
-        } else {
-            console.log(res.err);
-        }
-    });
 });
 
 

@@ -10,7 +10,9 @@ import {
 } from "mdbreact";
 import "./AdminDashboard.css";
 import ClassList from "./ClassList";
+import StudentAttendance from "./StudentAttendance";
 const classList = <ClassList />;
+const studentAttendance = <StudentAttendance />;
 
 class ProfessorDashboard extends Component {
   constructor(props) {
@@ -39,6 +41,12 @@ class ProfessorDashboard extends Component {
                     <ListGroupItem hover onClick={this.loadMyClases.bind(this)}>
                       Ver lista de Clases
                     </ListGroupItem>
+                    <ListGroupItem
+                      hover
+                      onClick={this.takeAttendance.bind(this)}
+                    >
+                      Tomar Asistencia
+                    </ListGroupItem>
                   </ListGroup>
                 </div>
               </CardBody>
@@ -56,6 +64,8 @@ class ProfessorDashboard extends Component {
     switch (componentSelector) {
       case "L_CLA":
         return classList;
+      case "S_ATT":
+        return studentAttendance;
       default:
         return "";
     }
@@ -63,6 +73,9 @@ class ProfessorDashboard extends Component {
 
   loadMyClases() {
     this.setState({ componentSelector: "L_CLA" });
+  }
+  takeAttendance() {
+    this.setState({ componentSelector: "S_ATT" });
   }
 }
 

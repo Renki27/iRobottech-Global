@@ -14,11 +14,15 @@ import RegisterProfessor from "./RegisterProfessor";
 import RegisterSecretary from "./RegisterSecretary";
 import DisableAccount from "./DisableAccount";
 import Enrollment from "./Enrollment";
+import CreateCourse from "./CreateCourse";
+import CreateGroup from "./CreateGroup";
 const registerStudent = <RegisterStudent />;
 const registerProfessor = <RegisterProfessor />;
 const registerSecretary = <RegisterSecretary />;
 const disableAccount = <DisableAccount />;
 const enrollmentStudent = <Enrollment />;
+const createCourse = <CreateCourse />;
+const createGroup = <CreateGroup />;
 
 class AdminDashboard extends Component {
   constructor(props) {
@@ -65,8 +69,12 @@ class AdminDashboard extends Component {
                     <label className="mt-2 font-weight-bold deep-orange-text">
                       Cursos
                     </label>
-                    <ListGroupItem hover>Crear Curso</ListGroupItem>
-                    <ListGroupItem hover>Crear Grupo</ListGroupItem>
+                    <ListGroupItem hover onClick={this.createCourse.bind(this)}>
+                      Crear Curso
+                    </ListGroupItem>
+                    <ListGroupItem hover onClick={this.createGroup.bind(this)}>
+                      Crear Grupo
+                    </ListGroupItem>
                     <label className="mt-2 font-weight-bold deep-orange-text">
                       Cuenta
                     </label>
@@ -98,6 +106,10 @@ class AdminDashboard extends Component {
         return disableAccount;
       case "ENROLL":
         return enrollmentStudent;
+      case "C_COURSE":
+        return createCourse;
+      case "C_GROUP":
+        return createGroup;
       default:
         return "";
     }
@@ -117,6 +129,12 @@ class AdminDashboard extends Component {
   }
   enrollment() {
     this.setState({ componentSelector: "ENROLL" });
+  }
+  createCourse() {
+    this.setState({ componentSelector: "C_COURSE" });
+  }
+  createGroup() {
+    this.setState({ componentSelector: "C_GROUP" });
   }
 }
 
