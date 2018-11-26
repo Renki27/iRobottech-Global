@@ -21,7 +21,8 @@ app.use("/EditProfileRoute", require("../routes/EditProfileRoute"));
 //APP USE LOGIN
 app.use("/RegisterCourse", require("../routes/RegisterCourseRoute"));
 app.use("/RegisterGroup", require("../routes/RegisterGroupRoute"));
-//app.use("/RegisterPerson", require("../routes/RegisterPersonRoute"));
+app.use("/RegisterPerson", require("../routes/RegisterPersonRoute"));
+app.use("/RegisterSchedule", require("../routes/RegisterScheduleRoute"));
 
 // Static Files
 app.use(express.static("dist"));
