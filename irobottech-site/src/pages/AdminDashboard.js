@@ -13,16 +13,18 @@ import RegisterStudent from "./RegisterStudent";
 import RegisterProfessor from "./RegisterProfessor";
 import RegisterSecretary from "./RegisterSecretary";
 import DisableAccount from "./DisableAccount";
+import Enrollment from "./Enrollment";
 const registerStudent = <RegisterStudent />;
 const registerProfessor = <RegisterProfessor />;
 const registerSecretary = <RegisterSecretary />;
 const disableAccount = <DisableAccount />;
+const enrollmentStudent = <Enrollment />;
 
 class AdminDashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      componentSelector: "",
+      componentSelector: ""
     };
     this.selector = this.selector.bind(this);
   }
@@ -55,6 +57,12 @@ class AdminDashboard extends Component {
                       Registrar Secretaria/o
                     </ListGroupItem>
                     <label className="mt-2 font-weight-bold deep-orange-text">
+                      Estudiante
+                    </label>
+                    <ListGroupItem hover onClick={this.enrollment.bind(this)}>
+                      Matricular Estudiante
+                    </ListGroupItem>
+                    <label className="mt-2 font-weight-bold deep-orange-text">
                       Cursos
                     </label>
                     <ListGroupItem hover>Crear Curso</ListGroupItem>
@@ -62,7 +70,9 @@ class AdminDashboard extends Component {
                     <label className="mt-2 font-weight-bold deep-orange-text">
                       Cuenta
                     </label>
-                    <ListGroupItem hover onClick={this.loaderDisAcc.bind(this)}>Deshabilitar Cuenta</ListGroupItem>
+                    <ListGroupItem hover onClick={this.loaderDisAcc.bind(this)}>
+                      Deshabilitar Cuenta
+                    </ListGroupItem>
                   </ListGroup>
                 </div>
               </CardBody>
@@ -86,6 +96,8 @@ class AdminDashboard extends Component {
         return registerSecretary;
       case "DIS_ACC":
         return disableAccount;
+      case "ENROLL":
+        return enrollmentStudent;
       default:
         return "";
     }
@@ -102,6 +114,9 @@ class AdminDashboard extends Component {
   }
   loaderDisAcc() {
     this.setState({ componentSelector: "DIS_ACC" });
+  }
+  enrollment() {
+    this.setState({ componentSelector: "ENROLL" });
   }
 }
 
