@@ -23,8 +23,8 @@ class HomeCarousel extends Component {
                                 <Mask overlay="black-light"></Mask>
                             </View>
                             <CarouselCaption>
-                                <h3 className="h3-responsive">Light mask</h3>
-                                <p>First text</p>
+                                <h3 className="h3-responsive">Robotica</h3>
+                                
                             </CarouselCaption>
                         </CarouselItem>
                         <CarouselItem itemId="2">
@@ -33,8 +33,8 @@ class HomeCarousel extends Component {
                                 <Mask overlay="black-light"></Mask>
                             </View>
                             <CarouselCaption>
-                                <h3 className="h3-responsive">Strong mask</h3>
-                                <p>Second text</p>
+                                <h3 className="h3-responsive">Aprendizaje</h3>
+                                
                             </CarouselCaption>
                         </CarouselItem>
                         <CarouselItem itemId="3">
@@ -43,8 +43,8 @@ class HomeCarousel extends Component {
                                 <Mask overlay="black-light"></Mask>
                             </View>
                             <CarouselCaption>
-                                <h3 className="h3-responsive">Slight mask</h3>
-                                <p>Third text</p>
+                                <h3 className="h3-responsive">Desarrollo</h3>
+                                
                             </CarouselCaption>
                         </CarouselItem>
                     </CarouselInner>
