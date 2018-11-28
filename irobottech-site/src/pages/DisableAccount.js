@@ -85,7 +85,7 @@ class DisableAccountAdmin extends Component {
     return (
       <div className="container">
         <Row>
-          <Col className="mx-auto">
+          <Col className="mx-auto mt-5">
             <Card>
               <CardBody>
                 <p className="h5 text-center mb-4">Deshabilitar Cuenta</p>

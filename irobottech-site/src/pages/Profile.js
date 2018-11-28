@@ -4,7 +4,17 @@ import AdminDashboard from "./AdminDashboard";
 import ProfessorDashboard from "./ProfessorDashboard";
 import SecretaryDashboard from "./SecretaryDashboard";
 import StudentDashboard from "./StudentDashboard";
-
+import {
+  Container,
+  Row,
+  Col,
+  Input,
+  Button,
+  Card,
+  label,
+  NavLink,
+  CardBody
+} from "mdbreact";
 const adminView = <AdminDashboard />;
 const secretaryView = <SecretaryDashboard />;
 const professorView = <ProfessorDashboard />;
@@ -31,7 +41,6 @@ class Profile extends Component {
     });
   }
 
-
   componentDidMount() {
     const token = localStorage.usertoken;
     const decoded = jwt_decode(token);
@@ -42,8 +51,7 @@ class Profile extends Component {
     });
   }
 
-
-  shouldComponentUpdate (next_props, next_state) {
+  shouldComponentUpdate(next_props, next_state) {
     return false;
   }
 
@@ -65,9 +73,17 @@ class Profile extends Component {
   render() {
     return (
       <div>
-        {this.dashboardSelector(this.state.account_type)}
-        <h1>{this.state.email}</h1>
-        <h1>{this.state.account_type}</h1>
+        <Col>{this.dashboardSelector(this.state.account_type)}</Col>
+
+          <Col className="mx-auto mt-5">
+            <Card>
+              <CardBody>
+                <h1>{this.state.email}</h1>
+                <h1>{this.state.account_type}</h1>
+              </CardBody>
+            </Card>
+          </Col>
+
       </div>
     );
   }

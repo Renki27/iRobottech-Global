@@ -9,11 +9,11 @@ class DropdownPage extends React.Component {
           Descargas
         </DropdownToggle>
         <DropdownMenu right>
-          <DropdownItem  className="nav-link d-none d-md-inline" href="/download/formularioEstudiante.pdf">
-            Descargar Folmulario Estudiante
+          <DropdownItem  className="nav-link d-none d-md-block" href="/download/formularioEstudiante.pdf">
+            Folmulario de registro para estudiantes
           </DropdownItem>
-          <DropdownItem className="nav-link d-none d-md-inline" href="/download/CurriculumDePersonal.zip">
-            Descargar currículum de personal
+          <DropdownItem className="nav-link d-none d-md-block" href="/download/CurriculumDePersonal.zip">
+            Formulario de currículum para personal
           </DropdownItem>
           {/*<DropdownItem href="#">Something else here</DropdownItem>
           <DropdownItem href="#">Something else here</DropdownItem> */}

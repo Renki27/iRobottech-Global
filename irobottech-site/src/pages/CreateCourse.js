@@ -97,7 +97,7 @@ export class CreateCourse extends React.Component {
         return (
             < Container >
                 <Row>
-                    <Col md="4">
+                    <Col>
                         <form onSubmit={this.handleSubmit}>
                             <p className="h5 text-center mb-4">Crear Curso</p>
                             <div className="grey-text">

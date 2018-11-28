@@ -49,16 +49,16 @@ class AdminDashboard extends Component {
                       Registro
                     </label>
                     <ListGroupItem hover onClick={this.loaderRegStu.bind(this)}>
-                      Registrar Estudiante
+                      Estudiante
                     </ListGroupItem>
                     <ListGroupItem
                       hover
                       onClick={this.loaderRegProf.bind(this)}
                     >
-                      Registrar Profesor
+                      Profesor
                     </ListGroupItem>
                     <ListGroupItem hover onClick={this.loaderRegSec.bind(this)}>
-                      Registrar Secretaria/o
+                      Secretaria/o
                     </ListGroupItem>
                     <label className="mt-2 font-weight-bold deep-orange-text">
                       Estudiante

@@ -16,4 +16,9 @@
 
 div.App {
   background-color:#212121;
+  background-image: url("../images/lego.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover; /* Resize the background image to cover the entire container */
 }

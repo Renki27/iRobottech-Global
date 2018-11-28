@@ -72,7 +72,7 @@
   width: 100%;
 }
 
-.MuiSelect-icon-11 {
+svg.MuiSelect-icon-11 {
   color: white;
 }
 
@@ -83,5 +83,14 @@
 
 
 .jss25 {
+  color: white;
+}
+
+.card-bg {
+  width: "27rem";
+  background-image: url("../images/lego.jpg");
+}
+
+div.MuiInputBase-root-25 {
   color: white;
 }

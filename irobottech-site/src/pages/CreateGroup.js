@@ -218,7 +218,7 @@ export class CreateGroup extends React.Component {
     return (
       <Container >
         <Row>
-          <Col md="4">
+          <Col >
             <form onSubmit={this.handleSubmit}>
               <p className="h5 text-center mb-4">Crear Grupo</p>
               <div className="grey-text">

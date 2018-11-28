@@ -97,7 +97,7 @@ class MyNavbar extends Component {
               <li className="nav-item">
                 <DropdownPage />
               </li>
-              {localStorage.usertoken ? userAuth : noUserAuth};
+              {localStorage.usertoken ? userAuth : noUserAuth}
             </ul>
           </div>
         </div>

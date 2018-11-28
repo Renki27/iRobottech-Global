@@ -1,5 +1,14 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Input, Button, Card, label, NavLink } from "mdbreact";
+import {
+  Container,
+  Row,
+  Col,
+  Input,
+  Button,
+  Card,
+  label,
+  NavLink
+} from "mdbreact";
 import "./Login.css";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
@@ -56,8 +65,11 @@ class Login extends Component {
                   className="card-image"
                   style={{
                     backgroundImage:
-                      "url(https://mdbootstrap.com/img/Photos/Others/pricing-table7.jpg)",
-                    width: "27rem"
+                      "url(https://www.popsci.com/sites/popsci.com/files/styles/655_1x_/public/images/2018/06/depositphotos_5032066_original.jpg)",
+                    width: "27rem",
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize:
+                      "cover" /* Resize the background image to cover the entire container */
                   }}
                 >
                   <div className="text-white rgba-stylish-strong py-5 px-5 z-depth-4">
@@ -86,7 +98,7 @@ class Login extends Component {
                       </FormControl>
                       <Input
                         name="email"
-                        label="Your email"
+                        label="Email"
                         group
                         type="text"
                         validate
@@ -95,7 +107,7 @@ class Login extends Component {
                       />
                       <Input
                         name="password"
-                        label="Your password"
+                        label="Contraseña"
                         group
                         type="password"
                         validate
@@ -103,7 +115,7 @@ class Login extends Component {
                         onChange={this.handleChange}
                       />
                       <Row className="d-flex align-items-center mb-4">
-                        <div className="text-center mb-3 col-md-12">
+                        <div className="text-center col-md-12">
                           <Button
                             color="danger"
                             rounded
@@ -112,7 +124,11 @@ class Login extends Component {
                           >
                             Ingresar
                           </Button>
-                          <NavLink to="/RecoverPage"> Haz olvidado la contraseña? </NavLink>
+                          <div className="mt-3"> 
+                            <NavLink to="/RecoverPage">
+                              Haz olvidado la contraseña?
+                            </NavLink>
+                          </div>
                         </div>
                       </Row>
                     </form>

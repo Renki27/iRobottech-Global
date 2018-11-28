@@ -55,7 +55,6 @@ class StudentAttendance extends Component {
                 Asistencia
               </h3>
               <CardBody>
-                <form noValidate>
                   <label className="cyan-text">Datos de:</label>
                   <div className="row">
                     <div className="col">
@@ -100,10 +99,9 @@ class StudentAttendance extends Component {
                       onClick={this.getStudents}
                       className="btn btn-outline-deep-orange"
                     >
-                      Registrar
+                      Cargar
                     </button>
                   </div>
-                </form>
                 <div>
                   <BootstrapTable
                     data={this.state.students}

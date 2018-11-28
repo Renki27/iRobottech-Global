@@ -216,7 +216,38 @@ class RegisterStudent extends Component {
                         />
                       </div>
                     </div>
+                    <p className="cyan-text">Datos de la cuenta:</p>
+                    <div className="row">
+                      <div className="col">
+                        <Input
+                          label="Email"
+                          name="email"
+                          maxLength="30"
+                          value={this.state.email}
+                          onChange={this.handleInputChange}
+                          hint="ejemplo@mail.com"
+                          type="email"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col">
+                        <Input
+                          label="Confirma Email"
+                          name="emailConfirm"
+                          maxLength="30"
+                          onChange={this.handleInputChange}
+                          hint="ejemplo@mail.com"
+                          type="email"
+                          required
+                        />
+                      </div>
+                    </div>
                     <p className="cyan-text">Datos del encargado:</p>
+                    <small className="form-text text-muted">
+                      *Estos datos son necesarios para niños menores de 12 años.
+                    </small>
                     <div className="row">
                       <div className="col">
                         <Input
@@ -254,34 +285,7 @@ class RegisterStudent extends Component {
                         />
                       </div>
                     </div>
-                    <p className="cyan-text">Datos de la cuenta:</p>
-                    <div className="row">
-                      <div className="col">
-                        <Input
-                          label="Email"
-                          name="email"
-                          maxLength="30"
-                          value={this.state.email}
-                          onChange={this.handleInputChange}
-                          hint="ejemplo@mail.com"
-                          type="email"
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col">
-                        <Input
-                          label="Confirma Email"
-                          name="emailConfirm"
-                          maxLength="30"
-                          onChange={this.handleInputChange}
-                          hint="ejemplo@mail.com"
-                          type="email"
-                          required
-                        />
-                      </div>
-                    </div>
+
                     <div className="text-center py-4 mt-3">
                       <button
                         className="btn btn-outline-deep-orange"
