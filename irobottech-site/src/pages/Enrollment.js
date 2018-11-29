@@ -95,7 +95,7 @@ class Enrollment extends Component {
         `users/verifyAccount/${this.state.emailId}`
       );
       if (response) {
-        document.getElementById("Hola").style.display = "block";
+        document.getElementById("Formulario").style.display = "block";
         document.getElementById("idEmail").disabled = true;
       }
       this.setState({ id_person: response.data.id_person });
@@ -117,7 +117,7 @@ class Enrollment extends Component {
   }
 
   componentDidMount() {
-    document.getElementById("Hola").style.display = "none";
+    document.getElementById("Formulario").style.display = "none";
     axios.get("http://localhost:8080/RegisterCourse").then(response => {
       this.state.courses = response.data;
       this.setState({
@@ -174,7 +174,7 @@ class Enrollment extends Component {
                     Verificar
                   </Button>
                 </div>
-                <form onSubmit={this.matricular} id="Hola" noValidate>
+                <form onSubmit={this.matricular} id="Formulario" noValidate>
                   <div className="grey-text">
                     <br />
                     <br />

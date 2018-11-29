@@ -56,19 +56,19 @@ router.post('/edit', function (req, res, next) {
   let lastName1 = "";
   let lastName2 = "";
   let identification = "";
-  let birthDate = "";
+  let birthDate;
   let address = "";
   let phone = "";
   Person.findOne({ where: { ID_PERSON: req.body.id_person } }).then(token => {
-    console.log("Estoy buscando la persona " + req.body.id_person )
-    
+    console.log("Estoy buscando la persona " + req.body.id_person ) 
     if (token){
       firstName = token.first_name;
       secondName = token.second_name;
       lastName1 = token.last_name_1;
       lastName2 = token.last_name_2;
-      birthDate = token.birth_Date
-      identification = token.identification
+      birthDate = token.birth_date;
+      console.log("La fecha de nacimiento es: " + token.birth_date);
+      identification = token.identification;
       Address.findOne({ where: { ID_PERSON: req.body.id_person } }).then(myAddress => {
         if (myAddress){
           address = myAddress.full_address;

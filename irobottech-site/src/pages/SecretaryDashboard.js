@@ -12,11 +12,11 @@ import "./AdminDashboard.css";
 import RegisterStudent from "./RegisterStudent";
 import RegisterProfessor from "./RegisterProfessor";
 import RegisterSecretary from "./RegisterSecretary";
-import DisableAccount from "./DisableAccount";
+import ManageAccount from "./ManageAccount";
 const registerStudent = <RegisterStudent />;
 const registerProfessor = <RegisterProfessor />;
 const registerSecretary = <RegisterSecretary />;
-const disableAccount = <DisableAccount />;
+const manageAccount = <ManageAccount />;
 
 class SecretaryDashboard extends Component {
   constructor(props) {
@@ -62,7 +62,7 @@ class SecretaryDashboard extends Component {
                     <label className="mt-2 font-weight-bold deep-orange-text">
                       Cuenta
                     </label>
-                    <ListGroupItem hover onClick={this.loaderDisAcc.bind(this)}>
+                    <ListGroupItem hover onClick={this.manageAccount.bind(this)}>
                       Deshabilitar Cuenta
                     </ListGroupItem>
                   </ListGroup>
@@ -86,8 +86,8 @@ class SecretaryDashboard extends Component {
         return registerProfessor;
       case "R_SEC":
         return registerSecretary;
-      case "DIS_ACC":
-        return disableAccount;
+      case "MAN_ACC":
+        return manageAccount;
       default:
         return "";
     }
@@ -102,8 +102,8 @@ class SecretaryDashboard extends Component {
   loaderRegSec() {
     this.setState({ componentSelector: "R_SEC" });
   }
-  loaderDisAcc() {
-    this.setState({ componentSelector: "DIS_ACC" });
+  manageAccount() {
+    this.setState({ componentSelector: "MAN_ACC" });
   }
 }
 

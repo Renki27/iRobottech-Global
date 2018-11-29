@@ -12,14 +12,14 @@ import "./AdminDashboard.css";
 import RegisterStudent from "./RegisterStudent";
 import RegisterProfessor from "./RegisterProfessor";
 import RegisterSecretary from "./RegisterSecretary";
-import DisableAccount from "./DisableAccount";
+import ManageAccount from "./ManageAccount";
 import Enrollment from "./Enrollment";
 import CreateCourse from "./CreateCourse";
 import CreateGroup from "./CreateGroup";
 const registerStudent = <RegisterStudent />;
 const registerProfessor = <RegisterProfessor />;
 const registerSecretary = <RegisterSecretary />;
-const disableAccount = <DisableAccount />;
+const manageAccount = <ManageAccount />;
 const enrollmentStudent = <Enrollment />;
 const createCourse = <CreateCourse />;
 const createGroup = <CreateGroup />;
@@ -78,8 +78,8 @@ class AdminDashboard extends Component {
                     <label className="mt-2 font-weight-bold deep-orange-text">
                       Cuenta
                     </label>
-                    <ListGroupItem hover onClick={this.loaderDisAcc.bind(this)}>
-                      Deshabilitar Cuenta
+                    <ListGroupItem hover onClick={this.manageAccount.bind(this)}>
+                     Administrar Cuentas
                     </ListGroupItem>
                   </ListGroup>
                 </div>
@@ -102,8 +102,8 @@ class AdminDashboard extends Component {
         return registerProfessor;
       case "R_SEC":
         return registerSecretary;
-      case "DIS_ACC":
-        return disableAccount;
+      case "MAN_ACC":
+        return manageAccount;
       case "ENROLL":
         return enrollmentStudent;
       case "C_COURSE":
@@ -124,8 +124,8 @@ class AdminDashboard extends Component {
   loaderRegSec() {
     this.setState({ componentSelector: "R_SEC" });
   }
-  loaderDisAcc() {
-    this.setState({ componentSelector: "DIS_ACC" });
+  manageAccount() {
+    this.setState({ componentSelector: "MAN_ACC" });
   }
   enrollment() {
     this.setState({ componentSelector: "ENROLL" });

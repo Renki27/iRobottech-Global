@@ -25,7 +25,7 @@ module.exports = mysqlConnection.sequelize.define(
       type: Sequelize.STRING
     },
     birth_date: {
-      type: Sequelize.DATE
+      type: Sequelize.DATEONLY
     },
   },
   {

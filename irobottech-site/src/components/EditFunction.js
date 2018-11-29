@@ -16,6 +16,8 @@ export const edit = token => {
     });
 }; 
 
+
+
 export const fullEdit = valuesToEdit => {
   return axios
     .put("EditProfileRoute/editFull", {

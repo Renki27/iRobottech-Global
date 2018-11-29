@@ -23,6 +23,7 @@ app.use("/RegisterCourse", require("../routes/RegisterCourseRoute"));
 app.use("/RegisterGroup", require("../routes/RegisterGroupRoute"));
 app.use("/RegisterPerson", require("../routes/RegisterPersonRoute"));
 app.use("/RegisterSchedule", require("../routes/RegisterScheduleRoute"));
+app.use("/ShowAccounts",  require("../routes/AccountsRoute"));
 
 // Static Files
 app.use(express.static("dist"));

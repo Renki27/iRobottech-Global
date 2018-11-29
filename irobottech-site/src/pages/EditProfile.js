@@ -65,6 +65,7 @@ class EditProfile extends Component {
       address: this.state.address,
       id_person: decoded.id_person,
     };
+    
     fullEdit(valuesToEdit).then(res => {
       if (res) {
         this.props.history.push(`/`);

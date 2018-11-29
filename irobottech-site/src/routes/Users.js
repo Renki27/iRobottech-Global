@@ -179,7 +179,7 @@ router.get("/verifyAccount/:email", (req, res) => {
     where: {
       status: "ACTIVE",
       email: req.params.email,
-      account_type: ["SECRETARY", "PROFESSOR", "STUDENT"]
+      account_type: ["SECRETARY", "PROFESSOR", "STUDENT", "ADMIN"]
     }
   }).then(function(account) {
     if (account) {
@@ -189,6 +189,23 @@ router.get("/verifyAccount/:email", (req, res) => {
     }
   });
 });
+
+
+router.get("/verifyAllAccount/:email", (req, res) => {
+  Account.find({
+    where: {
+      email: req.params.email,
+      account_type: ["SECRETARY", "PROFESSOR", "STUDENT", "ADMIN"]
+    }
+  }).then(function(account) {
+    if (account) {
+      res.send(account);
+    } else {
+      console.log(res.err);
+    }
+  });
+});
+
 
 //Get Person Data
 router.get("/getPersonData/:id", (req, res) => {
