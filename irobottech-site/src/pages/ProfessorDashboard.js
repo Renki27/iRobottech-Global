@@ -11,8 +11,10 @@ import {
 import "./AdminDashboard.css";
 import ClassList from "./ClassList";
 import StudentAttendance from "./StudentAttendance";
+import CreateClass from "./CreateClass";
 const classList = <ClassList />;
 const studentAttendance = <StudentAttendance />;
+const createClass = <CreateClass />;
 
 class ProfessorDashboard extends Component {
   constructor(props) {
@@ -38,6 +40,9 @@ class ProfessorDashboard extends Component {
                     <label className="mt-2 font-weight-bold deep-orange-text">
                       Clases
                     </label>
+                    <ListGroupItem hover onClick={this.createNewClass.bind(this)}>
+                      Crear clase
+                    </ListGroupItem>
                     <ListGroupItem hover onClick={this.loadMyClases.bind(this)}>
                       Ver lista de Clases
                     </ListGroupItem>
@@ -62,6 +67,8 @@ class ProfessorDashboard extends Component {
 
   selector(componentSelector) {
     switch (componentSelector) {
+      case "C_CLA":
+        return createClass;
       case "L_CLA":
         return classList;
       case "S_ATT":
@@ -70,7 +77,9 @@ class ProfessorDashboard extends Component {
         return "";
     }
   }
-
+  createNewClass() {
+    this.setState({ componentSelector: "C_CLA" });
+  }
   loadMyClases() {
     this.setState({ componentSelector: "L_CLA" });
   }

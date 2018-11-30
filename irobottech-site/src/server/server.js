@@ -16,6 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 // Routes
 app.use('/download',require('../routes/downloadRoutes'));
 app.use("/users", require("../routes/Users"));
+app.use("/classesR", require("../routes/ClassesR"));
 app.use("/RecoverPass", require("../routes/recoverPass"));
 app.use("/EditProfileRoute", require("../routes/EditProfileRoute"));
 //APP USE LOGIN

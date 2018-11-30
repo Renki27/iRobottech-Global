@@ -83,7 +83,9 @@ class Enrollment extends Component {
     };
     matricular(account).then(res => {
       if (res) {
-       {/* <Redirect to={`/InformeMatricula:${this.state.id_person}`} />;*/}
+        {
+          /* <Redirect to={`/InformeMatricula:${this.state.id_person}`} />;*/
+        }
         this.props.history.push(`/InformeMatricula:${this.state.id_person}`);
       }
     });

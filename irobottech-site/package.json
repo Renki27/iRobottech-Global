@@ -35,6 +35,7 @@
     "react-scripts": "^2.1.1",
     "react-select": "^2.1.2",
     "react-step-wizard": "^4.4.0",
+    "react-toastify": "^4.4.3",
     "sequelize": "^4.41.2"
   },
   "scripts": {
