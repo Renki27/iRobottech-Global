@@ -23,7 +23,7 @@ router.get("/group/:name", (req, res) => {
     ).then(function (account) {
         if (account) {
             res.json(account);
-            res.send(account);
+           // res.send(account);
         } else {
             console.log(res.err);
         }

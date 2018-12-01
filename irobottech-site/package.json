@@ -30,11 +30,18 @@
     "react": "^16.6.1",
     "react-bootstrap": "^0.32.4",
     "react-bootstrap-table": "^4.3.1",
+    "react-bootstrap-table-next": "^1.4.1",
+    "react-bootstrap-table2-editor": "^1.2.2",
+    "react-bootstrap-table2-filter": "^1.1.0",
+    "react-bootstrap-table2-overlay": "^1.0.0",
+    "react-bootstrap-table2-paginator": "^1.0.4",
+    "react-bootstrap-table2-toolkit": "^1.1.1",
     "react-dom": "^16.6.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.1",
     "react-select": "^2.1.2",
     "react-step-wizard": "^4.4.0",
+    "react-toastify": "^4.4.3",
     "sequelize": "^4.41.2"
   },
   "scripts": {

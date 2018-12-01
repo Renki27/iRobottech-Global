@@ -3,6 +3,13 @@ import { Row, Col, Input, Button, Card, CardBody } from "mdbreact";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import axios from "axios";
 
+const cellEditProp = {
+  mode: "click",
+  blurToSave: true
+};
+
+const state = ["Presente", "Ausente", "Justificado", "Injustificado"]
+
 class StudentAttendance extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +33,11 @@ class StudentAttendance extends Component {
   async getStudents() {
     try {
       const response = await axios
-        .get(`users/getStudentsFromGroupAndCourse/${this.state.groupNumber}/${this.state.courseName}`)
+        .get(
+          `users/getStudentsFromGroupAndCourse/${this.state.groupNumber}/${
+            this.state.courseName
+          }`
+        )
         .then(response => {
           this.state.students = response.data;
           this.setState({
@@ -55,58 +66,59 @@ class StudentAttendance extends Component {
                 Asistencia
               </h3>
               <CardBody>
-                  <label className="cyan-text">Datos de:</label>
-                  <div className="row">
-                    <div className="col">
-                      <Input
-                        name="classNumber"
-                        label="Número de clase"
-                        maxLength="25"
-                        value={this.state.classNumber}
-                        onChange={this.handleChange}
-                        className="form-control"
-                        type="text"
-                        required
-                        errorText={this.state.firstNameError}
-                      />
-                    </div>
-                    <div className="col">
-                      <Input
-                        name="courseName"
-                        label="Nombre del curso"
-                        maxLength="25"
-                        value={this.state.courseName}
-                        onChange={this.handleChange}
-                        className="form-control"
-                        type="text"
-                        required
-                      />
-                    </div>
-                    <div className="col">
-                      <Input
-                        label="Número de grupo"
-                        name="groupNumber"
-                        maxLength="25"
-                        value={this.state.groupNumber}
-                        onChange={this.handleChange}
-                        type="text"
-                        required
-                      />
-                    </div>
+                <label className="cyan-text">Datos de:</label>
+                <div className="row">
+                  <div className="col">
+                    <Input
+                      name="classNumber"
+                      label="Número de clase"
+                      maxLength="25"
+                      value={this.state.classNumber}
+                      onChange={this.handleChange}
+                      className="form-control"
+                      type="text"
+                      required
+                      errorText={this.state.firstNameError}
+                    />
                   </div>
-                  <div className="text-center py-4 mt-3">
-                    <button
-                      onClick={this.getStudents}
-                      className="btn btn-outline-deep-orange"
-                    >
-                      Cargar
-                    </button>
+                  <div className="col">
+                    <Input
+                      name="courseName"
+                      label="Nombre del curso"
+                      maxLength="25"
+                      value={this.state.courseName}
+                      onChange={this.handleChange}
+                      className="form-control"
+                      type="text"
+                      required
+                    />
                   </div>
+                  <div className="col">
+                    <Input
+                      label="Número de grupo"
+                      name="groupNumber"
+                      maxLength="25"
+                      value={this.state.groupNumber}
+                      onChange={this.handleChange}
+                      type="text"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="text-center py-4 mt-3">
+                  <button
+                    onClick={this.getStudents}
+                    className="btn btn-outline-deep-orange"
+                  >
+                    Cargar
+                  </button>
+                </div>
                 <div>
                   <BootstrapTable
                     data={this.state.students}
                     exportCSV={true}
                     selectRow={selectRowProp}
+                    cellEdit={cellEditProp}
                     pagination
                   >
                     <TableHeaderColumn
@@ -115,6 +127,7 @@ class StudentAttendance extends Component {
                       dataAlign="center"
                       headerAlign="center"
                       isKey
+                      hidden
                     >
                       Id
                     </TableHeaderColumn>
@@ -123,6 +136,7 @@ class StudentAttendance extends Component {
                       width="100"
                       dataAlign="center"
                       headerAlign="center"
+                      hidden
                     >
                       Id
                     </TableHeaderColumn>
@@ -149,6 +163,17 @@ class StudentAttendance extends Component {
                       headerAlign="center"
                     >
                       Grupo
+                    </TableHeaderColumn>
+                    <TableHeaderColumn
+                      width="120"
+                      dataAlign="center"
+                      headerAlign="center"
+                      editable={{
+                        type: "select",
+                        options: { values: state }
+                      }}
+                    >
+                      Asistencia
                     </TableHeaderColumn>
                   </BootstrapTable>
                 </div>

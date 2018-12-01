@@ -11,7 +11,7 @@ import {
   CardBody
 } from "mdbreact";
 
-export class InformeMatricula extends Component {
+class EnrollmentReport extends Component {
   state = {
     inform: [{}]
   };
@@ -96,4 +96,4 @@ export class InformeMatricula extends Component {
   }
 }
 
-export default InformeMatricula;
+export default EnrollmentReport;

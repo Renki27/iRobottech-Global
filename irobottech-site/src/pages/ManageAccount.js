@@ -28,7 +28,6 @@ class ManageAccount extends Component {
       address: "",
       accounts: [{}],
       status: ""
-
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -40,7 +39,6 @@ class ManageAccount extends Component {
     // this.loadIntoSelect = this.loadIntoSelect.bind(this);
     // this.accountSelector = this.accountSelector.bind(this);
   }
-
 
   componentDidMount() {
     document.getElementById("Formulario").style.display = "none";
@@ -60,7 +58,7 @@ class ManageAccount extends Component {
       );
       if (response) {
         const token2 = {
-          id_person: response.data.id_person,
+          id_person: response.data.id_person
         };
         edit(token2).then(res => {
           if (res) {
@@ -108,6 +106,7 @@ class ManageAccount extends Component {
       } catch (err) {
         console.error(err);
       }  
+
   }
 
   async enableAccount() {
@@ -137,11 +136,9 @@ class ManageAccount extends Component {
     this.setState({ open: true });
   };
 
-
   handleClose = () => {
     this.setState({ open: false });
   };
-
 
   handleSubmit = evt => {
     event.preventDefault();
@@ -154,7 +151,7 @@ class ManageAccount extends Component {
       birthDate: this.state.birthDate,
       phone: this.state.phone,
       address: this.state.address,
-      id_person: this.state.id_person,
+      id_person: this.state.id_person
     };
 
     fullEdit(valuesToEdit).then(res => {
@@ -200,7 +197,7 @@ class ManageAccount extends Component {
         this.setState({ id_person: response.data.id_person });
         this.setState({ status: response.data.status });    
         const token2 = {
-          id_person: response.data.id_person,
+          id_person: response.data.id_person
         };
         edit(token2).then(res => {
           if (res) {
@@ -221,6 +218,7 @@ class ManageAccount extends Component {
       console.error(err);
     }
     document.getElementById("Formulario").style.display = "block";
+
   if (this.state.status == "ACTIVE"){
     document.getElementById("btnDes").style.display = "block";
     document.getElementById("btnHab").style.display = "none";
@@ -228,6 +226,7 @@ class ManageAccount extends Component {
     document.getElementById("btnDes").style.display = "none";
     document.getElementById("btnHab").style.display = "block";
   }
+
   }
 
   render() {
@@ -242,14 +241,13 @@ class ManageAccount extends Component {
                 <label>Elija la cuenta: </label>
                 <Select
                   onChange={this.accountSelect}
-                  options={this.state.accounts.map(function (json) {
+                  options={this.state.accounts.map(function(json) {
                     return {
                       label: json.username + "  -  " + json.email,
                       value: json.email
                     };
                   })}
                 />
-
 
                 {/*                 <div className="col">
                   <Input
@@ -285,7 +283,9 @@ class ManageAccount extends Component {
                                 onSubmit={this.handleSubmit}
                                 noValidate
                               >
-                                <label className="cyan-text">Datos personales:</label>
+                                <label className="cyan-text">
+                                  Datos personales:
+                                </label>
                                 <div className="row">
                                   <div className="col">
                                     <Input
@@ -390,12 +390,13 @@ class ManageAccount extends Component {
                                 <div className="text-center py-4 mt-3">
                                   <button
                                     className="btn btn-outline-deep-orange"
-                                    type="submit" to="/profile">
+                                    type="submit"
+                                    to="/profile"
+                                  >
                                     Editar
-                            </button>
+                                  </button>
                                 </div>
                               </form>
-
 
                               <Button id= "btnHab"                         
                               className="btn btn-outline-deep-orange"
@@ -404,10 +405,13 @@ class ManageAccount extends Component {
                               </Button>
                               
                               <Button id= "btnDes"                   
+
                                 className="btn btn-outline-deep-orange"
                                 onClick={this.handleClickOpen}>
                                 Deshabilitar
+
                              </Button>
+
 
 
                               <Dialog
@@ -421,14 +425,17 @@ class ManageAccount extends Component {
                                 </DialogTitle>
                                 <DialogContent>
                                   <DialogContentText id="alert-dialog-description">
-                                    Está seguro que desea deshabilitar la cuenta del
-                        usuario: "{this.state.emailD} " ?
-                      </DialogContentText>
+                                    Está seguro que desea deshabilitar la cuenta
+                                    del usuario: "{this.state.emailD} " ?
+                                  </DialogContentText>
                                 </DialogContent>
                                 <DialogActions>
-                                  <Button onClick={this.handleClose} color="primary">
+                                  <Button
+                                    onClick={this.handleClose}
+                                    color="primary"
+                                  >
                                     Cancelar
-                      </Button>
+                                  </Button>
                                   <Button
                                     onClick={() => {
                                       this.disableAccount();
@@ -438,7 +445,7 @@ class ManageAccount extends Component {
                                     autoFocus
                                   >
                                     Aceptar
-                      </Button>
+                                  </Button>
                                 </DialogActions>
                               </Dialog>
                             </CardBody>
@@ -447,11 +454,6 @@ class ManageAccount extends Component {
                       </Row>
                     </Container>
                   </div>
-
-
-
-
-
                 </div>
               </CardBody>
             </Card>

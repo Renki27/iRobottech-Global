@@ -88,7 +88,9 @@ class AdminDashboard extends Component {
                     <label className="mt-2 font-weight-bold deep-orange-text">
                       Cuenta
                     </label>
+
                     <ListGroupItem hover onClick={this.manageAccount.bind(this)}>
+
                       Administrar Cuentas
                     </ListGroupItem>
                   </ListGroup>

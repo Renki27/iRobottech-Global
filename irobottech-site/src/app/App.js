@@ -16,7 +16,7 @@ import RecoverPage from "../pages/RecoverPage";
 import EditProfile from "../pages/EditProfile";
 import EditPass from "../pages/EditPass";
 import Enrollment from "../pages/Enrollment";
-import InformeMatricula from "../pages/InformeMatricula";
+import EnrollmentReport from "../pages/EnrollmentReport";
 import "./App.css";
 
 class App extends Component {
@@ -47,7 +47,7 @@ class App extends Component {
             <Route exact path="/RegisterAdmin" component={RegisterAdmin} />
             <Route exact path="/editProfile" component={EditProfile} />
             <Route exact path="/EditPass" component={EditPass} />
-            <Route exact path="/InformeMatricula:myId" component={InformeMatricula} />
+            <Route exact path="/EnrollmentReport:myId" component={EnrollmentReport} />
           </div>
           <FooterPage />
         </div>
