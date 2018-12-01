@@ -181,7 +181,7 @@ router.get("/verifyAccount/:email", (req, res) => {
       email: req.params.email,
       account_type: ["SECRETARY", "PROFESSOR", "STUDENT", "ADMIN"]
     }
-  }).then(function(account) {
+  }).then(function (account) {
     if (account) {
       res.send(account);
     } else {
@@ -197,7 +197,7 @@ router.get("/verifyAllAccount/:email", (req, res) => {
       email: req.params.email,
       account_type: ["SECRETARY", "PROFESSOR", "STUDENT", "ADMIN"]
     }
-  }).then(function(account) {
+  }).then(function (account) {
     if (account) {
       res.send(account);
     } else {
@@ -213,7 +213,7 @@ router.get("/getPersonData/:id", (req, res) => {
     where: {
       id_person: req.params.id
     }
-  }).then(function(person) {
+  }).then(function (person) {
     if (person) {
       res.send(person);
     } else {
@@ -230,9 +230,17 @@ router.put("/disableAccount/:email", (req, res) => {
   );
 });
 
+
+router.put("/enableAccount/:email", (req, res) => {
+  Account.update(
+    { status: "ACTIVE" },
+    { where: { email: req.params.email } }
+  );
+});
+
 //Get  Classes
 router.get("/getClasses", (req, res) => {
-  Class.findAll().then(function(classes) {
+  Class.findAll().then(function (classes) {
     if (classes) {
       res.send(classes);
     } else {
@@ -254,7 +262,7 @@ router.get("/getStudentsFromGroupAndCourse/:group/:course", (req, res) => {
         p1: enrollment.course
       }
     })
-    .then(function(students) {
+    .then(function (students) {
       if (students) {
         res.send(students);
       } else {
@@ -263,36 +271,56 @@ router.get("/getStudentsFromGroupAndCourse/:group/:course", (req, res) => {
     });
 });
 
+router.get("/getStudentsFromCourse/:course", (req, res) => {
+  mysqlConnection.sequelize
+    .query("CALL `SELECT_STUDENTS_FROM_COURSE`(:p0)", {
+      replacements: {
+        p0: req.params.course,
+      }
+    })
+    .then(function (students) {
+      if (students) {
+        res.send(students);
+      } else {
+        console.log(res.err);
+      }
+    });
+});
+
+
+
 //enrollment
 router.post("/matricular", (req, res) => {
   Enrollment.create({
     ST_GROUP_NUMBER: req.body.numberCurse,
     COURSE_NAME: req.body.curseName,
-    STU_ID_ACCOUNT: req.body.id_account,
+    STU_ID_ACCOUNT: req.body.id_person,
     STU_ID_PERSON: req.body.id_person
   });
 
   if (req.body.accountType == "ADMIN") {
     Enrollment_Report.create({
-      STU_ID_ACCOUNT: req.body.id_account,
+      STU_ID_ACCOUNT: req.body.id_person,
       STU_ID_PERSON: req.body.id_person,
       ADM_ID_ACCOUNT: req.body.id_accountUser,
       ADM_ID_PERSON: req.body.id_personUser,
       START_DATE: req.body.startDate,
       END_DATE: req.body.endDate,
-      NUMBER_WEEKS: req.body.number_weeks
+      NUMBER_WEEKS: req.body.number_weeks,
+      COURSE_NAME:req.body.curseName
     });
     res.send("Mensaje");
   }
   if (req.body.accountType == "SECRETARY") {
     Enrollment_Report.create({
-      STU_ID_ACCOUNT: req.body.id_account,
+      STU_ID_ACCOUNT: req.body.id_person,
       STU_ID_PERSON: req.body.id_person,
       SEC_ID_ACCOUNT: req.body.id_accountUser,
       SEC_ID_PERSON: req.body.id_personUser,
       START_DATE: req.body.startDate,
       END_DATE: req.body.endDate,
-      NUMBER_WEEKS: req.body.number_weeks
+      NUMBER_WEEKS: req.body.number_weeks,
+      COURSE_NAME:req.body.curseName
     });
     res.send("Mensaje");
   }
@@ -306,11 +334,74 @@ router.get("/inform/:id", (req, res) => {
         p0: req.params.id
       }
     })
-    .then(function(inform) {
+    .then(function (inform) {
       if (inform) {
         res.send(inform);
       }
     });
+});
+
+
+router.get("/Uniqueinform/:id/:courseName", (req, res) => {
+  mysqlConnection.sequelize
+    .query("CALL SELECT_UNIQUE_ENROLLMENT(:p0, :p1)", {
+      replacements: {
+        p0: req.params.id,
+        p1: req.params.courseName
+      }
+    })
+    .then(function (inform) {
+      if (inform) {
+        res.send(inform);
+      }
+    });
+});
+
+
+router.get("/showEnrollmentFromStudent/:id", (req, res) => {
+  Enrollment.findAll(
+    {
+      where: {
+        STU_ID_ACCOUNT: req.params.id
+      }
+    }
+  ).then(function (enrollments) {
+    if (enrollments) {
+      res.send(enrollments);
+    } else {
+      console.log(res.err);
+    }
+  });
+});
+
+
+
+router.get("/deleteInform/:id/:courseName/:reservationNumber", (req, res) => {
+  mysqlConnection.sequelize
+    .query("CALL `DELETE_FULL_ENROLLMENT`(:p0, :p1, :p2)", {
+      replacements: {
+        p0: req.params.id,
+        p1: req.params.courseName,
+        p2: req.params.reservationNumber,
+      }
+    })
+});
+
+
+router.put("/editInform/:groupNumber/:startDate/:endDate/:numberWeeks/:reservationNumber/:courseName/:id_person", (req, res) => {
+  Enrollment.update(
+    {ST_GROUP_NUMBER: req.params.groupNumber},
+    { where: { STU_ID_PERSON: req.params.id_person,
+         COURSE_NAME: req.params.courseName}}
+  )
+
+  Enrollment_Report.update(
+    {START_DATE: req.params.startDate,
+      END_DATE: req.params.endDate,
+      NUMBER_WEEKS: req.params.numberWeeks
+    },
+    { where: { RESERVATION_NUMBER: req.params.reservationNumber}}
+  )
 });
 
 module.exports = router;

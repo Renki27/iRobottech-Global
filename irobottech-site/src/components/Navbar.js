@@ -94,6 +94,11 @@ class MyNavbar extends Component {
                   Home <span className="sr-only">(current)</span>
                 </Link>
               </li>
+              <li className="nav-item active">
+                <Link className="nav-link" to="/about">
+                  Quienes somos <span className="sr-only"></span>
+                </Link>
+              </li>
               <li className="nav-item">
                 <DropdownPage />
               </li>

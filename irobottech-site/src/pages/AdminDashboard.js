@@ -16,6 +16,8 @@ import ManageAccount from "./ManageAccount";
 import Enrollment from "./Enrollment";
 import CreateCourse from "./CreateCourse";
 import CreateGroup from "./CreateGroup";
+import EnrollmentManage from './EnrollmentManage';
+import ShowEnrollments from './ShowEnrollments'
 const registerStudent = <RegisterStudent />;
 const registerProfessor = <RegisterProfessor />;
 const registerSecretary = <RegisterSecretary />;
@@ -23,6 +25,8 @@ const manageAccount = <ManageAccount />;
 const enrollmentStudent = <Enrollment />;
 const createCourse = <CreateCourse />;
 const createGroup = <CreateGroup />;
+const enrollmentManage = <EnrollmentManage />;
+const showEnrollments = <ShowEnrollments />;
 
 class AdminDashboard extends Component {
   constructor(props) {
@@ -66,6 +70,12 @@ class AdminDashboard extends Component {
                     <ListGroupItem hover onClick={this.enrollment.bind(this)}>
                       Matricular Estudiante
                     </ListGroupItem>
+                    <ListGroupItem hover onClick={this.enrollmentManage.bind(this)}>
+                      Administrar Matriculas
+                    </ListGroupItem>
+                    <ListGroupItem hover onClick={this.showEnrollments.bind(this)}>
+                      Ver matriculas por Estudiante
+                    </ListGroupItem>
                     <label className="mt-2 font-weight-bold deep-orange-text">
                       Cursos
                     </label>
@@ -79,7 +89,7 @@ class AdminDashboard extends Component {
                       Cuenta
                     </label>
                     <ListGroupItem hover onClick={this.manageAccount.bind(this)}>
-                     Administrar Cuentas
+                      Administrar Cuentas
                     </ListGroupItem>
                   </ListGroup>
                 </div>
@@ -110,6 +120,10 @@ class AdminDashboard extends Component {
         return createCourse;
       case "C_GROUP":
         return createGroup;
+      case "ENR_MAN":
+        return enrollmentManage;
+        case "SHO_ENR":
+        return showEnrollments;
       default:
         return "";
     }
@@ -135,6 +149,12 @@ class AdminDashboard extends Component {
   }
   createGroup() {
     this.setState({ componentSelector: "C_GROUP" });
+  }
+  enrollmentManage() {
+    this.setState({ componentSelector: "ENR_MAN" });
+  }
+  showEnrollments(){
+    this.setState({ componentSelector: "SHO_ENR" });
   }
 }
 

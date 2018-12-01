@@ -27,6 +27,7 @@ class ManageAccount extends Component {
       phone: "",
       address: "",
       accounts: [{}],
+      status: ""
 
     };
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -34,6 +35,8 @@ class ManageAccount extends Component {
     this.verifyAccount = this.verifyAccount.bind(this);
     this.disableAccount = this.disableAccount.bind(this);
     this.accountSelect = this.accountSelect.bind(this);
+    this.enableAccount = this.enableAccount.bind(this);
+    this.inputNumberValidator = this.inputNumberValidator.bind(this);
     // this.loadIntoSelect = this.loadIntoSelect.bind(this);
     // this.accountSelector = this.accountSelector.bind(this);
   }
@@ -92,6 +95,8 @@ class ManageAccount extends Component {
   }
 
   async disableAccount() {
+    document.getElementById("btnDes").style.display = "none";
+    document.getElementById("btnHab").style.display = "block";
       try {
         const response = await axios
           .put(`users/disableAccount/${this.state.emailD}`)
@@ -104,6 +109,23 @@ class ManageAccount extends Component {
         console.error(err);
       }  
   }
+
+  async enableAccount() {
+    document.getElementById("btnDes").style.display = "block";
+    document.getElementById("btnHab").style.display = "none";
+    try {
+      const response = await axios
+        .put(`users/enableAccount/${this.state.emailD}`)
+        .then(response => {
+          if (response) {
+            //this.props.history.push(`/profile`);
+          }
+        });
+    } catch (err) {
+      console.error(err);
+    }  
+}
+
 
   handleChange(event) {
     const { name, value } = event.target;
@@ -149,6 +171,23 @@ class ManageAccount extends Component {
     });
   }
 
+
+  inputNumberValidator(event) {
+    const re = /^[0-9\b]+$/;
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    // if value is not blank, then test the regex
+
+    if (value === "" || re.test(value)) {
+      this.setState({
+        [name]: value
+      });
+    }
+  }
+
+
   async accountSelect(event) {
     this.state.emailD = event.value;
     this.setState({ emailD: event.value });
@@ -159,6 +198,7 @@ class ManageAccount extends Component {
       );
       if (response) {
         this.setState({ id_person: response.data.id_person });
+        this.setState({ status: response.data.status });    
         const token2 = {
           id_person: response.data.id_person,
         };
@@ -181,15 +221,21 @@ class ManageAccount extends Component {
       console.error(err);
     }
     document.getElementById("Formulario").style.display = "block";
-
+  if (this.state.status == "ACTIVE"){
+    document.getElementById("btnDes").style.display = "block";
+    document.getElementById("btnHab").style.display = "none";
+  } else {
+    document.getElementById("btnDes").style.display = "none";
+    document.getElementById("btnHab").style.display = "block";
+  }
   }
 
   render() {
     return (
       <div className="container">
         <Row>
-          <Col className="mx-auto mt-5">
-            <Card>
+          <Col className="mx-auto mt-5" >
+            <Card >
               <CardBody>
                 <p className="h5 text-center mb-4">Administrar Cuentas</p>
 
@@ -198,7 +244,7 @@ class ManageAccount extends Component {
                   onChange={this.accountSelect}
                   options={this.state.accounts.map(function (json) {
                     return {
-                      label: json.username + " /// " + json.email,
+                      label: json.username + "  -  " + json.email,
                       value: json.email
                     };
                   })}
@@ -350,13 +396,20 @@ class ManageAccount extends Component {
                                 </div>
                               </form>
 
-                              <Button
+
+                              <Button id= "btnHab"                         
+                              className="btn btn-outline-deep-orange"
+                              onClick={this.enableAccount}>
+                              Habilitar
+                              </Button>
                               
+                              <Button id= "btnDes"                   
                                 className="btn btn-outline-deep-orange"
-                                onClick={this.handleClickOpen}
-                              >
+                                onClick={this.handleClickOpen}>
                                 Deshabilitar
-                  </Button>
+                             </Button>
+
+
                               <Dialog
                                 open={this.state.open}
                                 onClose={this.handleClose}

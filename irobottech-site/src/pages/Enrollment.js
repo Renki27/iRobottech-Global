@@ -23,7 +23,8 @@ class Enrollment extends Component {
       groups: [{}],
       StartDate: "",
       EndDate: "",
-      number_weeks: ""
+      number_weeks: "",
+      accounts: [{}],
     };
     this.handleChange = this.handleChange.bind(this);
     this.verifyAccount = this.verifyAccount.bind(this);
@@ -32,6 +33,8 @@ class Enrollment extends Component {
     this.valueGroup = this.valueGroup.bind(this);
     this.groupSelect = this.groupSelect.bind(this);
     this.matricular = this.matricular.bind(this);
+    this.accountSelect = this.accountSelect.bind(this);
+    this.handleChangeDate = this.handleChangeDate.bind(this);
   }
 
   valueCourse(event) {
@@ -89,6 +92,26 @@ class Enrollment extends Component {
     });
   };
 
+  async accountSelect(event) {
+    this.state.emailId = event.value;
+    this.setState({ emailId: event.value });
+    this.setState({ person_data: "" });
+    try {
+      const response = await axios.get(
+        `users/verifyAllAccount/${this.state.emailId}`
+      );
+      if (response) {
+        this.setState({ id_person: response.data.id_person });
+        this.setState({ status: response.data.status });    
+      }
+    } catch (err) {
+      console.error(err);
+    }
+    document.getElementById("Formulario").style.display = "block";
+  }
+
+
+
   async verifyAccount() {
     try {
       const response = await axios.get(
@@ -117,6 +140,12 @@ class Enrollment extends Component {
   }
 
   componentDidMount() {
+    axios.get("http://localhost:8080/ShowAccounts/students").then(response => {
+      this.state.accounts = response.data;
+      this.setState({
+        accounts: response.data
+      });
+    });
     document.getElementById("Formulario").style.display = "none";
     axios.get("http://localhost:8080/RegisterCourse").then(response => {
       this.state.courses = response.data;
@@ -124,6 +153,19 @@ class Enrollment extends Component {
         courses: response.data
       });
     });
+  }
+
+  
+
+  handleChangeDate(event) {
+    // this.state.EndDate = this.state.StartDate;
+  //  this.state.EndDate = this.state.StartDate.getDate() + this.state.number_weeks;
+   // this.state.EndDate.setDate(this.state.StartDate.getDate() + this.state.number_weeks);
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+   
   }
 
   handleChange(event) {
@@ -149,7 +191,19 @@ class Enrollment extends Component {
               <CardBody>
                 <p className="h5 text-center mb-4">Matricula</p>
 
-                <div className="col">
+
+             <label>Elija la cuenta: </label>
+                <Select
+                  onChange={this.accountSelect}
+                  options={this.state.accounts.map(function (json) {
+                    return {
+                      label: json.username + "  -  " + json.email,
+                      value: json.email
+                    };
+                  })}
+                />
+
+{/*                 <div className="col">
                   <Input
                     id="idEmail"
                     label="Email"
@@ -173,7 +227,7 @@ class Enrollment extends Component {
                   >
                     Verificar
                   </Button>
-                </div>
+                </div> */}
                 <form onSubmit={this.matricular} id="Formulario" noValidate>
                   <div className="grey-text">
                     <br />
@@ -208,13 +262,13 @@ class Enrollment extends Component {
                       label="Fecha de inicio"
                       name="StartDate"
                       value={this.state.StartDate}
-                      onChange={this.handleChange}
+                      onChange={this.handleChangeDate}
                       type="date"
                       hint="00/00/0000 "
                       required
                     />
                     <Input
-                      label="Fecha de inicio"
+                      label="Fecha de Fin"
                       name="EndDate"
                       value={this.state.EndDate}
                       onChange={this.handleChange}
