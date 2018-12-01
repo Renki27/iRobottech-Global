@@ -6,11 +6,6 @@ import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const cellEditProp = {
-  mode: "click",
-  blurToSave: true
-};
-
 const state = ["Presente", "Ausente", "Justificado", "Injustificado"];
 
 class CreateClass extends Component {
@@ -66,16 +61,13 @@ class CreateClass extends Component {
       .then(response => {
         if (response != 0) {
           this.state.lastClassN = response.data;
-          alert(this.state.lastClassN);
           this.setState({
             lastClassN: response.data + 1
           });
-          alert(this.state.lastClassN);
         } else {
           this.setState({
             lastClassN: 1
           });
-          alert(this.state.lastClassN);
         }
       });
   }
@@ -147,7 +139,6 @@ class CreateClass extends Component {
             document.getElementById("createClassButton").disabled = true;
             this.setState({ buttonDisabled: true });
             this.notify(evt, "SUCCESS", "Se ha guarado la clase!");
-            console.log(response.status);
           });
 
         //si está vacia
@@ -181,21 +172,31 @@ class CreateClass extends Component {
         toast.info(msj);
     }
   };
-
+  //csvFileName={`Lista Clase: ${this.state.lastClassN} Curso: ${this.state.courseName} Grupo:${this.state.groupNumber} Fecha:${this.state.currentDate}`.csv}
   //----------------------------------------------------------------------------------------------
   render() {
     const selectRowProp = {
-      mode: "radio",
-      bgColor: "pink", // you should give a bgcolor, otherwise, you can't regonize which row has been selected
-      hideSelectColumn: true, // enable hide selection column.
+      mode: "checkbox",
+      // bgColor: "pink", // you should give a bgcolor, otherwise, you can't regonize which row has been selected
+      // hideSelectColumn: true, // enable hide selection column.
       clickToSelect: true // you should enable clickToSelect, otherwise, you can't select column.
       //onSelect: this.handleRowSelect
     };
+
+    const cellEditProp = {
+      mode: "click",
+      blurToSave: true
+    };
+
+    const options = {
+      exportCSVText: "Descargar documento"
+    };
+
     return (
       <div>
         <div>
           <Row className="mt-6">
-            <Col md="10" className="ml-5">
+            <Col md="12" className="ml-5">
               <Card>
                 <h3 className="text-center font-weight-bold pl-0 my-4">
                   Crear Clase
@@ -289,7 +290,7 @@ class CreateClass extends Component {
         </div>
         <div>
           <Row className="mt-5">
-            <Col md="10" className="ml-5">
+            <Col md="12" className="ml-5">
               <Card>
                 <h3 className="text-center font-weight-bold pl-0 my-4">
                   Asistencia
@@ -307,10 +308,12 @@ class CreateClass extends Component {
                   <div>
                     <BootstrapTable
                       data={this.state.students}
+                      options={options}
                       exportCSV={true}
                       selectRow={selectRowProp}
                       cellEdit={cellEditProp}
                       pagination
+                      ignoreSinglePage
                     >
                       <TableHeaderColumn
                         dataField="ID_ACCOUNT"
@@ -319,6 +322,8 @@ class CreateClass extends Component {
                         headerAlign="center"
                         isKey
                         hidden
+                        export={false}
+                        editable={false}
                       >
                         Id
                       </TableHeaderColumn>
@@ -328,6 +333,8 @@ class CreateClass extends Component {
                         dataAlign="center"
                         headerAlign="center"
                         hidden
+                        export={false}
+                        editable={false}
                       >
                         Id
                       </TableHeaderColumn>
@@ -336,6 +343,8 @@ class CreateClass extends Component {
                         width="100"
                         dataAlign="center"
                         headerAlign="center"
+                        csvHeader="Nombre"
+                        editable={false}
                       >
                         Estudiante
                       </TableHeaderColumn>
@@ -344,6 +353,8 @@ class CreateClass extends Component {
                         width="100"
                         dataAlign="center"
                         headerAlign="center"
+                        editable={false}
+                        export={false}
                       >
                         Curso
                       </TableHeaderColumn>
@@ -352,11 +363,15 @@ class CreateClass extends Component {
                         width="100"
                         dataAlign="center"
                         headerAlign="center"
+                        editable={false}
+                        export={false}
                       >
                         Grupo
                       </TableHeaderColumn>
                       <TableHeaderColumn
+                        dataField="Attendance"
                         width="120"
+                        csvHeader="Asistencia"
                         dataAlign="center"
                         headerAlign="center"
                         editable={{
