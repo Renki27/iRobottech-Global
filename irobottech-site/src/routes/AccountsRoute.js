@@ -6,6 +6,7 @@ const group = require("../models/Group");
 const mysqlConnection = require("../connectionDataBase/databaseConnection");
 const secretary = require("../models/Secretary");
 const proffesor = require("../models/Professor");
+const Course = require("../models/Course");
 router.use(cors());
 process.env.SECRET_KEY = "secret";
 const account = require("../models/Account");
@@ -83,6 +84,19 @@ router.get("/secretary", (req, res) => {
         })
 });
 
+
+router.get("/courses", (req, res) => {
+    Course.findAll(
+        {
+            where: {
+                STATUS: ["Activo"]
+            }
+        }
+    )
+        .then(function (group) {
+            res.json(group);
+        })
+});
 
 
 

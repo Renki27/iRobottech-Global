@@ -95,8 +95,8 @@ class MyNavbar extends Component {
                 </Link>
               </li>
               <li className="nav-item active">
-                <Link className="nav-link" to="/about">
-                  Quienes somos <span className="sr-only"></span>
+                <Link className="nav-link" to="/Courses">
+                  Nuestros Cursos <span className="sr-only"></span>
                 </Link>
               </li>
               <li className="nav-item">

@@ -143,15 +143,6 @@ class About extends Component {
                                 Aca va la informacion Sobre la empresa
                         </h3>
                             <CardBody>
-                                <div>
-                                <h4 className="text-center font-weight-bold pl-0 my-4">
-                                Nuestros profesores
-                                  </h4>
-                                 <div>{this.createTable()}</div>  
-                                    <br />
-                                    <br />
-                                </div>
-
                             </CardBody>
                         </Card>
                     </Col>

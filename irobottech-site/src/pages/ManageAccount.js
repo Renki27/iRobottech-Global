@@ -8,6 +8,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import "./ManageAccount.css"
 
 class ManageAccount extends Component {
   constructor(props) {
@@ -42,7 +43,7 @@ class ManageAccount extends Component {
 
   componentDidMount() {
     document.getElementById("Formulario").style.display = "none";
-    axios.get("http://localhost:8080/ShowAccounts").then(response => {
+    axios.get("ShowAccounts").then(response => {
       this.state.accounts = response.data;
       this.setState({
         accounts: response.data
@@ -231,10 +232,11 @@ class ManageAccount extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container" >
         <Row>
           <Col className="mx-auto mt-5" >
-            <Card >
+            <Card style={{ width: "40rem"}}>
+            
               <CardBody>
                 <p className="h5 text-center mb-4">Administrar Cuentas</p>
 
