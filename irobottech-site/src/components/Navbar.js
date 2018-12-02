@@ -91,7 +91,7 @@ class MyNavbar extends Component {
             <ul className="navbar-nav ml-auto">
               <li className="nav-item active">
                 <Link className="nav-link" to="/">
-                  Home <span className="sr-only">(current)</span>
+                  Inicio <span className="sr-only">(current)</span>
                 </Link>
               </li>
               <li className="nav-item active">
