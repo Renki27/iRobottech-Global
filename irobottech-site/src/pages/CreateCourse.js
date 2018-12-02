@@ -56,7 +56,7 @@ export class CreateCourse extends React.Component {
         const decoded = jwt_decode(token);
 
         if (decoded.account_type == "ADMIN") {
-            alert(decoded.id_account);
+
             state.ADM_ID_ACCOUNT = decoded.id_account;
             this.setState({
                 ADM_ID_ACCOUNT: decoded.id_account
