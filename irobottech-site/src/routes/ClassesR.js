@@ -75,6 +75,23 @@ router.get("/getMyGroups/:id", (req, res) => {
   });
 });
 
+
+
+//Get all groups
+router.get("/getAllGroupsNCourses", (req, res) => {
+  mysqlConnection.sequelize
+  .query("CALL SELECT_GET_ALL_GROUPS_N_COURSES ()")
+  .then(function(data) {
+    if (data) {
+      res.json(data);
+    } else {
+      res.json(0);
+    }
+  });
+});
+
+
+
 //Get Professor courses
 router.get("/getMyCourses/:id", (req, res) => {
   mysqlConnection.sequelize

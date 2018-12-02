@@ -3,6 +3,7 @@ import { Row, Col, Input, Button, Card, CardBody } from "mdbreact";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import axios from "axios";
 import Select from "react-select";
+import "./global.css";
 
 class EnrollmentManage extends Component {
   constructor(props) {
@@ -28,14 +29,14 @@ class EnrollmentManage extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.courseSelect = this.courseSelect.bind(this);
     this.cellButton = this.cellButton.bind(this);
-    this.onClickAccounttSelected = this.onClickAccounttSelected.bind(this)
-    this.eliminarMatricula = this.eliminarMatricula.bind(this)
+    this.onClickAccounttSelected = this.onClickAccounttSelected.bind(this);
+    this.eliminarMatricula = this.eliminarMatricula.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     //  this.handleSubmit = this.handleSubmit.bind(this);
     this.editar = this.editar.bind(this);
     this.groupSelect = this.groupSelect.bind(this);
     //  this.llenarGrupos = this.llenarGrupos.bind(this)
-    this.getDefaultValue = this.getDefaultValue.bind(this)
+    this.getDefaultValue = this.getDefaultValue.bind(this);
   }
 
   handleChange = event => {
@@ -56,7 +57,6 @@ class EnrollmentManage extends Component {
     });
   }
 
-
   async courseSelect(event) {
     document.getElementById("listaEstudiantes").style.display = "block";
     this.state.courseName = event.value;
@@ -75,7 +75,9 @@ class EnrollmentManage extends Component {
     }
     try {
       await axios
-        .get(`http://localhost:8080/RegisterCourse/groups/${this.state.courseName}`)
+        .get(
+          `http://localhost:8080/RegisterCourse/groups/${this.state.courseName}`
+        )
         .then(response => {
           this.state.groups = response.data;
           this.setState({
@@ -86,8 +88,6 @@ class EnrollmentManage extends Component {
       console.error(err);
     }
   }
-
-
 
   async getStudents() {
     try {
@@ -106,7 +106,11 @@ class EnrollmentManage extends Component {
 
   async eliminarMatricula() {
     document.getElementById("inform").style.display = "none";
-    axios.get(`/users/deleteInform/${this.state.inform[0].ID_PERSON}/${this.state.inform[0].COURSE_NAME}/${this.state.inform[0].RESERVATION_NUMBER}`)
+    axios.get(
+      `/users/deleteInform/${this.state.inform[0].ID_PERSON}/${
+        this.state.inform[0].COURSE_NAME
+      }/${this.state.inform[0].RESERVATION_NUMBER}`
+    );
     try {
       const response = await axios
         .get(`users/getStudentsFromCourse/${this.state.courseName}`)
@@ -119,9 +123,7 @@ class EnrollmentManage extends Component {
     } catch (err) {
       console.error(err);
     }
-
   }
-
 
   handleInputChange(event) {
     const { name, value } = event.target;
@@ -132,49 +134,50 @@ class EnrollmentManage extends Component {
 
   async onClickAccounttSelected(row) {
     document.getElementById("inform").style.display = "block";
-    axios.get(`/users/Uniqueinform/${row.ID_PERSON}/${this.state.courseName}`).then(response => {
-      this.setState({
-        inform: response.data
+    axios
+      .get(`/users/Uniqueinform/${row.ID_PERSON}/${this.state.courseName}`)
+      .then(response => {
+        this.setState({
+          inform: response.data
+        });
+        this.setState({
+          NOMBRE_ESTUDINTE: this.state.inform[0].NOMBRE_ESTUDINTE,
+          ST_GROUP_NUMBER: this.state.inform[0].ST_GROUP_NUMBER,
+          START_DATE: this.state.inform[0].START_DATE,
+          END_DATE: this.state.inform[0].END_DATE,
+          NUMBER_WEEKS: this.state.inform[0].NUMBER_WEEKS,
+          RESERVATION_NUMBER: this.state.inform[0].RESERVATION_NUMBER,
+          COURSE_NAME: this.state.inform[0].COURSE_NAME,
+          ID_PERSON: this.state.inform[0].ID_PERSON
+        });
       });
-      this.setState({
-        NOMBRE_ESTUDINTE: this.state.inform[0].NOMBRE_ESTUDINTE,
-        ST_GROUP_NUMBER: this.state.inform[0].ST_GROUP_NUMBER,
-        START_DATE: this.state.inform[0].START_DATE,
-        END_DATE: this.state.inform[0].END_DATE,
-        NUMBER_WEEKS: this.state.inform[0].NUMBER_WEEKS,
-        RESERVATION_NUMBER: this.state.inform[0].RESERVATION_NUMBER,
-        COURSE_NAME: this.state.inform[0].COURSE_NAME,
-        ID_PERSON: this.state.inform[0].ID_PERSON
-      });
-    });
   }
 
   getDefaultValue = evt => {
-    return this.state.ST_GROUP_NUMBER
-  }
-
+    return this.state.ST_GROUP_NUMBER;
+  };
 
   groupSelect(event) {
     this.state.ST_GROUP_NUMBER = event.value;
     this.setState({ GROUP_NAME: event.value });
   }
 
-
   cellButton(cell, row, enumObject, rowIndex, data) {
     return (
-      <button
-        type="button"
-        onClick={() =>
-          this.onClickAccounttSelected(row)}
-      >
+      <button type="button" onClick={() => this.onClickAccounttSelected(row)}>
         Ver Detalles
-       </button>
-    )
+      </button>
+    );
   }
 
-
   editar() {
-    axios.put(`/users/editInform/${this.state.ST_GROUP_NUMBER}/${this.state.START_DATE}/${this.state.END_DATE}/${this.state.NUMBER_WEEKS}/${this.state.RESERVATION_NUMBER}/${this.state.COURSE_NAME} /${this.state.ID_PERSON}`)
+    axios.put(
+      `/users/editInform/${this.state.ST_GROUP_NUMBER}/${
+        this.state.START_DATE
+      }/${this.state.END_DATE}/${this.state.NUMBER_WEEKS}/${
+        this.state.RESERVATION_NUMBER
+      }/${this.state.COURSE_NAME} /${this.state.ID_PERSON}`
+    );
   }
 
   render() {
@@ -189,15 +192,13 @@ class EnrollmentManage extends Component {
       <div>
         <Row className="mt-6">
           <Col md="10" className="ml-5">
-            <Card>
-              <h3 className="text-center font-weight-bold pl-0 my-4">
-                Cursos
-              </h3>
+            <Card className="global-width">
+              <h3 className="text-center font-weight-bold pl-0 my-4">Cursos</h3>
               <CardBody>
                 <label>Elija el curso: </label>
                 <Select
                   onChange={this.courseSelect}
-                  options={this.state.courses.map(function (json) {
+                  options={this.state.courses.map(function(json) {
                     return {
                       label: json.COURSE_NAME + " - " + json.COUSE_CODE,
                       value: json.COURSE_NAME
@@ -221,7 +222,8 @@ class EnrollmentManage extends Component {
                       Nombre
                     </TableHeaderColumn>
 
-                    <TableHeaderColumn hidden
+                    <TableHeaderColumn
+                      hidden
                       dataField="ID_PERSON"
                       width="100"
                       dataAlign="center"
@@ -229,7 +231,8 @@ class EnrollmentManage extends Component {
                     >
                       Id_Person
                     </TableHeaderColumn>
-                    <TableHeaderColumn hidden
+                    <TableHeaderColumn
+                      hidden
                       dataField="RESERVATION_NUMBER"
                       width="100"
                       dataAlign="center"
@@ -239,9 +242,11 @@ class EnrollmentManage extends Component {
                     </TableHeaderColumn>
 
                     <TableHeaderColumn
-                      dataField='button'
+                      dataField="button"
                       dataFormat={this.cellButton}
-                    >Detalles</TableHeaderColumn>
+                    >
+                      Detalles
+                    </TableHeaderColumn>
                   </BootstrapTable>
                 </div>
               </CardBody>
@@ -249,19 +254,15 @@ class EnrollmentManage extends Component {
           </Col>
         </Row>
 
-
         <div id="inform">
           <Row className="mt-6">
             <Col md="8" className="mx-auto">
               <Card>
                 <h3 className="text-center font-weight-bold pl-0 my-4">
                   Detalles de la Matricula
-                      </h3>
+                </h3>
                 <CardBody>
-                  <form
-                    className="needs-validation"
-                    noValidate
-                  >
+                  <form className="needs-validation" noValidate>
                     <div className="row">
                       <div className="col">
                         <Input
@@ -276,24 +277,20 @@ class EnrollmentManage extends Component {
                         />
                       </div>
                       <div className="col">
-
                         <h6>
-                          Matriculado en el Grupo # {this.state.ST_GROUP_NUMBER} Seleccione aca si desea cambiarlo
-                      </h6>
-                        <h6>
-
+                          Matriculado en el Grupo # {this.state.ST_GROUP_NUMBER}{" "}
+                          Seleccione aca si desea cambiarlo
                         </h6>
+                        <h6 />
                         <Select
                           //  default value ={this.getDefaultValue}
                           onChange={this.groupSelect}
-                          options={this.state.groups.map(function (json) {
+                          options={this.state.groups.map(function(json) {
                             return {
                               label: json.ST_GROUP_NUMBER,
-                              value: json.ST_GROUP_NUMBER,
+                              value: json.ST_GROUP_NUMBER
                             };
-                          }
-                          )}
-
+                          })}
                         />
                         {/*                      <Input
                           label="Numero de Grupo"
@@ -343,28 +340,27 @@ class EnrollmentManage extends Component {
                         />
                       </div>
                     </div>
-
                   </form>
                   <div className="text-center py-4 mt-3">
                     <button
                       className="btn btn-outline-deep-orange"
-                      onClick={this.editar}>
+                      onClick={this.editar}
+                    >
                       Editar
-                            </button>
+                    </button>
                   </div>
                   <button
                     className="btn btn-outline-deep-orange"
-                    onClick={this.eliminarMatricula}>
+                    onClick={this.eliminarMatricula}
+                  >
                     Eliminar
-                            </button>
+                  </button>
                 </CardBody>
               </Card>
             </Col>
           </Row>
         </div>
-
       </div>
-
     );
   }
 }

@@ -19,6 +19,7 @@ import CreateGroup from "./CreateGroup";
 import EnrollmentManage from './EnrollmentManage';
 import ShowEnrollments from './ShowEnrollments'
 import DownloadFile from './DownloadFile'
+import ViewAllGroupsNCourses from "./ViewAllGroupsNCourses";
 const registerStudent = <RegisterStudent />;
 const registerProfessor = <RegisterProfessor />;
 const registerSecretary = <RegisterSecretary />;
@@ -29,6 +30,7 @@ const createGroup = <CreateGroup />;
 const enrollmentManage = <EnrollmentManage />;
 const showEnrollments = <ShowEnrollments />;
 const downloadFile = <DownloadFile />;
+const viewAllGroupsNCourses = <ViewAllGroupsNCourses/>
 
 class AdminDashboard extends Component {
   constructor(props) {
@@ -64,7 +66,7 @@ class AdminDashboard extends Component {
                       Profesor
                     </ListGroupItem>
                     <ListGroupItem hover onClick={this.loaderRegSec.bind(this)}>
-                      Secretaria/o
+                      Secretario/a
                     </ListGroupItem>
                     <label className="mt-2 font-weight-bold deep-orange-text">
                       Estudiante
@@ -86,6 +88,9 @@ class AdminDashboard extends Component {
                     </ListGroupItem>
                     <ListGroupItem hover onClick={this.createGroup.bind(this)}>
                       Crear Grupo
+                    </ListGroupItem>
+                    <ListGroupItem hover onClick={this.getAllGroupsNCourses.bind(this)}>
+                      Ver Cursos y Grupos
                     </ListGroupItem>
                     <label className="mt-2 font-weight-bold deep-orange-text">
                       Cuenta
@@ -135,6 +140,8 @@ class AdminDashboard extends Component {
         return showEnrollments;
         case "DOW_FIL":
         return downloadFile;
+        case "V_GNC":
+        return viewAllGroupsNCourses;
       default:
         return "";
     }
@@ -169,6 +176,9 @@ class AdminDashboard extends Component {
   }
   downloadFile(){
     this.setState({ componentSelector: "DOW_FIL" });
+  }
+  getAllGroupsNCourses() {
+    this.setState({ componentSelector: "V_GNC" });
   }
 }
 

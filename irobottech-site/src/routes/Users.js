@@ -222,6 +222,21 @@ router.get("/accountData/:id", (req, res) => {
 });
 
 
+//Get Account type
+router.get("/getAccountType/:email", (req, res) => {
+  mysqlConnection.sequelize
+    .query("CALL SELECT_ACCOUNT_TYPE(:p0)", {
+      replacements: {
+        p0: req.params.email
+      }
+    })
+    .then(function(data) {
+      if (data) {
+        res.send(data);
+      }
+    });
+});
+
 //Get Person Data
 router.get("/getPersonData/:id", (req, res) => {
   Person.findOne({

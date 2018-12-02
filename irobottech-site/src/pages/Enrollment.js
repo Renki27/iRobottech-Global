@@ -5,6 +5,7 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import { matricular } from "../components/matricularFunction";
 import { Link, withRouter } from "react-router-dom";
+import "./global.css"
 
 class Enrollment extends Component {
   constructor(props) {
@@ -187,10 +188,11 @@ class Enrollment extends Component {
   render() {
     return (
       <div className="container">
-        <Row>
-          <Col className="mx-auto">
-            <Card>
-              <CardBody>
+
+          <Row className="mt-6">
+            <Col md="10" className="ml-5">
+              <Card className ="global-width">
+                <CardBody>
                 <p className="h5 text-center mb-4">Matricula</p>
 
 

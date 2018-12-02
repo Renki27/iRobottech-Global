@@ -10,11 +10,8 @@ import {
   NavLink
 } from "mdbreact";
 import "./Login.css";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
 import { login } from "../components/UserFunctions";
-
+import axios from "axios";
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -22,10 +19,12 @@ class Login extends Component {
     this.state = {
       account_type: "",
       email: "",
-      password: ""
+      password: "",
+      accountT: [{}]
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.getAccountType = this.getAccountType.bind(this);
   }
 
   validateForm() {
@@ -39,17 +38,42 @@ class Login extends Component {
     });
   };
 
+  getAccountType() {
+    axios.get(`users/getAccountType/${this.state.email}`).then(response => {
+      if (response) {
+        this.state.account_type = response.data;
+        this.setState({
+          account_type: response.data
+        });
+        alert(response.data);
+      } else {
+        alert(error);
+      }
+    });
+  }
+
   handleSubmit = event => {
     event.preventDefault(); //previene el metodo default de un objeto
+    axios.get(`users/getAccountType/${this.state.email}`).then(response => {
+      if (response) {
+        this.state.accountT = response.data;
+        this.setState({
+          account_type: this.state.accountT[0].ACCOUNT_TYPE
+        });
+        //  alert(response.data);
 
-    const account = {
-      account_type: this.state.account_type,
-      email: this.state.email,
-      password: this.state.password
-    };
-    login(account).then(res => {
-      if (res) {
-        this.props.history.push(`/profile`);
+        const account = {
+          account_type: this.state.account_type,
+          email: this.state.email,
+          password: this.state.password
+        };
+        login(account).then(res => {
+          if (res) {
+            this.props.history.push(`/profile`);
+          }
+        });
+      } else {
+        alert(error);
       }
     });
   };
@@ -64,38 +88,19 @@ class Login extends Component {
                 <Card
                   className="card-image"
                   style={{
-                    backgroundImage:
-                      "url(https://www.popsci.com/sites/popsci.com/files/styles/655_1x_/public/images/2018/06/depositphotos_5032066_original.jpg)",
                     width: "27rem",
                     backgroundRepeat: "no-repeat",
                     backgroundSize:
                       "cover" /* Resize the background image to cover the entire container */
                   }}
                 >
-                  <div className="text-white rgba-stylish-strong py-5 px-5 z-depth-4">
+                  <div className="text-white rgba-stylish-strong py-5 px-5 z-depth-4 blue-gradient">
                     <div className="text-center">
                       <h3 className="cyan-text mb-5 mt-4 font-weight-bold">
                         <strong>Iniciar Sesión</strong>
                       </h3>
                     </div>
                     <form onSubmit={this.handleSubmit} noValidate>
-                      <FormControl required>
-                        <label>Tipo de Cuenta</label>
-                        <Select
-                          name="account_type"
-                          onChange={this.handleChange}
-                          value={this.state.account_type}
-                          errorText="sadasd"
-                          inputProps={{
-                            id: "acc-required"
-                          }}
-                        >
-                          <MenuItem value={"ADMIN"}>Administrador</MenuItem>
-                          <MenuItem value={"SECRETARY"}>Secretario/a</MenuItem>
-                          <MenuItem value={"PROFESSOR"}>Profesor</MenuItem>
-                          <MenuItem value={"STUDENT"}>Estudiante</MenuItem>
-                        </Select>
-                      </FormControl>
                       <Input
                         name="email"
                         label="Email"
@@ -124,7 +129,7 @@ class Login extends Component {
                           >
                             Ingresar
                           </Button>
-                          <div className="mt-3"> 
+                          <div className="mt-3">
                             <NavLink to="/RecoverPage">
                               Haz olvidado la contraseña?
                             </NavLink>

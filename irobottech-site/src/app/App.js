@@ -18,39 +18,52 @@ import EditPass from "../pages/EditPass";
 import Enrollment from "../pages/Enrollment";
 import EnrollmentReport from "../pages/EnrollmentReport";
 import "./App.css";
-
+import { View, Mask } from "mdbreact";
 class App extends Component {
   render() {
     return (
       <Switch>
-        <div className="App">
-          {/* Component en minuscula */}
-          <Navbar />
-          <Route exact path="/" component={Home} />
-          <div className="Container">
-            <Route exact path="/RecoverPage" component={RecoverPage} />
-            <Route exact path="/About" component={About} />
-            <Route exact path="/Contact" component={Contact} />
-            <Route exact path="/Login" component={Login} />
-            <Route exact path="/RegisterStudent" component={RegisterStudent} />
-            <Route exact path="/profile" component={Profile} />
-            <Route
-              exact
-              path="/RegisterProfessor"
-              component={RegisterProfessor}
-            />
-            <Route
-              exact
-              path="/RegisterSecretary"
-              component={RegisterSecretary}
-            />
-            <Route exact path="/RegisterAdmin" component={RegisterAdmin} />
-            <Route exact path="/editProfile" component={EditProfile} />
-            <Route exact path="/EditPass" component={EditPass} />
-            <Route exact path="/EnrollmentReport:myId" component={EnrollmentReport} />
+
+          <div className="App ">
+            <div className="Container">
+              {/* Component en minuscula */}
+              <Navbar />
+
+              <Route exact path="/" component={Home} />
+
+              <Route exact path="/RecoverPage" component={RecoverPage} />
+              <Route exact path="/About" component={About} />
+              <Route exact path="/Contact" component={Contact} />
+              <Route exact path="/Login" component={Login} />
+              <Route
+                exact
+                path="/RegisterStudent"
+                component={RegisterStudent}
+              />
+              <Route exact path="/profile" component={Profile} />
+              <Route
+                exact
+                path="/RegisterProfessor"
+                component={RegisterProfessor}
+              />
+              <Route
+                exact
+                path="/RegisterSecretary"
+                component={RegisterSecretary}
+              />
+              <Route exact path="/RegisterAdmin" component={RegisterAdmin} />
+              <Route exact path="/editProfile" component={EditProfile} />
+              <Route exact path="/EditPass" component={EditPass} />
+              <Route
+                exact
+                path="/EnrollmentReport:myId"
+                component={EnrollmentReport}
+              />
+            </div>
+
+            <FooterPage />
           </div>
-          <FooterPage />
-        </div>
+
       </Switch>
     );
   }

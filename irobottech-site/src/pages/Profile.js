@@ -78,8 +78,7 @@ class Profile extends Component {
           <Col className="mx-auto mt-5">
             <Card>
               <CardBody>
-                <h1>{this.state.email}</h1>
-                <h1>{this.state.account_type}</h1>
+                <h6>{this.state.account_type}</h6>
               </CardBody>
             </Card>
           </Col>

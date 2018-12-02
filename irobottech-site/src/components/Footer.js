@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 class FooterPage extends Component {
   render() {
     return (
-      <Footer color="elegant-color-dark" className="font-small pt-4 mt-4">
+      <Footer color="elegant-color-dark" className="font-small pt-4">
         <Container fluid className="text-center text-md-left">
           <Row>
             <Col md="6">
