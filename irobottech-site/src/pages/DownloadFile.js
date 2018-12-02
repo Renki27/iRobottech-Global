@@ -9,9 +9,6 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import UploadForm from './uploadForm';
-
-const uploadForm = <UploadForm />;
 
 class DownloadFile extends Component {
     constructor(props) {
@@ -22,26 +19,19 @@ class DownloadFile extends Component {
             id_person: "",
             path: "",
             open: false,
-            firstName: "",
-            secondName: "",
-            lastName1: "",
-            lastName2: "",
             idNumber: "",
-            birthDate: "",
-            phone: "",
-            address: "",
             accounts: [{}],
             status: ""
         };
         this.accountSelect = this.accountSelect.bind(this);
         this.load = this.load.bind(this)
         this.download = this.download.bind(this)
-        // this.loadIntoSelect = this.loadIntoSelect.bind(this);
-        // this.accountSelector = this.accountSelector.bind(this);
     }
 
     componentDidMount() {
-        //  document.getElementById("Formulario").style.display = "none";
+
+     document.getElementById("btnDescargar").style.display = "none";
+      document.getElementById("SelectFile").style.display = "none";
         axios.get("/ShowAccounts/personal").then(response => {
             this.state.accounts = response.data;
             this.setState({
@@ -72,7 +62,14 @@ class DownloadFile extends Component {
             console.error(err);
           }
 
-        //    document.getElementById("Formulario").style.display = "block";
+     document.getElementById("SelectFile").style.display = "block";
+     if(this.state.path != ""){
+        document.getElementById("btnDescargar").style.display = "block";
+     } 
+     if(this.state.path == ""){
+        document.getElementById("btnDescargar").style.display = "none";
+     } 
+    
     }
 
     render() {
@@ -98,8 +95,8 @@ class DownloadFile extends Component {
                                 <br></br>
                                 <br></br>
                                 <br></br>
+                                <div id="SelectFile">
                                 <div className="input-group">
-
                                     <div className="custom-file">
                                         <form name="upload-form" action="upload" method="post" enctype="multipart/form-data">
                                             <input
@@ -109,7 +106,6 @@ class DownloadFile extends Component {
                                                 aria-describedby="inputGroupFileAddon01"
                                                 name="attachment"
                                             />
-
                                             <input hidden
                                                 aria-describedby="inputGroupFileAddon01"
                                                 value={this.state.id_person}
@@ -117,7 +113,7 @@ class DownloadFile extends Component {
                                             />
                                             <label className="custom-file-label" htmlFor="inputGroupFile01">
                                                 Buscar Archivo
-                                   </label>
+                                            </label>
                                             <br></br>
                                             <br></br>
                                             <br></br>
@@ -126,16 +122,16 @@ class DownloadFile extends Component {
                                     </div>
                                 </div>
                                 <div>
-                                    <div id="123">
                                         <br></br>
                                         <br></br>
                                         <br></br>
-                                       
+                                        <div id="btnDescargar">
                                       {/*   <button onClick={this.download}>Descargar</button> */}
                                        <a href= {`/download/${this.state.path}`}>
                                             Descargar
                                             </a>
-                                    </div>
+                                            </div>
+                                </div>
                                 </div>
                             </CardBody>
                         </Card>

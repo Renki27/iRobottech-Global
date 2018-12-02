@@ -68,7 +68,7 @@ class ShowEnrollments extends Component {
               <CardBody>
                 <p className="h5 text-center mb-4">Mostrar Matriculas</p>
                 <label>Seleccione la cuenta </label>
-                <Select
+                <Select styles="weight:300px"
                   onChange={this.accountSelect}
                   options={this.state.accounts.map(function (json) {
                     return {
@@ -78,6 +78,9 @@ class ShowEnrollments extends Component {
                   })}
                 />
   
+  <br></br>
+  <br></br>
+  <br></br>
                   <div id="listaCursos">
                    <BootstrapTable
                     data={this.state.enrollments}
@@ -87,7 +90,7 @@ class ShowEnrollments extends Component {
                   >
                     <TableHeaderColumn
                       dataField="COURSE_NAME"
-                      width="100"
+                      width="300"
                       dataAlign="center"
                       headerAlign="center"
                       isKey
@@ -97,7 +100,7 @@ class ShowEnrollments extends Component {
 
                     <TableHeaderColumn 
                       dataField="ST_GROUP_NUMBER"
-                      width="100"
+                      width="300"
                       dataAlign="center"
                       headerAlign="center"
                     >
