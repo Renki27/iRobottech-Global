@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const cors = require("cors");
-const jwt = require("jsonwebtoken");
 const course = require("../models/Course");
 
 router.use(cors());
@@ -23,8 +22,21 @@ router.get("/course/:CourseName", (req, res) => {
       }).then(function (group) {
             res.json(group);
         })
-
 });
+
+
+router.get("/courseU/:CourseName", (req, res) => {
+  courseData.findOne({
+      where: {
+          COURSE_NAME: req.params.CourseName
+      }
+    }).then(function (group) {
+          res.json(group);
+      })
+});
+
+
+
 
 router.post("/", (req, res) => {
   courseData.create(req.body).then(result => res.json(result));

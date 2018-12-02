@@ -188,7 +188,7 @@ export class CreateGroup extends React.Component {
 
   componentDidMount() {
 
-    axios.get('http://localhost:8080/RegisterPerson')
+    axios.get('/RegisterPerson')
       .then(response => {
         state.professors = response.data;
         this.setState({
@@ -197,7 +197,7 @@ export class CreateGroup extends React.Component {
       });
 
 
-    axios.get("http://localhost:8080/RegisterCourse").then(response => {
+    axios.get("/RegisterCourse").then(response => {
       state.courses = response.data;
       this.setState({
         courses: response.data
