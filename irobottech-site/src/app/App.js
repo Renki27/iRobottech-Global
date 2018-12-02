@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { HashRouter } from "react-router-dom";
 import Home from "../pages/Home.js";
 import About from "../pages/About.js";
+import Courses from "../pages/Courses.js";
 import Contact from "../pages/Contact";
 import Login from "../pages/Login";
 import RegisterStudent from "../pages/RegisterStudent";
@@ -48,6 +49,7 @@ class App extends Component {
             <Route exact path="/editProfile" component={EditProfile} />
             <Route exact path="/EditPass" component={EditPass} />
             <Route exact path="/EnrollmentReport:myId" component={EnrollmentReport} />
+            <Route exact path="/Courses" component={Courses} />
           </div>
           <FooterPage />
         </div>
