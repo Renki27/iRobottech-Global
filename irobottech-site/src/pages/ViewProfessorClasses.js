@@ -1,100 +1,101 @@
 import React, { Component } from "react";
 import { Row, Col, Input, Button, Card, CardBody } from "mdbreact";
-import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
-//import "node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css";
 import axios from "axios";
+import Select from "react-select";
+import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import jwt_decode from "jwt-decode";
 
-
-class ClassList extends Component {
+class ViewProfessorClasses extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      classes: [{}]
+      classes: [{}],
+      myID: ""
     };
-    this.getClassesList = this.getClassesList.bind(this);
+    this.getMyClasses = this.getMyClasses.bind(this);
   }
 
   componentDidMount() {
-    this.getClassesList();
-    
+    const token = localStorage.usertoken;
+    const decoded = jwt_decode(token);
+    this.state.myID = decoded.id_account;
+    this.setState({
+      myID: decoded.id_account
+    });
+    this.getMyClasses();
   }
 
-  async getClassesList() {
+  async getMyClasses() {
     try {
-      const response = await axios.get(`users/getClasses`).then(response => {
-        this.state.classes = response.data;
-        this.setState({
-          classes: response.data
+      const response = await axios
+        .get(`classesR/getMyClasses/${this.state.myID}`)
+        .then(response => {
+          this.state.classes = response.data;
+          this.setState({
+            classes: response.data
+          });
         });
-      });
     } catch (err) {
       console.error(err);
     }
   }
 
-  
-
   render() {
-
-    const selectRowProp = {
-        mode: "radio",
-        bgColor: 'pink', // you should give a bgcolor, otherwise, you can't regonize which row has been selected
-        hideSelectColumn: true,  // enable hide selection column.
-        clickToSelect: true,  // you should enable clickToSelect, otherwise, you can't select column.
-        //onSelect: this.handleRowSelect
-      };
-      
     return (
       <div>
-        <Row>
-          <Col className="mx-auto">
+        <Row className="mt-6">
+          <Col md="10" className="ml-5">
             <Card>
+              <h3 className="text-center font-weight-bold pl-0 my-4">
+                Mis clases
+              </h3>
               <CardBody>
                 <div>
                   <BootstrapTable
                     data={this.state.classes}
-                    exportCSV={true}
-                    selectRow={selectRowProp}
-                    ignoreSinglePage
                     search
                     multiColumnSearch={true}
+                    ignoreSinglePage
+                    width="150"
                   >
                     <TableHeaderColumn
-                      dataField="number_class"
-                      width="100"
+                      dataField="NUMBER_CLASS"
+                      width="150"
                       dataAlign="center"
                       headerAlign="center"
                       isKey
                     >
-                      N°
+                      N° de clase
                     </TableHeaderColumn>
                     <TableHeaderColumn
-                      dataField="st_group_number"
-                      width="100"
+                      dataField="ST_GROUP_NUMBER"
+                      width="150"
                       dataAlign="center"
                       headerAlign="center"
                     >
-                      Grupo
+                      N° de grupo
                     </TableHeaderColumn>
                     <TableHeaderColumn
-                      dataField="course_name"
-                      width="100"
+                      dataField="COURSE_NAME"
+                      width="150"
                       dataAlign="center"
                       headerAlign="center"
                     >
                       Curso
                     </TableHeaderColumn>
                     <TableHeaderColumn
-                      dataField="time"
-                      width="100"
+                      dataField="TIME"
+                      width="150"
                       dataAlign="center"
                       headerAlign="center"
                     >
-                      Hora de inicio
+                      Hora
                     </TableHeaderColumn>
                     <TableHeaderColumn
-                      dataField="date"
-                      width="100"
+                      dataField="DATE"
+                      width="150"
                       dataAlign="center"
                       headerAlign="center"
                     >
@@ -106,10 +107,8 @@ class ClassList extends Component {
             </Card>
           </Col>
         </Row>
-        <div />
       </div>
     );
   }
 }
-
-export default ClassList;
+export default ViewProfessorClasses;

@@ -3,6 +3,7 @@ const router = express.Router();
 const mysqlConnection = require("../connectionDataBase/databaseConnection");
 const cors = require("cors");
 const _Class = require("../models/Class");
+const Group = require("../models/Group");
 
 router.use(cors());
 
@@ -41,7 +42,52 @@ router.post("/createClass", (req, res) => {
       } else {
         console.log(res.err);
       }
+    });
+});
+
+//Get Professor classes
+router.get("/getMyClasses/:id", (req, res) => {
+  mysqlConnection.sequelize
+    .query("CALL SELECT_GET_PROFESSOR_CLASSES_BY_ID(:p0)", {
+      replacements: {
+        p0: req.params.id
+      }
     })
+    .then(function(data) {
+      if (data) {
+        res.json(data);
+      }
+    });
+});
+
+//Get professor groups
+router.get("/getMyGroups/:id", (req, res) => {
+  Group.findAll({
+    where: {
+      prof_id_account: req.params.id
+    }
+  }).then(function(data) {
+    if (data) {
+      res.json(data);
+    } else {
+      res.json(0);
+    }
+  });
+});
+
+//Get Professor courses
+router.get("/getMyCourses/:id", (req, res) => {
+  mysqlConnection.sequelize
+    .query("CALL SELECT_GET_PROFESSOR_COURSES_BY_ID(:p0)", {
+      replacements: {
+        p0: req.params.id
+      }
+    })
+    .then(function(data) {
+      if (data) {
+        res.json(data);
+      }
+    });
 });
 
 module.exports = router;

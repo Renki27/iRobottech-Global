@@ -29,6 +29,7 @@ class CreateClass extends Component {
     this.getLastClass = this.getLastClass.bind(this);
     this.getStudents = this.getStudents.bind(this);
     this.notify = this.notify.bind(this);
+    this.handleOnSelectAll = this.handleOnSelectAll.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -103,6 +104,20 @@ class CreateClass extends Component {
     this.getLastClass();
   };
 
+  handleOnSelectAll = (isSelect, rows) => {
+    const ids = rows.map(r => r.id);
+
+    if (isSelect) {
+      this.setState(() => ({
+        selected: ids
+      }));
+    } else {
+      this.setState(() => ({
+        selected: []
+      }));
+    }
+  };
+
   async getStudents() {
     try {
       const response = await axios
@@ -153,6 +168,11 @@ class CreateClass extends Component {
     }
   };
 
+  submitAttendance = evt => {
+    evt.preventDefault();
+    this.handleOnSelectAll;
+  };
+
   //Notificaciones-----------------------------------------------------------------------------
   notify = (evt, value, msj) => {
     switch (value) {
@@ -175,12 +195,13 @@ class CreateClass extends Component {
   //csvFileName={`Lista Clase: ${this.state.lastClassN} Curso: ${this.state.courseName} Grupo:${this.state.groupNumber} Fecha:${this.state.currentDate}`.csv}
   //----------------------------------------------------------------------------------------------
   render() {
-    const selectRowProp = {
+    const selectRow = {
       mode: "checkbox",
       // bgColor: "pink", // you should give a bgcolor, otherwise, you can't regonize which row has been selected
       // hideSelectColumn: true, // enable hide selection column.
-      clickToSelect: true // you should enable clickToSelect, otherwise, you can't select column.
+      clickToSelect: true, // you should enable clickToSelect, otherwise, you can't select column.
       //onSelect: this.handleRowSelect
+      onSelectAll: this.handleOnSelectAll
     };
 
     const cellEditProp = {
@@ -310,7 +331,7 @@ class CreateClass extends Component {
                       data={this.state.students}
                       options={options}
                       exportCSV={true}
-                      selectRow={selectRowProp}
+                      selectRow={selectRow}
                       cellEdit={cellEditProp}
                       pagination
                       ignoreSinglePage
@@ -382,6 +403,14 @@ class CreateClass extends Component {
                         Asistencia
                       </TableHeaderColumn>
                     </BootstrapTable>
+                    <div className="text-center py-4 mt-3">
+                      <button
+                        onClick={this.submitAttendance.bind(this)}
+                        className="btn btn-outline-deep-orange"
+                      >
+                        Guardar
+                      </button>
+                    </div>
                   </div>
                 </CardBody>
               </Card>
