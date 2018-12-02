@@ -50,6 +50,9 @@ module.exports = mysqlConnection.sequelize.define(
     },
     NUMBER_WEEKS:{
         type: Sequelize.INTEGER
+    },
+    COURSE_NAME:{
+        type: Sequelize.STRING
     }
   },
   {

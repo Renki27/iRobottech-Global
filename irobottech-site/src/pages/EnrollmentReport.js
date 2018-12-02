@@ -45,7 +45,7 @@ class EnrollmentReport extends Component {
                     data={this.state.inform}
                     columns={this.state.columns}
                   >
-                    <TableHeaderColumn
+                    <TableHeaderColumn hidden
                       dataField="NOMBRE_ESTUDINTE"
                       isKey
                       width="50"
@@ -53,6 +53,7 @@ class EnrollmentReport extends Component {
                       Alumno:{" "}
                     </TableHeaderColumn>
                   </BootstrapTable>
+                  <h2>Nombre del Estudiante: {this.state.inform[0].NOMBRE_ESTUDINTE}</h2>
                   <hr />
                   <BootstrapTable
                     data={this.state.inform}

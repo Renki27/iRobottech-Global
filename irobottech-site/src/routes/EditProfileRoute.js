@@ -25,7 +25,9 @@ router.put("/editFull", (req, res) => {
     second_name: person.secondName, 
     last_name_1: person.lastName1,
     last_name_2: person.lastName2,
-    identification : person.idNumber},
+    identification : person.idNumber,
+    birth_date: person.birthDate,
+  },
     { where: {id_person: person.id_person}}   
   )
   Address.update(
@@ -60,14 +62,12 @@ router.post('/edit', function (req, res, next) {
   let address = "";
   let phone = "";
   Person.findOne({ where: { ID_PERSON: req.body.id_person } }).then(token => {
-    console.log("Estoy buscando la persona " + req.body.id_person ) 
     if (token){
       firstName = token.first_name;
       secondName = token.second_name;
       lastName1 = token.last_name_1;
       lastName2 = token.last_name_2;
       birthDate = token.birth_date;
-      console.log("La fecha de nacimiento es: " + token.birth_date);
       identification = token.identification;
       Address.findOne({ where: { ID_PERSON: req.body.id_person } }).then(myAddress => {
         if (myAddress){
