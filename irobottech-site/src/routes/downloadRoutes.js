@@ -4,7 +4,7 @@ const path = require("path");
 
 router.get("/:id", function(req, res) {
   res.download(
-    path.join(__dirname, "../../public/" + req.params.id),
+    path.join(__dirname, "../../dist/uploads/" + req.params.id),
     req.params.id,
     function(err) {
       if (err) {

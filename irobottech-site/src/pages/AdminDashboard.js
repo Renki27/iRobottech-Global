@@ -18,6 +18,7 @@ import CreateCourse from "./CreateCourse";
 import CreateGroup from "./CreateGroup";
 import EnrollmentManage from './EnrollmentManage';
 import ShowEnrollments from './ShowEnrollments'
+import DownloadFile from './DownloadFile'
 const registerStudent = <RegisterStudent />;
 const registerProfessor = <RegisterProfessor />;
 const registerSecretary = <RegisterSecretary />;
@@ -27,6 +28,7 @@ const createCourse = <CreateCourse />;
 const createGroup = <CreateGroup />;
 const enrollmentManage = <EnrollmentManage />;
 const showEnrollments = <ShowEnrollments />;
+const downloadFile = <DownloadFile />;
 
 class AdminDashboard extends Component {
   constructor(props) {
@@ -90,8 +92,13 @@ class AdminDashboard extends Component {
                     </label>
 
                     <ListGroupItem hover onClick={this.manageAccount.bind(this)}>
-
                       Administrar Cuentas
+                    </ListGroupItem>
+                    <label className="mt-2 font-weight-bold deep-orange-text">
+                      Archivos
+                    </label>
+                    <ListGroupItem hover onClick={this.downloadFile.bind(this)}>
+                      Descargar/Cargar Curriculums
                     </ListGroupItem>
                   </ListGroup>
                 </div>
@@ -126,6 +133,8 @@ class AdminDashboard extends Component {
         return enrollmentManage;
         case "SHO_ENR":
         return showEnrollments;
+        case "DOW_FIL":
+        return downloadFile;
       default:
         return "";
     }
@@ -157,6 +166,9 @@ class AdminDashboard extends Component {
   }
   showEnrollments(){
     this.setState({ componentSelector: "SHO_ENR" });
+  }
+  downloadFile(){
+    this.setState({ componentSelector: "DOW_FIL" });
   }
 }
 

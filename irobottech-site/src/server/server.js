@@ -25,6 +25,8 @@ app.use("/RegisterGroup", require("../routes/RegisterGroupRoute"));
 app.use("/RegisterPerson", require("../routes/RegisterPersonRoute"));
 app.use("/RegisterSchedule", require("../routes/RegisterScheduleRoute"));
 app.use("/ShowAccounts",  require("../routes/AccountsRoute"));
+app.use("/upload",require("../routes/uploadRoute"));
+app.use("/files",require( "../routes/files"));
 
 // Static Files
 app.use(express.static("dist"));

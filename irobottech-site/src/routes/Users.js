@@ -207,6 +207,21 @@ router.get("/verifyAllAccount/:email", (req, res) => {
 });
 
 
+router.get("/accountData/:id", (req, res) => {
+  Account.find({
+    where: {
+      id_person: req.params.id,
+    }
+  }).then(function (account) {
+    if (account) {
+      res.send(account);
+    } else {
+      console.log(res.err);
+    }
+  });
+});
+
+
 //Get Person Data
 router.get("/getPersonData/:id", (req, res) => {
   Person.findOne({

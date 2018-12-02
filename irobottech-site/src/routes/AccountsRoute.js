@@ -29,6 +29,23 @@ router.get("/", (req, res) => {
 
 });
 
+
+
+router.get("/personal", (req, res) => {
+
+    account.findAll(
+        {
+            where: {
+                account_type: ["SECRETARY", "PROFESSOR"]
+            }
+        }
+    )
+        .then(function (group) {
+            res.json(group);
+        })
+
+});
+
 router.get("/students", (req, res) => {
 
     account.findAll(
