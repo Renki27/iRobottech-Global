@@ -10,11 +10,15 @@ import {
 } from "mdbreact";
 import "./AdminDashboard.css";
 import ClassList from "./ClassList";
-import StudentAttendance from "./StudentAttendance";
 import CreateClass from "./CreateClass";
+import ViewProfessorClasses from "./ViewProfessorClasses";
+import ViewProfessorGroups from "./ViewProfessorGroups";
+import ViewProfessorCourses from "./ViewProfessorCourses";
 const classList = <ClassList />;
-const studentAttendance = <StudentAttendance />;
 const createClass = <CreateClass />;
+const viewClasses = <ViewProfessorClasses />;
+const viewGroups = <ViewProfessorGroups />;
+const viewCourses = <ViewProfessorCourses />;
 
 class ProfessorDashboard extends Component {
   constructor(props) {
@@ -40,7 +44,10 @@ class ProfessorDashboard extends Component {
                     <label className="mt-2 font-weight-bold deep-orange-text">
                       Clases
                     </label>
-                    <ListGroupItem hover onClick={this.createNewClass.bind(this)}>
+                    <ListGroupItem
+                      hover
+                      onClick={this.createNewClass.bind(this)}
+                    >
                       Crear clase
                     </ListGroupItem>
                     <ListGroupItem hover onClick={this.loadMyClases.bind(this)}>
@@ -48,9 +55,18 @@ class ProfessorDashboard extends Component {
                     </ListGroupItem>
                     <ListGroupItem
                       hover
-                      onClick={this.takeAttendance.bind(this)}
+                      onClick={this.viewMyClasses.bind(this)}
                     >
-                      Tomar Asistencia
+                      Mis Clases
+                    </ListGroupItem>
+                    <ListGroupItem hover onClick={this.viewMyGroups.bind(this)}>
+                      Mis Grupos
+                    </ListGroupItem>
+                    <ListGroupItem
+                      hover
+                      onClick={this.viewMyCourses.bind(this)}
+                    >
+                      Mis Cursos
                     </ListGroupItem>
                   </ListGroup>
                 </div>
@@ -67,12 +83,16 @@ class ProfessorDashboard extends Component {
 
   selector(componentSelector) {
     switch (componentSelector) {
+      case "V_CLA":
+        return viewClasses;
+      case "V_GRO":
+        return viewGroups;
+      case "V_COU":
+        return viewCourses;
       case "C_CLA":
         return createClass;
       case "L_CLA":
         return classList;
-      case "S_ATT":
-        return studentAttendance;
       default:
         return "";
     }
@@ -80,11 +100,17 @@ class ProfessorDashboard extends Component {
   createNewClass() {
     this.setState({ componentSelector: "C_CLA" });
   }
+  viewMyClasses() {
+    this.setState({ componentSelector: "V_CLA" });
+  }
+  viewMyGroups() {
+    this.setState({ componentSelector: "V_GRO" });
+  }
+  viewMyCourses() {
+    this.setState({ componentSelector: "V_COU" });
+  }
   loadMyClases() {
     this.setState({ componentSelector: "L_CLA" });
-  }
-  takeAttendance() {
-    this.setState({ componentSelector: "S_ATT" });
   }
 }
 

@@ -55,7 +55,9 @@ class ClassList extends Component {
                     data={this.state.classes}
                     exportCSV={true}
                     selectRow={selectRowProp}
-                    pagination
+                    ignoreSinglePage
+                    search
+                    multiColumnSearch={true}
                   >
                     <TableHeaderColumn
                       dataField="number_class"
