@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Input, Button } from 'mdbreact';
+import { Container, Row, Col, Card, CardBody, Input, Button } from 'mdbreact';
 import Select from 'react-select';
 import jwt_decode from "jwt-decode";
 
@@ -9,11 +9,12 @@ const state = {
     CATEGORY: 0,
     COURSE_NAME: "",
     COUSE_CODE: "",
-    STATUS: "Activo",
+    STATUS: "ACTIVE",
     ADM_ID_ACCOUNT: null,
     ADM_ID_PERSON: null,
     SEC_ID_ACCOUNT: null,
-    SEC_ID_PERSON: null
+    SEC_ID_PERSON: null,
+    DESCRIPTION: "",
 };
 
 
@@ -29,6 +30,12 @@ export class CreateCourse extends React.Component {
     valueCourseType = this.valueCourseType.bind(this);
     valueCourse = this.valueCourse.bind(this);
     valueCategory = this.valueCategory.bind(this);
+    valueDescription = this.valueDescription.bind(this);
+
+    valueDescription(event) {
+        state.DESCRIPTION = event.value;
+        this.setState({ DESCRIPTION: event.value });
+    }
 
     valueCourseType(event) {
         state.CATEGORY = event.value;
@@ -72,8 +79,6 @@ export class CreateCourse extends React.Component {
 
     handleSubmit = event => {
 
-
-
         fetch("/RegisterCourse", {
             method: "POST",
             body: JSON.stringify(state),
@@ -98,22 +103,27 @@ export class CreateCourse extends React.Component {
             < Container >
                 <Row>
                     <Col>
-                        <form onSubmit={this.handleSubmit}>
-                            <p className="h5 text-center mb-4">Crear Curso</p>
-                            <div className="grey-text">
+                        <Card>
+                            <CardBody>
+                                <form onSubmit={this.handleSubmit}>
+                                    <p className="h5 text-center mb-4">Crear Curso</p>
+                                    <div className="grey-text">
 
-                                <Input label="Nombre del Curso" name="COURSE_NAME" type="text" value={state.COURSE_NAME} onChange={this.valueCourse} />
-                                <Input label="Sigla del Curso" name="COUSE_CODE" type="text" value={state.COUSE_CODE} onChange={this.valueCategory} />
-                                <label>Elija el tipo de curso: </label>
-                                <Select options={this.CourseType} onChange={this.valueCourseType} />
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                            </div>
-                            <div className="text-center">
-                                <Button type="submit" color="primary" >Register</Button>
-                            </div>
-                        </form>
+                                        <Input label="Nombre del Curso" name="COURSE_NAME" type="text" value={state.COURSE_NAME} onChange={this.valueCourse} />
+                                        <Input label="Sigla del Curso" name="COUSE_CODE" type="text" value={state.COUSE_CODE} onChange={this.valueCategory} />
+                                        <label>Elija el tipo de curso: </label>
+                                        <Select options={this.CourseType} onChange={this.valueCourseType} />
+                                        <br></br>
+                                        <Input label="Descripción del Curso" name="COUSE_DES" type="textarea" value={state.DESCRIPTION} onChange={this.valueDescription} />
+                                        <br></br>
+                                        <br></br>
+                                    </div>
+                                    <div className="text-center">
+                                        <Button type="submit" color="primary" >Registrar Curso</Button>
+                                    </div>
+                                </form>
+                            </CardBody>
+                        </Card>
                     </Col>
                 </Row>
             </Container >

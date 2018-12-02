@@ -3,7 +3,6 @@ const router = express.Router();
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const course = require("../models/Course");
-const Group = require("../models/Group");
 
 router.use(cors());
 process.env.SECRET_KEY = "secret";
@@ -20,8 +19,8 @@ router.get("/", (req, res) => {
 
 });
 
-router.get("/groups/:CourseName", (req, res) => {
-    Group.findAll({
+router.get("/course/:CourseName", (req, res) => {
+    courseData.findOne({
         where: {
             COURSE_NAME: req.params.CourseName
         }

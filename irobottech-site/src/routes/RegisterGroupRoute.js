@@ -30,6 +30,10 @@ router.get("/group/:name", (req, res) => {
     });
 });
 
+router.delete("/groupD/:numberC/:name", (req, res) => {
+    groupData.destroy({ where: {ST_GROUP_NUMBER: req.params.numberC, COURSE_NAME:  req.params.name}})
+        .then(result => res.json(result))
+});
 
 router.post("/", (req, res) => {
     groupData.create(req.body)

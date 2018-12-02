@@ -29,6 +29,9 @@ module.exports = mysqlConnection.sequelize.define(
         STATUS: {
             type: Sequelize.STRING
         },
+        DESCRIPTION:{
+            type: Sequelize.STRING
+        }
     },
     {
         timestamps: false,
