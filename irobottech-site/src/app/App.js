@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { HashRouter } from "react-router-dom";
 import Home from "../pages/Home.js";
 import About from "../pages/About.js";
+import Courses from "../pages/Courses.js";
 import Contact from "../pages/Contact";
 import Login from "../pages/Login";
 import RegisterStudent from "../pages/RegisterStudent";
@@ -23,47 +24,42 @@ class App extends Component {
   render() {
     return (
       <Switch>
+        <div className="App ">
+          <div className="Container">
+            {/* Component en minuscula */}
+            <Navbar />
 
-          <div className="App ">
-            <div className="Container">
-              {/* Component en minuscula */}
-              <Navbar />
+            <Route exact path="/" component={Home} />
 
-              <Route exact path="/" component={Home} />
-
-              <Route exact path="/RecoverPage" component={RecoverPage} />
-              <Route exact path="/About" component={About} />
-              <Route exact path="/Contact" component={Contact} />
-              <Route exact path="/Login" component={Login} />
-              <Route
-                exact
-                path="/RegisterStudent"
-                component={RegisterStudent}
-              />
-              <Route exact path="/profile" component={Profile} />
-              <Route
-                exact
-                path="/RegisterProfessor"
-                component={RegisterProfessor}
-              />
-              <Route
-                exact
-                path="/RegisterSecretary"
-                component={RegisterSecretary}
-              />
-              <Route exact path="/RegisterAdmin" component={RegisterAdmin} />
-              <Route exact path="/editProfile" component={EditProfile} />
-              <Route exact path="/EditPass" component={EditPass} />
-              <Route
-                exact
-                path="/EnrollmentReport:myId"
-                component={EnrollmentReport}
-              />
-            </div>
-
-            <FooterPage />
+            <Route exact path="/RecoverPage" component={RecoverPage} />
+            <Route exact path="/About" component={About} />
+            <Route exact path="/Contact" component={Contact} />
+            <Route exact path="/Login" component={Login} />
+            <Route exact path="/RegisterStudent" component={RegisterStudent} />
+            <Route exact path="/profile" component={Profile} />
+            <Route
+              exact
+              path="/RegisterProfessor"
+              component={RegisterProfessor}
+            />
+            <Route
+              exact
+              path="/RegisterSecretary"
+              component={RegisterSecretary}
+            />
+            <Route exact path="/RegisterAdmin" component={RegisterAdmin} />
+            <Route exact path="/editProfile" component={EditProfile} />
+            <Route exact path="/EditPass" component={EditPass} />
+            <Route
+              exact
+              path="/EnrollmentReport:myId"
+              component={EnrollmentReport}
+            />
+            <Route exact path="/Courses" component={Courses} />
           </div>
 
+          <FooterPage />
+        </div>
       </Switch>
     );
   }

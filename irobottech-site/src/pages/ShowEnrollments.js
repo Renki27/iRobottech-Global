@@ -31,7 +31,7 @@ class ShowEnrollments extends Component {
 
   componentDidMount() {
    document.getElementById("listaCursos").style.display = "none";
-    axios.get("http://localhost:8080/ShowAccounts/students").then(response => {
+    axios.get("/ShowAccounts/students").then(response => {
       this.state.accounts = response.data;
       this.setState({
         accounts: response.data
@@ -44,7 +44,7 @@ class ShowEnrollments extends Component {
     document.getElementById("listaCursos").style.display = "block";
     this.state.id_person = event.value;
     this.setState({ id_person: event.value });
-    axios.get(`http://localhost:8080/users/showEnrollmentFromStudent/${this.state.id_person}`).then(response => {
+    axios.get(`/users/showEnrollmentFromStudent/${this.state.id_person}`).then(response => {
         this.state.enrollments = response.data;
         this.setState({
         enrollments: response.data
@@ -68,7 +68,7 @@ class ShowEnrollments extends Component {
               <CardBody>
                 <p className="h5 text-center mb-4">Mostrar Matriculas</p>
                 <label>Seleccione la cuenta </label>
-                <Select
+                <Select styles="weight:300px"
                   onChange={this.accountSelect}
                   options={this.state.accounts.map(function (json) {
                     return {
@@ -78,6 +78,9 @@ class ShowEnrollments extends Component {
                   })}
                 />
   
+  <br></br>
+  <br></br>
+  <br></br>
                   <div id="listaCursos">
                    <BootstrapTable
                     data={this.state.enrollments}
@@ -87,7 +90,7 @@ class ShowEnrollments extends Component {
                   >
                     <TableHeaderColumn
                       dataField="COURSE_NAME"
-                      width="100"
+                      width="300"
                       dataAlign="center"
                       headerAlign="center"
                       isKey
@@ -97,7 +100,7 @@ class ShowEnrollments extends Component {
 
                     <TableHeaderColumn 
                       dataField="ST_GROUP_NUMBER"
-                      width="100"
+                      width="300"
                       dataAlign="center"
                       headerAlign="center"
                     >

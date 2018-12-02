@@ -9,6 +9,7 @@ const Person = require("../models/Person");
 const Class = require("../models/Class");
 const Student = require("../models/Student");
 const Enrollment = require("../models/Enrollment");
+const Schedule = require("../models/Schedule");
 const Enrollment_Report = require("../models/Enrollment_Report");
 router.use(cors());
 
@@ -372,6 +373,21 @@ router.get("/inform/:id", (req, res) => {
 });
 
 
+router.get("/showMyEnrollments/:id", (req, res) => {
+  mysqlConnection.sequelize
+    .query("CALL SELECT_ENROLLMENT(:p0)", {
+      replacements: {
+        p0: req.params.id
+      }
+    })
+    .then(function (inform) {
+      if (inform) {
+        res.send(inform);
+      }
+    });
+});
+
+
 router.get("/Uniqueinform/:id/:courseName", (req, res) => {
   mysqlConnection.sequelize
     .query("CALL SELECT_UNIQUE_ENROLLMENT(:p0, :p1)", {
@@ -404,6 +420,23 @@ router.get("/showEnrollmentFromStudent/:id", (req, res) => {
   });
 });
 
+
+router.get("/showMySchedule/:groupNumber/:courseName", (req, res) => {
+  Schedule.findAll(
+    {
+      where: {
+        ST_GROUP_NUMBER: req.params.groupNumber,
+        COURSE_NAME:req.params.courseName
+      }
+    }
+  ).then(function (schedule) {
+    if (schedule) {
+      res.send(schedule);
+    } else {
+      console.log(res.err);
+    }
+  });
+});
 
 
 router.get("/deleteInform/:id/:courseName/:reservationNumber", (req, res) => {
