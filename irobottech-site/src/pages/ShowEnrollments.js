@@ -31,7 +31,7 @@ class ShowEnrollments extends Component {
 
   componentDidMount() {
    document.getElementById("listaCursos").style.display = "none";
-    axios.get("http://localhost:8080/ShowAccounts/students").then(response => {
+    axios.get("/ShowAccounts/students").then(response => {
       this.state.accounts = response.data;
       this.setState({
         accounts: response.data
@@ -44,7 +44,7 @@ class ShowEnrollments extends Component {
     document.getElementById("listaCursos").style.display = "block";
     this.state.id_person = event.value;
     this.setState({ id_person: event.value });
-    axios.get(`http://localhost:8080/users/showEnrollmentFromStudent/${this.state.id_person}`).then(response => {
+    axios.get(`/users/showEnrollmentFromStudent/${this.state.id_person}`).then(response => {
         this.state.enrollments = response.data;
         this.setState({
         enrollments: response.data
