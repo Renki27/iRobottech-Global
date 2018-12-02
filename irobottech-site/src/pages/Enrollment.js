@@ -48,7 +48,7 @@ class Enrollment extends Component {
     this.setState({ COURSE_NAME: event.value });
     axios
       .get(
-        `http://localhost:8080/RegisterCourse/groups/${this.state.COURSE_NAME}`
+        `RegisterCourse/groups/${this.state.COURSE_NAME}`
       )
       .then(response => {
         this.state.groups = response.data;
@@ -90,7 +90,7 @@ class Enrollment extends Component {
         {
           /* <Redirect to={`/InformeMatricula:${this.state.id_person}`} />;*/
         }
-        this.props.history.push(`/InformeMatricula:${this.state.id_person}`);
+        this.props.history.push(`/EnrollmentReport:${this.state.id_person}`);
       }
     });
   };

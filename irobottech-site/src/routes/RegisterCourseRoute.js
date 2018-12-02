@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const cors = require("cors");
 const course = require("../models/Course");
+const Group = require("../models/Group");
 
 router.use(cors());
 process.env.SECRET_KEY = "secret";
@@ -35,8 +36,16 @@ router.get("/courseU/:CourseName", (req, res) => {
       })
 });
 
+router.get("/groups/:CourseName", (req, res) => {
+  Group.findAll({
+      where: {
+          COURSE_NAME: req.params.CourseName
+      }
+    }).then(function (group) {
+          res.json(group);
+      })
 
-
+});
 
 router.post("/", (req, res) => {
   courseData.create(req.body).then(result => res.json(result));

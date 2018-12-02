@@ -41,7 +41,6 @@ const cellEditProp = {
 
 
 function onAfterSaveCell(row, cellName, cellValue, rowIndex) {
-  alert(`Save cell ${cellName} with value ${cellValue}`);
 
   let rowStr = '';
   // For que recorre la fila seleccionada
@@ -51,14 +50,11 @@ function onAfterSaveCell(row, cellName, cellValue, rowIndex) {
 
   var res = rowStr.split(" ");
   if ((parseInt(res[2]) - parseInt(res[1])) <= 0 || (parseInt(res[2]) - parseInt(res[1])) == parseInt(res[2])) {
-    alert("Una de las horas no es correcta");
   } else {
     axios.put(`/RegisterSchedule/scheduleU/${(parseInt(res[2]) - parseInt(res[1]))}/${res[1]}/${res[2]}/${rowIndex}/${state.ST_GROUP_NUMBER}/${state.COURSE_NAME}`)
       .then(response => {
-        alert("Modificado")
       });
   }
-  alert('Thw whole row :\n' + rowStr);
 }
 
 function onBeforeSaveCell(row, cellName, cellValue) {
@@ -268,8 +264,8 @@ export class CreateGroup extends React.Component {
     axios.get(`/RegisterGroup/group/${state.COURSE_NAME}`)
       .then(response => {
         if (response.data > 0) {
-          state.ST_GROUP_NUMBER = response.data;
-          return this.setState({ ST_GROUP_NUMBER: response.data });
+          state.ST_GROUP_NUMBER = response.data + 1;
+          this.setState({ ST_GROUP_NUMBER: response.data + 1});
         }
 
       });

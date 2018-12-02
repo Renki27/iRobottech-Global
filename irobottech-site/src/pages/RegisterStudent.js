@@ -140,7 +140,6 @@ class RegisterStudent extends Component {
                           onChange={this.handleInputChange}
                           className="form-control"
                           type="text"
-                          required
                         />
                       </div>
                       <div className="col">
@@ -162,7 +161,6 @@ class RegisterStudent extends Component {
                           value={this.state.lastName2}
                           onChange={this.handleInputChange}
                           type="text"
-                          required
                         />
                       </div>
                     </div>
@@ -175,7 +173,6 @@ class RegisterStudent extends Component {
                           value={this.state.idNumber}
                           onChange={this.inputNumberValidator}
                           type="text"
-                          required
                         />
                       </div>
                       <div className="col-6">
@@ -197,7 +194,6 @@ class RegisterStudent extends Component {
                           value={this.state.phone}
                           onChange={this.inputNumberValidator}
                           type="text"
-                          required
                         />
                       </div>
                     </div>
@@ -257,7 +253,6 @@ class RegisterStudent extends Component {
                           onChange={this.handleInputChange}
                           type="text"
                           maxLength="50"
-                          required
                         />
                       </div>
                     </div>
@@ -270,7 +265,6 @@ class RegisterStudent extends Component {
                           value={this.state.guardianID}
                           onChange={this.inputNumberValidator}
                           type="text"
-                          required
                         />
                       </div>
                       <div className="col">
@@ -281,7 +275,6 @@ class RegisterStudent extends Component {
                           value={this.state.emergencyPhone}
                           onChange={this.inputNumberValidator}
                           type="text"
-                          required
                         />
                       </div>
                     </div>
