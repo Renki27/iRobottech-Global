@@ -35,8 +35,8 @@ export class CreateCourse extends React.Component {
     valueDescription = this.valueDescription.bind(this);
 
     valueDescription(event) {
-        state.DESCRIPTION = event.value;
-        this.setState({ DESCRIPTION: event.value });
+        state.DESCRIPTION = event.target.value;
+        this.setState({ DESCRIPTION: event.target.value });
     }
 
     valueCourseType(event) {

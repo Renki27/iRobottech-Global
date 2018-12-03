@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 const state = {
-    CATEGORY: 0,
+    CATEGORY: "",
     COURSE_NAME: "",
     COUSE_CODE: "",
     STATUS: "",
@@ -75,6 +75,14 @@ export class CourseManage extends React.Component {
             .then(response => {
                 state.STATUS = response.data.STATUS;
                 this.setState({ STATUS: response.data.STATUS })
+                if (state.STATUS === "INACTIVE") {
+                    document.getElementById("btnHab").style.display = "block";
+                    document.getElementById("btnDes").style.display = "none";
+
+                } else if (state.STATUS === "ACTIVE") {
+                    document.getElementById("btnDes").style.display = "block";
+                    document.getElementById("btnHab").style.display = "none";
+                }
                 state.CATEGORY = response.data.CATEGORY;
                 state.COURSE_NAME = response.data.COURSE_NAME;
                 state.COUSE_CODE = response.data.COUSE_CODE;
@@ -91,8 +99,8 @@ export class CourseManage extends React.Component {
     }
 
     valueDescription(event) {
-        state.DESCRIPTION = event.value;
-        this.setState({ DESCRIPTION: event.value });
+        state.DESCRIPTION = event.target.value;
+        this.setState({ DESCRIPTION: event.target.value });
     }
 
     valueCategory(event) {
@@ -102,7 +110,7 @@ export class CourseManage extends React.Component {
     }
 
     handleSubmit = event => {
-        axios.put(`courseU/${state.COUSE_CODE}/${state.DESCRIPTION}/${state.COURSE_NAME}`)
+        axios.put(`/RegisterCourse/courseU/${state.COUSE_CODE}/${state.DESCRIPTION}/${state.COURSE_NAME}`)
             .then(response => {
 
             });
@@ -154,7 +162,7 @@ export class CourseManage extends React.Component {
                                         <Button id="btnHab" className="btn btn-outline-deep-orange" onClick={this.activeCourse}>
                                             Habilitar
                                         </Button>
-                                        <Button id="btnDes" className="btn btn-outline-deep-orange" style={{  marginRight:"auto", marginLeft:"auto" }} onClick={this.inactiveCourse}>
+                                        <Button id="btnDes" className="btn btn-outline-deep-orange" style={{ marginRight: "auto", marginLeft: "auto" }} onClick={this.inactiveCourse}>
                                             Deshabilitar
                                         </Button>
                                     </div>
