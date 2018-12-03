@@ -47,7 +47,7 @@ class RecoverPage extends Component {
                     });
                     break;
                 case 'success':
-                    toast.success('Success message', {
+                    toast.success('Correo de recuperacion enviado', {
                         position: "top-right",
                     });
                     break;

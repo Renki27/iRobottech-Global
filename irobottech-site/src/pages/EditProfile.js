@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import jwt_decode from "jwt-decode";
 import { Container, Row, Col, Card, CardBody, Input } from "mdbreact";
 import { edit, fullEdit } from "../components/EditFunction";
-
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 
 class EditProfile extends Component {
   constructor(props) {
@@ -50,7 +51,29 @@ class EditProfile extends Component {
     }
   }
 
+  notify = (evt, value, msj) => {
+    switch (value) {
+      case "SUCCESS":
+        toast.success(msj);
+        break;
+      case "ERROR":
+        toast.error(msj);
+        break;
+      case "WARN":
+        toast.warn(msj);
+        break;
+      case "INFO":
+        toast.info(msj);
+        break;
+      default:
+        toast.info(msj);
+    }
+  };
+
   handleSubmit = evt => {  
+
+    this.notify(evt, "SUCCESS", "Se ha editado la cuenta")
+
     const token = localStorage.usertoken;
     const decoded = jwt_decode(token);
     event.preventDefault();

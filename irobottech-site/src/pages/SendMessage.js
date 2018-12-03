@@ -63,8 +63,7 @@ class SendMessage extends Component {
                                             <p className="h5 text-center mb-4">Escribe en el mensaje lo que deseas</p>
                                             <div className="grey-text">
                                                 <Input  name="nombre"  onChange={this.handleChange}
-                                                    value={this.state.nombre} label="Tu nombre" icon="user" group type="text" validate error="wrong" success="right" />
-                                        
+                                                    value={this.state.nombre} label="Tu nombre" icon="user" group type="text" validate error="wrong" success="right" />                                       
                                                 <Input  name="asunto" onChange={this.handleChange}
                                                     value={this.state.asunto} label="Asunto" icon="tag" group type="text" validate error="wrong" success="right" />
                                                 <Input  name="mensaje" onChange={this.handleChange}

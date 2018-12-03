@@ -77,12 +77,12 @@ class DownloadFile extends Component {
             <div className="container">
                 <Row>
                     <Col className="mx-auto mt-5" >
-                        <Card >
+                        <Card style={{ width: "60rem" }} >
                             <CardBody>
-                                <p className="h5 text-center mb-4">Administrar Cuentas</p>
-
+                                <p className="h5 text-center mb-4">Cuentas de nuestros empleados</p>
+                                
                                 <label>Elija la cuenta: </label>
-                                <Select
+                                <Select 
                                     onChange={this.accountSelect}
                                     options={this.state.accounts.map(function (json) {
                                         return {
@@ -117,7 +117,8 @@ class DownloadFile extends Component {
                                             <br></br>
                                             <br></br>
                                             <br></br>
-                                            <button type="submit">Cargar</button>
+                                            <button style={{  marginRight:"auto", marginLeft:"auto" }} 
+                                             type="submit">Cargar</button>
                                         </form>
                                     </div>
                                 </div>

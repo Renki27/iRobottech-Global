@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col, Button, Card, CardBody, Input } from "mdbreact";
+import {ToastContainer, toast, Fa } from 'mdbreact';
 import Select from "react-select";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
@@ -105,7 +106,7 @@ class Enrollment extends Component {
       );
       if (response) {
         this.setState({ id_person: response.data.id_person });
-        this.setState({ status: response.data.status });    
+        this.setState({ status: response.data.status });
       }
     } catch (err) {
       console.error(err);
@@ -158,17 +159,40 @@ class Enrollment extends Component {
     });
   }
 
-  
+
+  notify(type) {
+    return () => {
+        switch (type) {
+            case 'info':
+                toast.info('Info message', {
+                    autoClose: 3000
+                });
+                break;
+            case 'success':
+                toast.success('Matricula realizada', {
+                    position: "top-right",
+                });
+                break;
+            case 'warning':
+                toast.warn('Warning message');
+                break;
+            case 'error':
+                toast.error('Error message');
+                break;
+        }
+    };
+};
+
 
   handleChangeDate(event) {
     // this.state.EndDate = this.state.StartDate;
-  //  this.state.EndDate = this.state.StartDate.getDate() + this.state.number_weeks;
-   // this.state.EndDate.setDate(this.state.StartDate.getDate() + this.state.number_weeks);
+    //  this.state.EndDate = this.state.StartDate.getDate() + this.state.number_weeks;
+    // this.state.EndDate.setDate(this.state.StartDate.getDate() + this.state.number_weeks);
     const { name, value } = event.target;
     this.setState({
       [name]: value
     });
-   
+
   }
 
   handleChange(event) {
@@ -189,14 +213,13 @@ class Enrollment extends Component {
     return (
       <div className="container">
 
-          <Row className="mt-6">
-            <Col md="10" className="ml-5">
-              <Card className ="global-width">
-                <CardBody>
-                <p className="h5 text-center mb-4">Matricula</p>
+        <Row className="mt-6">
+          <Col md="10" className="ml-5">
+            <Card className="global-width">
+            <h3 className="text-center font-weight-bold pl-0 my-4">Matricula</h3>
+              <CardBody>
 
-
-             <label>Elija la cuenta: </label>
+                <label>Seleccione una cuenta</label>
                 <Select
                   onChange={this.accountSelect}
                   options={this.state.accounts.map(function (json) {
@@ -207,7 +230,7 @@ class Enrollment extends Component {
                   })}
                 />
 
-{/*                 <div className="col">
+                {/*                 <div className="col">
                   <Input
                     id="idEmail"
                     label="Email"
@@ -239,7 +262,7 @@ class Enrollment extends Component {
                     <label>Elija el curso: </label>
                     <Select
                       onChange={this.courseSelect}
-                      options={this.state.courses.map(function(json) {
+                      options={this.state.courses.map(function (json) {
                         return {
                           label: json.COURSE_NAME,
                           value: json.COURSE_NAME
@@ -252,7 +275,7 @@ class Enrollment extends Component {
                     <label>Elija el grupo: </label>
                     <Select
                       onChange={this.groupSelect}
-                      options={this.state.groups.map(function(json) {
+                      options={this.state.groups.map(function (json) {
                         return {
                           label: json.ST_GROUP_NUMBER,
                           value: json.ST_GROUP_NUMBER
@@ -291,9 +314,16 @@ class Enrollment extends Component {
                     />
                   </div>
                   <div className="text-center">
-                    <Button type="submit" color="primary">
-                      Matricular
+                    <React.Fragment>
+                      <Button onClick={this.notify('success')} type="submit" color="primary">
+                        Matricular
                     </Button>
+                      <ToastContainer
+                        hideProgressBar={true}
+                        newestOnTop={true}
+                        autoClose={5000}
+                      />
+                    </React.Fragment>
                   </div>
                 </form>
               </CardBody>

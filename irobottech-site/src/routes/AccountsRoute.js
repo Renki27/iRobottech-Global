@@ -89,7 +89,7 @@ router.get("/courses", (req, res) => {
     Course.findAll(
         {
             where: {
-                STATUS: ["Activo"]
+                STATUS: ["ACTIVE"]
             }
         }
     )

@@ -64,9 +64,9 @@ class ShowEnrollments extends Component {
       <div className="container">
         <Row>
           <Col className="mx-auto mt-5" >
-            <Card >
+            <Card style={{ width: "60rem" }}>
+            <h3 className="text-center font-weight-bold pl-0 my-4">Mostrar Matriculas</h3>
               <CardBody>
-                <p className="h5 text-center mb-4">Mostrar Matriculas</p>
                 <label>Seleccione la cuenta </label>
                 <Select styles="weight:300px"
                   onChange={this.accountSelect}

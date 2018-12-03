@@ -193,9 +193,9 @@ class EnrollmentManage extends Component {
         <Row className="mt-6">
           <Col md="10" className="ml-5">
             <Card className="global-width">
-              <h3 className="text-center font-weight-bold pl-0 my-4">Cursos</h3>
+              <h3 className="text-center font-weight-bold pl-0 my-4">Administrar matriculas por Curso</h3>
               <CardBody>
-                <label>Elija el curso: </label>
+                <label>Seleccione el curso </label>
                 <Select
                   onChange={this.courseSelect}
                   options={this.state.courses.map(function(json) {

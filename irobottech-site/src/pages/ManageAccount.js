@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col, Button, Card, CardBody, Input, Container } from "mdbreact";
+import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { edit, fullEdit } from "../components/EditFunction";
 import Select from "react-select";
@@ -9,6 +10,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import "./ManageAccount.css"
+import './Contact.css';
+import "react-toastify/dist/ReactToastify.css";
 
 class ManageAccount extends Component {
   constructor(props) {
@@ -37,6 +40,7 @@ class ManageAccount extends Component {
     this.accountSelect = this.accountSelect.bind(this);
     this.enableAccount = this.enableAccount.bind(this);
     this.inputNumberValidator = this.inputNumberValidator.bind(this);
+    this.notify = this.notify.bind(this);
     // this.loadIntoSelect = this.loadIntoSelect.bind(this);
     // this.accountSelector = this.accountSelector.bind(this);
   }
@@ -93,28 +97,30 @@ class ManageAccount extends Component {
     }
   }
 
-  async disableAccount() {
+   disableAccount = evt => {
+    this.notify(evt, "WARN", "Se ha deshabilitado la cuenta")
     document.getElementById("btnDes").style.display = "none";
     document.getElementById("btnHab").style.display = "block";
-      try {
-        const response = await axios
-          .put(`users/disableAccount/${this.state.emailD}`)
-          .then(response => {
-            if (response) {
-              //this.props.history.push(`/profile`);
-            }
-          });
-      } catch (err) {
-        console.error(err);
-      }  
+    try {
+      const response = axios
+        .put(`users/disableAccount/${this.state.emailD}`)
+        .then(response => {
+          if (response) {
+            //this.props.history.push(`/profile`);
+          }
+        });
+    } catch (err) {
+      console.error(err);
+    }
 
   }
 
-  async enableAccount() {
+   enableAccount = evt => {
+    this.notify(evt, "SUCCESS", "Se ha habilitado la cuenta")
     document.getElementById("btnDes").style.display = "block";
     document.getElementById("btnHab").style.display = "none";
     try {
-      const response = await axios
+      const response =  axios
         .put(`users/enableAccount/${this.state.emailD}`)
         .then(response => {
           if (response) {
@@ -123,8 +129,8 @@ class ManageAccount extends Component {
         });
     } catch (err) {
       console.error(err);
-    }  
-}
+    }
+  }
 
 
   handleChange(event) {
@@ -142,6 +148,7 @@ class ManageAccount extends Component {
   };
 
   handleSubmit = evt => {
+    this.notify(evt, "SUCCESS", "Edicion realizada")
     event.preventDefault();
     const valuesToEdit = {
       firstName: this.state.firstName,
@@ -185,6 +192,25 @@ class ManageAccount extends Component {
     }
   }
 
+  notify = (evt, value, msj) => {
+    switch (value) {
+      case "SUCCESS":
+        toast.success(msj);
+        break;
+      case "ERROR":
+        toast.error(msj);
+        break;
+      case "WARN":
+        toast.warn(msj);
+        break;
+      case "INFO":
+        toast.info(msj);
+        break;
+      default:
+        toast.info(msj);
+    }
+  };
+
 
   async accountSelect(event) {
     this.state.emailD = event.value;
@@ -196,7 +222,7 @@ class ManageAccount extends Component {
       );
       if (response) {
         this.setState({ id_person: response.data.id_person });
-        this.setState({ status: response.data.status });    
+        this.setState({ status: response.data.status });
         const token2 = {
           id_person: response.data.id_person
         };
@@ -220,13 +246,13 @@ class ManageAccount extends Component {
     }
     document.getElementById("Formulario").style.display = "block";
 
-  if (this.state.status == "ACTIVE"){
-    document.getElementById("btnDes").style.display = "block";
-    document.getElementById("btnHab").style.display = "none";
-  } else {
-    document.getElementById("btnDes").style.display = "none";
-    document.getElementById("btnHab").style.display = "block";
-  }
+    if (this.state.status == "ACTIVE") {
+      document.getElementById("btnDes").style.display = "block";
+      document.getElementById("btnHab").style.display = "none";
+    } else {
+      document.getElementById("btnDes").style.display = "none";
+      document.getElementById("btnHab").style.display = "block";
+    }
 
   }
 
@@ -235,50 +261,27 @@ class ManageAccount extends Component {
       <div className="container" >
         <Row>
           <Col className="mx-auto mt-5" >
-            <Card style={{ width: "40rem"}}>
-            
+            <Card style={{ width: "60rem" }}>
+
               <CardBody>
                 <p className="h5 text-center mb-4">Administrar Cuentas</p>
 
                 <label>Elija la cuenta: </label>
                 <Select
                   onChange={this.accountSelect}
-                  options={this.state.accounts.map(function(json) {
+                  options={this.state.accounts.map(function (json) {
                     return {
                       label: json.username + "  -  " + json.email,
                       value: json.email
                     };
                   })}
                 />
-
-                {/*                 <div className="col">
-                  <Input
-                    label="Email"
-                    name="emailD"
-                    maxLength="30"
-                    value={this.state.emailD}
-                    onChange={this.handleChange}
-                    hint="ejemplo@mail.com"
-                    type="email"
-                    required
-                  />
-                  <small id="emailHelp" className="form-text text-muted">
-                    Dijite el email de la cuenta.
-                  </small>
-                </div> */}
-
                 <div>
-                  {/*                   <Button
-                    className="btn btn-outline-deep-orange"
-                    onClick={this.verifyAccount}
-                  >
-                    Verificar
-                  </Button> */}
                   <div id="Formulario">
                     <Container className="mt-5">
                       <Row className="mt-6">
                         <Col md="8" className="mx-auto">
-                          <Card>
+                          <Card style={{ width: "40rem" }}>
                             <CardBody>
                               <form
                                 className="needs-validation"
@@ -395,18 +398,29 @@ class ManageAccount extends Component {
                                     type="submit"
                                     to="/profile"
                                   >
-                                    Editar
+                                    Guardar Cambios
                                   </button>
                                 </div>
                               </form>
 
-                              <Button id= "btnHab"                         
-                              className="btn btn-outline-deep-orange"
-                              onClick={this.enableAccount}>
-                              Habilitar
+
+                              <Button id="btnHab"
+                                className="btn btn-outline-deep-orange"
+                                onClick={this.enableAccount}>
+                                Habilitar
                               </Button>
-                              
-                              <Button id= "btnDes"                   
+                              <ToastContainer
+                                position="top-right"
+                                autoClose={5000}
+                                hideProgressBar
+                                newestOnTop
+                                closeOnClick
+                                rtl={false}
+                                pauseOnVisibilityChange
+                                draggable
+                                pauseOnHover
+                              />
+                              <Button id="btnDes" style={{  marginRight:"auto", marginLeft:"auto" }}
 
                                 className="btn btn-outline-deep-orange"
                                 onClick={this.handleClickOpen}>
