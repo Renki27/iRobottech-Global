@@ -92,7 +92,7 @@ export class CreateCourse extends React.Component {
         })
             .then(res => {
                 res.json();
-                this.notify(evt, "SUCCESS", "Se ha guarado el curso!");
+                this.notify(event, "SUCCESS", "Se ha guarado el curso!");
             })
             .then(data => {
                 console.log(data);

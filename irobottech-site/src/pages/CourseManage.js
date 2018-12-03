@@ -75,14 +75,6 @@ export class CourseManage extends React.Component {
             .then(response => {
                 state.STATUS = response.data.STATUS;
                 this.setState({ STATUS: response.data.STATUS })
-                if (state.STATUS === "INACTIVE") {
-                    document.getElementById("btnHab").style.display = "block";
-                    document.getElementById("btnDes").style.display = "none";
-
-                } else if (state.STATUS === "ACTIVE") {
-                    document.getElementById("btnDes").style.display = "block";
-                    document.getElementById("btnHab").style.display = "none";
-                }
                 state.CATEGORY = response.data.CATEGORY;
                 state.COURSE_NAME = response.data.COURSE_NAME;
                 state.COUSE_CODE = response.data.COUSE_CODE;
