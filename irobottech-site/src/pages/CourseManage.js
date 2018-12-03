@@ -162,7 +162,7 @@ export class CourseManage extends React.Component {
                                         <Button id="btnHab" className="btn btn-outline-deep-orange" onClick={this.activeCourse}>
                                             Habilitar
                                         </Button>
-                                        <Button id="btnDes" className="btn btn-outline-deep-orange" onClick={this.inactiveCourse}>
+                                        <Button id="btnDes" className="btn btn-outline-deep-orange" style={{  marginRight:"auto", marginLeft:"auto" }} onClick={this.inactiveCourse}>
                                             Deshabilitar
                                         </Button>
                                     </div>
