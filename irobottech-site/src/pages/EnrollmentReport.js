@@ -38,7 +38,7 @@ class EnrollmentReport extends Component {
                   <h1>Informe de Matricula</h1>
                   <h2>iRobottech</h2>
                   <h6>Correo: centralirobottech@gmail.com</h6>
-               <h6>Telefonos: 83223222</h6> */}
+                  <h6>Telefonos: 83223222</h6> */}
                   <br />
                   <hr />
                   <BootstrapTable

@@ -144,14 +144,14 @@ class Enrollment extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:8080/ShowAccounts/students").then(response => {
+    axios.get("ShowAccounts/students").then(response => {
       this.state.accounts = response.data;
       this.setState({
         accounts: response.data
       });
     });
     document.getElementById("Formulario").style.display = "none";
-    axios.get("http://localhost:8080/RegisterCourse").then(response => {
+    axios.get("RegisterCourse").then(response => {
       this.state.courses = response.data;
       this.setState({
         courses: response.data

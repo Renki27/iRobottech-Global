@@ -20,14 +20,14 @@ class About extends Component {
     }
 
     componentDidMount() {
-        axios.get("http://localhost:8080/ShowAccounts/proffesors").then(response => {
+        axios.get("ShowAccounts/proffesors").then(response => {
             this.state.proffesors = response.data;
             this.setState({
                 proffesors: response.data
             });
         });
 
-        axios.get("http://localhost:8080/ShowAccounts/secretary").then(response => {
+        axios.get("ShowAccounts/secretary").then(response => {
             this.state.secretarys = response.data;
             this.setState({
                 secretarys: response.data
