@@ -112,12 +112,12 @@ function onRowSelect(row, isSelected, e, rowIndex) {
           }
         })
       } else {
-        this.notify(evt, "WARN", "La cantidad de dias esta completa");
+        this.notify(e, "WARN", "La cantidad de dias esta completa");
         this.setState({ selected: [] });
       }
     } else {
       if ((parseInt(res[2]) - parseInt(res[1])) <= 0 || (parseInt(res[2]) - parseInt(res[1])) == parseInt(res[2])) {
-        this.notify(evt, "WARN", "Una de las horas esta mal");
+        this.notify(e, "WARN", "Una de las horas esta mal");
         this.setState({ selected: [] });
       } else if (isSelected && (parseInt(res[2]) - parseInt(res[1])) > 0) {
 
@@ -229,7 +229,7 @@ export class CreateGroup extends React.Component {
           "Content-Type": "application/json"
         }
       })
-        .then(res => { res.json(); this.notify(evt, "SUCCESS", "Se ha guarado!"); })
+        .then(res => { res.json(); this.notify(event, "SUCCESS", "Se ha guarado!"); })
         .then(data => {
           console.log(data);
         })

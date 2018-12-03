@@ -31,7 +31,7 @@ module.exports = mysqlConnection.sequelize.define(
         },
         DESCRIPTION:{
             type: Sequelize.STRING
-        }
+        },
     },
     {
         timestamps: false,
