@@ -74,15 +74,6 @@ class Profile extends Component {
     return (
       <div>
         <Col>{this.dashboardSelector(this.state.account_type)}</Col>
-
-          <Col className="mx-auto mt-5">
-            <Card>
-              <CardBody>
-                <h6>{this.state.account_type}</h6>
-              </CardBody>
-            </Card>
-          </Col>
-
       </div>
     );
   }

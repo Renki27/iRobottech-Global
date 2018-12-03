@@ -14,12 +14,13 @@ import CreateClass from "./CreateClass";
 import ViewProfessorClasses from "./ViewProfessorClasses";
 import ViewProfessorGroups from "./ViewProfessorGroups";
 import ViewProfessorCourses from "./ViewProfessorCourses";
-const classList = <ClassList />;
+import ViewClassAttendance from "./ViewClassAttendance";
 const createClass = <CreateClass />;
 const viewClasses = <ViewProfessorClasses />;
 const viewGroups = <ViewProfessorGroups />;
 const viewCourses = <ViewProfessorCourses />;
-
+const viewAttendanceList = <ViewClassAttendance />;
+import jwt_decode from "jwt-decode";
 class ProfessorDashboard extends Component {
   constructor(props) {
     super(props);
@@ -29,6 +30,13 @@ class ProfessorDashboard extends Component {
     this.selector = this.selector.bind(this);
   }
 
+  componentDidMount() {
+    const token = localStorage.usertoken;
+    const decoded = jwt_decode(token);
+    this.setState({
+      username: decoded.username
+    });
+  }
   render() {
     return (
       <div>
@@ -38,6 +46,7 @@ class ProfessorDashboard extends Component {
               <h5 className="text-center font-weight-bold pl-0 my-4 deep-orange-text">
                 Panel de Profesor
               </h5>
+              <h6>{this.state.username}</h6>
               <CardBody>
                 <div className="left-box align-box">
                   <ListGroup>
@@ -50,8 +59,11 @@ class ProfessorDashboard extends Component {
                     >
                       Crear clase
                     </ListGroupItem>
-                    <ListGroupItem hover onClick={this.loadMyClases.bind(this)}>
-                      Ver lista de Clases
+                    <ListGroupItem
+                      hover
+                      onClick={this.viewAttendance.bind(this)}
+                    >
+                      Ver Asistencia
                     </ListGroupItem>
                     <ListGroupItem
                       hover
@@ -91,8 +103,8 @@ class ProfessorDashboard extends Component {
         return viewCourses;
       case "C_CLA":
         return createClass;
-      case "L_CLA":
-        return classList;
+      case "V_ATT":
+        return viewAttendanceList;
       default:
         return "";
     }
@@ -109,8 +121,8 @@ class ProfessorDashboard extends Component {
   viewMyCourses() {
     this.setState({ componentSelector: "V_COU" });
   }
-  loadMyClases() {
-    this.setState({ componentSelector: "L_CLA" });
+  viewAttendance() {
+    this.setState({ componentSelector: "V_ATT" });
   }
 }
 

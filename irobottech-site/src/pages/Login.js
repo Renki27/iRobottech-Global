@@ -12,6 +12,9 @@ import {
 import "./Login.css";
 import { login } from "../components/UserFunctions";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -25,6 +28,7 @@ class Login extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getAccountType = this.getAccountType.bind(this);
+    this.notify = this.notify.bind(this);
   }
 
   validateForm() {
@@ -69,6 +73,7 @@ class Login extends Component {
         };
         login(account).then(res => {
           if (res) {
+            this.notify(event, "SUCCESS", "Ha iniciado sesión!");
             this.props.history.push(`/profile`);
           }
         });
@@ -76,6 +81,26 @@ class Login extends Component {
         alert(error);
       }
     });
+  };
+
+  //Notificaciones-----------------------------------------------------------------------------
+  notify = (evt, value, msj) => {
+    switch (value) {
+      case "SUCCESS":
+        toast.success(msj);
+        break;
+      case "ERROR":
+        toast.error(msj);
+        break;
+      case "WARN":
+        toast.warn(msj);
+        break;
+      case "INFO":
+        toast.info(msj);
+        break;
+      default:
+        toast.info(msj);
+    }
   };
 
   render() {
@@ -94,9 +119,9 @@ class Login extends Component {
                       "cover" /* Resize the background image to cover the entire container */
                   }}
                 >
-                  <div className="text-white rgba-stylish-strong py-5 px-5 z-depth-4 blue-gradient">
+                  <div className="text-white rgba-stylish-strong py-5 px-5 z-depth-4 peach-gradient">
                     <div className="text-center">
-                      <h3 className="cyan-text mb-5 mt-4 font-weight-bold">
+                      <h3 className="red-text mb-5 mt-4 font-weight-bold">
                         <strong>Iniciar Sesión</strong>
                       </h3>
                     </div>
@@ -129,6 +154,17 @@ class Login extends Component {
                           >
                             Ingresar
                           </Button>
+                          <ToastContainer
+                            position="top-right"
+                            autoClose={5000}
+                            hideProgressBar
+                            newestOnTop
+                            closeOnClick
+                            rtl={false}
+                            pauseOnVisibilityChange
+                            draggable
+                            pauseOnHover
+                          />
                           <div className="mt-3">
                             <NavLink to="/RecoverPage">
                               Haz olvidado la contraseña?

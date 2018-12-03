@@ -92,11 +92,11 @@ class Contact extends Component {
                     <ul className="list-unstyled mb-0 mt-4">
                       <li>
                         <Fa icon="map-marker" size="2x" className="blue-text" />
-                        <p>Direccion</p>
+                        <p>Dirección: Ruta Nacional 135, camino a Zaragoza, Provincia de Alajuela, Palmares, 20702</p>
                       </li>
                       <li>
                         <Fa icon="phone" size="2x" className="blue-text mt-4" />
-                        <p>Telefono</p>
+                        <p>Teléfono: 8322-3222</p>
                       </li>
                       <li>
                         <Fa
@@ -104,7 +104,7 @@ class Contact extends Component {
                           size="2x"
                           className="blue-text mt-4"
                         />
-                        <p>contact@example.com</p>
+                        <p>Email: irobottechstudio@gmail.com</p>
                       </li>
                     </ul>
                   </Col>

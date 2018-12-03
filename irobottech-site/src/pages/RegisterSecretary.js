@@ -67,7 +67,7 @@ class RegisterSecretary extends Component {
       <div>
         <Container className="mt-5">
           <Row className="mt-6">
-            <Col md="8" className="mx-auto">
+            <Col md="10" className="ml-5">
               <Card>
                 <h3 className="text-center font-weight-bold pl-0 my-4">
                   Registro de Secretario/a

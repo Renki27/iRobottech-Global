@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Card, CardBody, Input } from "mdbreact";
 import { registerProfessor } from "../components/UserFunctions";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class RegisterProfessor extends Component {
   constructor(props) {
@@ -20,6 +22,7 @@ class RegisterProfessor extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.inputNumberValidator = this.inputNumberValidator.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.notify = this.notify.bind(this);
   }
 
   handleInputChange(event) {
@@ -77,12 +80,47 @@ class RegisterProfessor extends Component {
       email: this.state.email
     };
     registerProfessor(newProfessor);
+    this.notify(evt, "SUCCESS", "Se Ha registrado la cuenta!");
+    this.resetFields();
   };
 
+  resetFields() {
+    this.setState({
+      firstName: "",
+      secondName: "",
+      lastName1: "",
+      lastName2: "",
+      idNumber: "",
+      birthDate: "",
+      phone: "",
+      address: "",
+      email: ""
+    });
+  }
+
+  //Notificaciones-----------------------------------------------------------------------------
+  notify = (evt, value, msj) => {
+    switch (value) {
+      case "SUCCESS":
+        toast.success(msj);
+        break;
+      case "ERROR":
+        toast.error(msj);
+        break;
+      case "WARN":
+        toast.warn(msj);
+        break;
+      case "INFO":
+        toast.info(msj);
+        break;
+      default:
+        toast.info(msj);
+    }
+  };
   render() {
     return (
       <div>
-     <Container className="mt-5">
+        <Container className="mt-5">
           <Row className="mt-6">
             <Col md="10" className="ml-5">
               <Card>
@@ -231,6 +269,17 @@ class RegisterProfessor extends Component {
                       </button>
                     </div>
                   </form>
+                  <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar
+                    newestOnTop
+                    closeOnClick
+                    rtl={false}
+                    pauseOnVisibilityChange
+                    draggable
+                    pauseOnHover
+                  />
                 </CardBody>
               </Card>
             </Col>
