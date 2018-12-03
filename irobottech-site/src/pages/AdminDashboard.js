@@ -17,6 +17,7 @@ import Enrollment from "./Enrollment";
 import CreateCourse from "./CreateCourse";
 import CreateGroup from "./CreateGroup";
 import CourseManage from "./CourseManage";
+import GroupManager from "./groupManager"
 const registerStudent = <RegisterStudent />;
 const registerProfessor = <RegisterProfessor />;
 const registerSecretary = <RegisterSecretary />;
@@ -25,6 +26,7 @@ const enrollmentStudent = <Enrollment />;
 const createCourse = <CreateCourse />;
 const createGroup = <CreateGroup />;
 const courseManage = <CourseManage />;
+const  groupManage = <GroupManager/>;
 
 class AdminDashboard extends Component {
   constructor(props) {
@@ -80,6 +82,9 @@ class AdminDashboard extends Component {
                     <ListGroupItem hover onClick={this.courseManage.bind(this)}>
                       Modificar Curso
                     </ListGroupItem>
+                    <ListGroupItem hover onClick={this.groupManage.bind(this)}>
+                      Modificar Grupo
+                    </ListGroupItem>
                     <label className="mt-2 font-weight-bold deep-orange-text">
                       Cuenta
                     </label>
@@ -117,6 +122,8 @@ class AdminDashboard extends Component {
         return createGroup;
       case "C_COURSEMANAGER":
         return courseManage;
+        case "C_GROUPMANAGER":
+        return groupManage;
       default:
         return "";
     }
@@ -145,6 +152,9 @@ class AdminDashboard extends Component {
   }
   courseManage() {
     this.setState({ componentSelector: "C_COURSEMANAGER" });
+  }
+  groupManage() {
+    this.setState({ componentSelector: "C_GROUPMANAGER" });
   }
 }
 

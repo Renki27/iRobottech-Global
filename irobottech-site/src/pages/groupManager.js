@@ -9,13 +9,11 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 const state = {
-  ST_GROUP_NUMBER: 0,
-  PROF_ID_ACCOUNT: null,
-  PROF_ID_PERSON: null,
+  ST_GROUP_NUMBER: null,
   COURSE_NAME: null,
   AVAILABLE_QUOTA: null,
-  professors: [{}],
   courses: [{}],
+  groups: [{}],
   category: 'Sin asignar',
   typeCount: null,
   buttonDisabled: false,
@@ -93,61 +91,9 @@ function onRowSelect(row, isSelected, e, rowIndex) {
   rowIndex = rowIndex + 1;
 
   //Valida que no existan campos vacios
-  if (state.COURSE_NAME === null || state.PROF_ID_PERSON === null || state.AVAILABLE_QUOTA === null) {
-    alert("Tiene Campos vacios");
-    this.setState({ selected: [] });
-  } else {
-    if (state.typeCount == 0) {
 
-      if (!isSelected) {
-        axios.delete(`/RegisterSchedule/scheduleD/${rowIndex}/${state.ST_GROUP_NUMBER}/${state.COURSE_NAME}`)
-          .then(response => {
-          });
-        state.days.some(function (json) {
-          if (json.dia == res[0]) {
-            state.typeCount = state.typeCount + 1;
-            return json.inicio = "00:00", json.fin = "00:00";
-          } else {
-            return;
-          }
-        })
-      } else {
-        this.notify(evt, "WARN", "La cantidad de dias esta completa");
-        this.setState({ selected: [] });
-      }
-    } else {
-      if ((parseInt(res[2]) - parseInt(res[1])) <= 0 || (parseInt(res[2]) - parseInt(res[1])) == parseInt(res[2])) {
-        this.notify(evt, "WARN", "Una de las horas esta mal");
-        this.setState({ selected: [] });
-      } else if (isSelected && (parseInt(res[2]) - parseInt(res[1])) > 0) {
 
-        const stateSchudele = {
-          DAY_NUMBER: rowIndex,
-          ST_GROUP_NUMBER: state.ST_GROUP_NUMBER,
-          COURSE_NAME: state.COURSE_NAME,
-          ASSIGNED_DAY: res[0],
-          ASSIGNED_HOURS: (parseInt(res[2]) - parseInt(res[1])),
-          START_TIME: res[1],
-          END_TIME: res[2]
-        }
-
-        fetch("/RegisterSchedule", {
-          method: "POST",
-          body: JSON.stringify(stateSchudele),
-
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json"
-          }
-        }).then(res => res.json()).then(data => {
-          console.log(data);
-        })
-          .catch(err => console.error(err));
-
-      }
-
-      state.typeCount = state.typeCount - 1;
-    }
+  if (state.typeCount == 0) {
 
     if (!isSelected) {
       axios.delete(`/RegisterSchedule/scheduleD/${rowIndex}/${state.ST_GROUP_NUMBER}/${state.COURSE_NAME}`)
@@ -161,17 +107,65 @@ function onRowSelect(row, isSelected, e, rowIndex) {
           return;
         }
       })
+    } else {
+      alert("Se seleccionó el máximo posible de días")
+      this.setState({ selected: [] });
     }
+  } else {
+    if ((parseInt(res[2]) - parseInt(res[1])) <= 0 || (parseInt(res[2]) - parseInt(res[1])) == parseInt(res[2])) {
+      alert("Una de las horas no es correcta");
+      this.setState({ selected: [] });
+    } else if (isSelected && (parseInt(res[2]) - parseInt(res[1])) > 0) {
+
+      const stateSchudele = {
+        DAY_NUMBER: rowIndex,
+        ST_GROUP_NUMBER: state.ST_GROUP_NUMBER,
+        COURSE_NAME: state.COURSE_NAME,
+        ASSIGNED_DAY: res[0],
+        ASSIGNED_HOURS: (parseInt(res[2]) - parseInt(res[1])),
+        START_TIME: res[1],
+        END_TIME: res[2]
+      }
+
+      fetch("/RegisterSchedule", {
+        method: "POST",
+        body: JSON.stringify(stateSchudele),
+
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      }).then(res => res.json()).then(data => {
+        console.log(data);
+      })
+        .catch(err => console.error(err));
+
+    }
+
+    state.typeCount = state.typeCount - 1;
+  }
+
+  if (!isSelected) {
+    axios.delete(`/RegisterSchedule/scheduleD/${rowIndex}/${state.ST_GROUP_NUMBER}/${state.COURSE_NAME}`)
+      .then(response => {
+      });
+    state.days.some(function (json) {
+      if (json.dia == res[0]) {
+        state.typeCount = state.typeCount + 1;
+        return json.inicio = "00:00", json.fin = "00:00";
+      } else {
+        return;
+      }
+    })
   }
 }
 
-export class CreateGroup extends React.Component {
+
+export class groupManager extends React.Component {
 
   handleBtnClick = () => {
     this.refs.nameCol.cleanSelected();
-    axios.delete(`/RegisterGroup/groupD/${state.ST_GROUP_NUMBER}/${state.COURSE_NAME}`)
-      .then(response => {
-      });
+
     document.getElementById("courseSelect").disabled = false;
     state.buttonDisabled = false;
     this.setState({ buttonDisabled: false });
@@ -183,68 +177,46 @@ export class CreateGroup extends React.Component {
 
   componentDidMount() {
 
-    axios.get('/RegisterPerson')
-      .then(response => {
-        state.professors = response.data;
-        this.setState({
-          professors: response.data
-        });
-      });
-
 
     axios.get("/RegisterCourse").then(response => {
       state.courses = response.data;
       this.setState({
         courses: response.data
       });
-      document.getElementById("schedule").style.display = "none";
-      document.getElementById("btnChange").style.display = "none";
-
     });
+
+
+
+
+
+    document.getElementById("schedule").style.display = "none";
+    document.getElementById("btnChange").style.display = "none";
+
+
   }
 
-  professorSelect = this.professorSelect.bind(this);
   valueQuota = this.valueQuota.bind(this);
   courseSelect = this.courseSelect.bind(this);
+  numberCourse = this.numberCourse.bind(this);
   addGroup = this.addGroup.bind(this);
 
   addGroup(event) {
 
-    if (state.COURSE_NAME != null && state.PROF_ID_PERSON != null && state.AVAILABLE_QUOTA != null) {
+    document.getElementById("courseSelect").disabled = true;
+    state.buttonDisabled = true;
+    this.setState({ buttonDisabled: true });
+    document.getElementById("schedule").style.display = "block";
+    document.getElementById("btnAddCourse").style.display = "none";
+    document.getElementById("btnChange").style.display = "block";
+  }
 
-      const stateGroup = {
-        ST_GROUP_NUMBER: state.ST_GROUP_NUMBER,
-        PROF_ID_ACCOUNT: state.PROF_ID_ACCOUNT,
-        PROF_ID_PERSON: state.PROF_ID_PERSON,
-        COURSE_NAME: state.COURSE_NAME,
-        AVAILABLE_QUOTA: state.AVAILABLE_QUOTA
-      }
+  numberCourse(event) {
+    state.ST_GROUP_NUMBER = event.value;
+    this.setState({ ST_GROUP_NUMBER: event.value });
 
-      fetch("/RegisterGroup", {
-        method: "POST",
-        body: JSON.stringify(stateGroup),
-
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        }
-      })
-        .then(res => { res.json(); this.notify(evt, "SUCCESS", "Se ha guarado!"); })
-        .then(data => {
-          console.log(data);
-        })
-        .catch(err => console.error(err));
-
-      document.getElementById("courseSelect").disabled = true;
-      state.buttonDisabled = true;
-      this.setState({ buttonDisabled: true });
-      document.getElementById("schedule").style.display = "block";
-      document.getElementById("btnAddCourse").style.display = "none";
-      document.getElementById("btnChange").style.display = "block";
-
-    } else {
-      alert("Faltan campos  que llenar")
-    }
+    axios.delete(`/RegisterSchedule/scheduleAll/${state.ST_GROUP_NUMBER}/${state.COURSE_NAME}`)
+      .then(response => {
+      });
   }
 
 
@@ -260,17 +232,6 @@ export class CreateGroup extends React.Component {
       , { dia: "Sábado", inicio: "00:00", fin: "00:00" }];
 
 
-    axios.get(`/RegisterGroup/group/${state.COURSE_NAME}`)
-      .then(response => {
-        if (response.data > 0) {
-          state.ST_GROUP_NUMBER = response.data + 1;
-          this.setState({ ST_GROUP_NUMBER: response.data + 1 });
-        }
-
-      });
-    state.ST_GROUP_NUMBER = state.ST_GROUP_NUMBER + 1;
-    this.setState({ ST_GROUP_NUMBER: state.ST_GROUP_NUMBER + 1 });
-
     axios.get(`/RegisterCourse/course/${state.COURSE_NAME}`)
       .then(response => {
         CourseType(response.data.CATEGORY)
@@ -278,19 +239,15 @@ export class CreateGroup extends React.Component {
         this.setState({ category: response.data.CATEGORY })
       });
 
-
-  }
-
-  professorSelect(event) {
-    state.PROF_ID_PERSON = event.value;
-    this.setState({ PROF_ID_PERSON: event.value });
-
-    state.professors.some(function (json) {
-      if (state.PROF_ID_PERSON == json.ID_PERSON) {
-        return (state.PROF_ID_ACCOUNT = json.ID_ACCOUNT);
-      } else {
-        return;
-      }
+    axios.get(`/RegisterGroup/groupFind/${state.COURSE_NAME}`).then(response => {
+      state.groups = response.data;
+      state.AVAILABLE_QUOTA = response.data.AVAILABLE_QUOTA;
+      this.setState({
+        groups: response.data
+      });
+      this.setState({
+        AVAILABLE_QUOTA: response.data.AVAILABLE_QUOTA
+      });
     });
   }
 
@@ -300,9 +257,12 @@ export class CreateGroup extends React.Component {
   }
 
   handleSubmit = event => {
-
+    axios.put(`/RegisterGroup/groupU/${state.AVAILABLE_QUOTA}/${state.ST_GROUP_NUMBER}/${state.COURSE_NAME}`)
+      .then(response => {
+      });
     event.preventDefault();
   };
+
 
   notify = (evt, value, msj) => {
     switch (value) {
@@ -330,20 +290,21 @@ export class CreateGroup extends React.Component {
           <Col md="10" className="ml-5">
             <Card style={{ width: "50rem" }}>
               <CardBody>
-                <p className="h5 text-center mb-4">Crear Grupo</p>
-                <label>Elija al profesor: </label>
-                <Select onChange={this.professorSelect} options={state.professors.map(function (json) {
-                  return { label: json.PROFESOR_NAME, value: json.ID_PERSON };
-                })} />
-                <br></br>
-                <label>Elija el curso: </label>
-                <Select id="courseSelect" isDisabled={state.buttonDisabled} onChange={this.courseSelect} options={state.courses.map(function (json) {
-                  return { label: json.COURSE_NAME, value: json.COURSE_NAME };
-                })} />
-                <Button id="btnChange" onClick={this.handleBtnClick}>Cambiar Curso</Button>
-                <br></br>
-                <Input label="Cupo de grupo" name="AVAILABLE_QUOTA" type="text" value={state.AVAILABLE_QUOTA} onChange={this.valueQuota} />
-                <br></br>
+                <p className="h5 text-center mb-4">Modificar Grupo</p>
+                <div className="grey-text">
+                  <br></br>
+                  <label>Elija el curso: </label>
+                  <Select id="courseSelect" isDisabled={state.buttonDisabled} onChange={this.courseSelect} options={state.courses.map(function (json) {
+                    return { label: json.COURSE_NAME, value: json.COURSE_NAME };
+                  })} />
+                  <Button id="btnChange" onClick={this.handleBtnClick}>Cambiar Curso</Button>
+                  <br></br>
+                  <Select onChange={this.numberCourse} options={state.groups.map(function (json) {
+                    return { label: json.ST_GROUP_NUMBER, value: json.ST_GROUP_NUMBER };
+                  })} />
+                  <Input label="Cupo de grupo" name="AVAILABLE_QUOTA" type="text" value={state.AVAILABLE_QUOTA} onChange={this.valueQuota} />
+                  <br></br>
+                </div>
                 <Button id="btnAddCourse" onClick={this.addGroup}>Asignar Horario</Button>
                 <form onSubmit={this.handleSubmit} id="schedule">
                   <label>El curso seleccionado es de tipo: {state.category}</label>
@@ -354,7 +315,7 @@ export class CreateGroup extends React.Component {
                     <TableHeaderColumn dataField='fin' editable={{ type: 'time' }} width="100">Hora Fin</TableHeaderColumn>
                   </BootstrapTable>
                   <div className="text-center">
-                    <Button type="submit" color="primary" id="Register">Crear Curso</Button>
+                    <Button type="submit" color="primary" id="Register">Actualizar Curso</Button>
                     <ToastContainer
                       position="top-right"
                       autoClose={5000}
@@ -377,4 +338,4 @@ export class CreateGroup extends React.Component {
   }
 }
 
-export default CreateGroup;
+export default groupManager;
