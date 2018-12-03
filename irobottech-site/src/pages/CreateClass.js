@@ -102,6 +102,7 @@ class CreateClass extends Component {
     this.state.groupNumber = evt.value;
     this.setState({ groupNumber: evt.value });
     this.getLastClass();
+    this.getStudents();
   };
 
   handleOnSelectAll = (isSelect, rows) => {
@@ -318,14 +319,7 @@ class CreateClass extends Component {
                 </h3>
                 <CardBody>
                   <div className="row" />
-                  <div className="text-center py-4 mt-3">
-                    <button
-                      onClick={this.getStudents}
-                      className="btn btn-outline-deep-orange"
-                    >
-                      Cargar
-                    </button>
-                  </div>
+
                   <div>
                     <BootstrapTable
                       data={this.state.students}

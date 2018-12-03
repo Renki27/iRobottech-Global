@@ -46,8 +46,8 @@ class ClassList extends Component {
       
     return (
       <div>
-        <Row>
-          <Col className="mx-auto">
+        <Row className="mt-6">
+          <Col md="12" className="ml-5">
             <Card>
               <CardBody>
                 <div>

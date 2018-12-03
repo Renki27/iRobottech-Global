@@ -16,12 +16,13 @@ import ManageAccount from "./ManageAccount";
 import Enrollment from "./Enrollment";
 import CreateCourse from "./CreateCourse";
 import CreateGroup from "./CreateGroup";
-import EnrollmentManage from './EnrollmentManage';
-import ShowEnrollments from './ShowEnrollments'
-import DownloadFile from './DownloadFile'
+import EnrollmentManage from "./EnrollmentManage";
+import ShowEnrollments from "./ShowEnrollments";
+import DownloadFile from "./DownloadFile";
 import ViewAllGroupsNCourses from "./ViewAllGroupsNCourses";
 import CourseManage from "./CourseManage";
 import GroupManager from "./groupManager"
+import ClassList from "./ClassList";
 const registerStudent = <RegisterStudent />;
 const registerProfessor = <RegisterProfessor />;
 const registerSecretary = <RegisterSecretary />;
@@ -32,9 +33,11 @@ const createGroup = <CreateGroup />;
 const enrollmentManage = <EnrollmentManage />;
 const showEnrollments = <ShowEnrollments />;
 const downloadFile = <DownloadFile />;
-const viewAllGroupsNCourses = <ViewAllGroupsNCourses/>
 const courseManage = <CourseManage />;
 const  groupManage = <GroupManager/>;
+const viewAllGroupsNCourses = <ViewAllGroupsNCourses />;
+const viewAllClasses = <ClassList />;
+import jwt_decode from "jwt-decode";
 
 class AdminDashboard extends Component {
   constructor(props) {
@@ -45,6 +48,13 @@ class AdminDashboard extends Component {
     this.selector = this.selector.bind(this);
   }
 
+  componentDidMount() {
+    const token = localStorage.usertoken;
+    const decoded = jwt_decode(token);
+    this.setState({
+      username: decoded.username
+    });
+  }
   render() {
     return (
       <div>
@@ -54,6 +64,7 @@ class AdminDashboard extends Component {
               <h5 className="text-center font-weight-bold pl-0 my-4 deep-orange-text">
                 Panel de Administrador
               </h5>
+              <h6>{this.state.username}</h6>
               <CardBody>
                 <div className="left-box align-box">
                   <ListGroup>
@@ -78,10 +89,16 @@ class AdminDashboard extends Component {
                     <ListGroupItem hover onClick={this.enrollment.bind(this)}>
                       Matricular Estudiante
                     </ListGroupItem>
-                    <ListGroupItem hover onClick={this.enrollmentManage.bind(this)}>
+                    <ListGroupItem
+                      hover
+                      onClick={this.enrollmentManage.bind(this)}
+                    >
                       Administrar Matriculas
                     </ListGroupItem>
-                    <ListGroupItem hover onClick={this.showEnrollments.bind(this)}>
+                    <ListGroupItem
+                      hover
+                      onClick={this.showEnrollments.bind(this)}
+                    >
                       Ver matriculas por Estudiante
                     </ListGroupItem>
                     <label className="mt-2 font-weight-bold deep-orange-text">
@@ -93,7 +110,10 @@ class AdminDashboard extends Component {
                     <ListGroupItem hover onClick={this.createGroup.bind(this)}>
                       Crear Grupo
                     </ListGroupItem>
-                    <ListGroupItem hover onClick={this.getAllGroupsNCourses.bind(this)}>
+                    <ListGroupItem
+                      hover
+                      onClick={this.getAllGroupsNCourses.bind(this)}
+                    >
                       Ver Cursos y Grupos
                     </ListGroupItem>
                     <ListGroupItem hover onClick={this.courseManage.bind(this)}>
@@ -101,12 +121,21 @@ class AdminDashboard extends Component {
                     </ListGroupItem>
                     <ListGroupItem hover onClick={this.groupManage.bind(this)}>
                       Modificar Grupo
+                      </ListGroupItem>
+                    <ListGroupItem
+                      hover
+                      onClick={this.getAllClasses.bind(this)}
+                    >
+                      Ver Clases
                     </ListGroupItem>
                     <label className="mt-2 font-weight-bold deep-orange-text">
                       Cuenta
                     </label>
 
-                    <ListGroupItem hover onClick={this.manageAccount.bind(this)}>
+                    <ListGroupItem
+                      hover
+                      onClick={this.manageAccount.bind(this)}
+                    >
                       Administrar Cuentas
                     </ListGroupItem>
                     <label className="mt-2 font-weight-bold deep-orange-text">
@@ -146,16 +175,18 @@ class AdminDashboard extends Component {
         return createGroup;
       case "ENR_MAN":
         return enrollmentManage;
-        case "SHO_ENR":
+      case "SHO_ENR":
         return showEnrollments;
-        case "DOW_FIL":
+      case "DOW_FIL":
         return downloadFile;
-        case "V_GNC":
+      case "V_GNC":
         return viewAllGroupsNCourses;
         case "C_COURSEMANAGER":
         return courseManage;
         case "C_GROUPMANAGER":
         return groupManage;
+      case "L_CLA":
+        return viewAllClasses;
       default:
         return "";
     }
@@ -185,10 +216,10 @@ class AdminDashboard extends Component {
   enrollmentManage() {
     this.setState({ componentSelector: "ENR_MAN" });
   }
-  showEnrollments(){
+  showEnrollments() {
     this.setState({ componentSelector: "SHO_ENR" });
   }
-  downloadFile(){
+  downloadFile() {
     this.setState({ componentSelector: "DOW_FIL" });
   }
   getAllGroupsNCourses() {
@@ -199,6 +230,9 @@ class AdminDashboard extends Component {
   }
   groupManage() {
     this.setState({ componentSelector: "C_GROUPMANAGER" });
+  }
+  getAllClasses() {
+    this.setState({ componentSelector: "L_CLA" });
   }
 }
 

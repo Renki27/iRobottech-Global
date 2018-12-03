@@ -162,7 +162,6 @@ export class CreateCourse extends React.Component {
             </Container >
         );
     }
-
 };
 
 export default CreateCourse;
