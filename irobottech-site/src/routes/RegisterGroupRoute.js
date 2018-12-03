@@ -18,6 +18,15 @@ router.get("/", (req, res) => {
 
 });
 
+router.get("/groupFind/:name", (req, res) => {
+
+    groupData.findAll({where: { COURSE_NAME: req.params.name}})
+        .then(function (group) {
+            res.json(group);
+        })
+
+});
+
 router.get("/group/:name", (req, res) => {
     groupData.count({ where: { COURSE_NAME: req.params.name} }
     ).then(function (account) {
@@ -28,6 +37,11 @@ router.get("/group/:name", (req, res) => {
             console.log(res.err);
         }
     });
+});
+
+router.put("/groupU/:quota/:numberC/:name", (req, res) => {
+    groupData.update({AVAILABLE_QUOTA: req.params.quota},{ where: {ST_GROUP_NUMBER: req.params.numberC, COURSE_NAME:  req.params.name}})
+        .then(result => res.json(result))
 });
 
 router.delete("/groupD/:numberC/:name", (req, res) => {

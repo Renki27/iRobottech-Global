@@ -12,25 +12,21 @@ import "./AdminDashboard.css";
 import RegisterStudent from "./RegisterStudent";
 import RegisterProfessor from "./RegisterProfessor";
 import RegisterSecretary from "./RegisterSecretary";
-import ManageAccount from "./ManageAccount";
+import DisableAccount from "./DisableAccount";
 import Enrollment from "./Enrollment";
 import CreateCourse from "./CreateCourse";
 import CreateGroup from "./CreateGroup";
-import EnrollmentManage from './EnrollmentManage';
-import ShowEnrollments from './ShowEnrollments'
-import DownloadFile from './DownloadFile'
-import ViewAllGroupsNCourses from "./ViewAllGroupsNCourses";
+import CourseManage from "./CourseManage";
+import GroupManager from "./groupManager"
 const registerStudent = <RegisterStudent />;
 const registerProfessor = <RegisterProfessor />;
 const registerSecretary = <RegisterSecretary />;
-const manageAccount = <ManageAccount />;
+const disableAccount = <DisableAccount />;
 const enrollmentStudent = <Enrollment />;
 const createCourse = <CreateCourse />;
 const createGroup = <CreateGroup />;
-const enrollmentManage = <EnrollmentManage />;
-const showEnrollments = <ShowEnrollments />;
-const downloadFile = <DownloadFile />;
-const viewAllGroupsNCourses = <ViewAllGroupsNCourses/>
+const courseManage = <CourseManage />;
+const  groupManage = <GroupManager/>;
 
 class AdminDashboard extends Component {
   constructor(props) {
@@ -66,19 +62,13 @@ class AdminDashboard extends Component {
                       Profesor
                     </ListGroupItem>
                     <ListGroupItem hover onClick={this.loaderRegSec.bind(this)}>
-                      Secretario/a
+                      Secretaria/o
                     </ListGroupItem>
                     <label className="mt-2 font-weight-bold deep-orange-text">
                       Estudiante
                     </label>
                     <ListGroupItem hover onClick={this.enrollment.bind(this)}>
                       Matricular Estudiante
-                    </ListGroupItem>
-                    <ListGroupItem hover onClick={this.enrollmentManage.bind(this)}>
-                      Administrar Matriculas
-                    </ListGroupItem>
-                    <ListGroupItem hover onClick={this.showEnrollments.bind(this)}>
-                      Ver matriculas por Estudiante
                     </ListGroupItem>
                     <label className="mt-2 font-weight-bold deep-orange-text">
                       Cursos
@@ -89,21 +79,17 @@ class AdminDashboard extends Component {
                     <ListGroupItem hover onClick={this.createGroup.bind(this)}>
                       Crear Grupo
                     </ListGroupItem>
-                    <ListGroupItem hover onClick={this.getAllGroupsNCourses.bind(this)}>
-                      Ver Cursos y Grupos
+                    <ListGroupItem hover onClick={this.courseManage.bind(this)}>
+                      Modificar Curso
+                    </ListGroupItem>
+                    <ListGroupItem hover onClick={this.groupManage.bind(this)}>
+                      Modificar Grupo
                     </ListGroupItem>
                     <label className="mt-2 font-weight-bold deep-orange-text">
                       Cuenta
                     </label>
-
-                    <ListGroupItem hover onClick={this.manageAccount.bind(this)}>
-                      Administrar Cuentas
-                    </ListGroupItem>
-                    <label className="mt-2 font-weight-bold deep-orange-text">
-                      Archivos
-                    </label>
-                    <ListGroupItem hover onClick={this.downloadFile.bind(this)}>
-                      Descargar/Cargar Curriculums
+                    <ListGroupItem hover onClick={this.loaderDisAcc.bind(this)}>
+                      Deshabilitar Cuenta
                     </ListGroupItem>
                   </ListGroup>
                 </div>
@@ -126,22 +112,18 @@ class AdminDashboard extends Component {
         return registerProfessor;
       case "R_SEC":
         return registerSecretary;
-      case "MAN_ACC":
-        return manageAccount;
+      case "DIS_ACC":
+        return disableAccount;
       case "ENROLL":
         return enrollmentStudent;
       case "C_COURSE":
         return createCourse;
       case "C_GROUP":
         return createGroup;
-      case "ENR_MAN":
-        return enrollmentManage;
-        case "SHO_ENR":
-        return showEnrollments;
-        case "DOW_FIL":
-        return downloadFile;
-        case "V_GNC":
-        return viewAllGroupsNCourses;
+      case "C_COURSEMANAGER":
+        return courseManage;
+        case "C_GROUPMANAGER":
+        return groupManage;
       default:
         return "";
     }
@@ -156,8 +138,8 @@ class AdminDashboard extends Component {
   loaderRegSec() {
     this.setState({ componentSelector: "R_SEC" });
   }
-  manageAccount() {
-    this.setState({ componentSelector: "MAN_ACC" });
+  loaderDisAcc() {
+    this.setState({ componentSelector: "DIS_ACC" });
   }
   enrollment() {
     this.setState({ componentSelector: "ENROLL" });
@@ -168,17 +150,11 @@ class AdminDashboard extends Component {
   createGroup() {
     this.setState({ componentSelector: "C_GROUP" });
   }
-  enrollmentManage() {
-    this.setState({ componentSelector: "ENR_MAN" });
+  courseManage() {
+    this.setState({ componentSelector: "C_COURSEMANAGER" });
   }
-  showEnrollments(){
-    this.setState({ componentSelector: "SHO_ENR" });
-  }
-  downloadFile(){
-    this.setState({ componentSelector: "DOW_FIL" });
-  }
-  getAllGroupsNCourses() {
-    this.setState({ componentSelector: "V_GNC" });
+  groupManage() {
+    this.setState({ componentSelector: "C_GROUPMANAGER" });
   }
 }
 
