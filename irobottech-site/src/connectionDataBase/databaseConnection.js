@@ -1,7 +1,7 @@
 const mysql = require("mysql");
 const Sequelize = require("sequelize");
 const mysqlConnection = {};
-const sequelize = new Sequelize("irobottechdb", "root", "", {
+const sequelize = new Sequelize("irobottechdb", "root", "root", {
   host: "localhost",
   dialect: "mysql",
   operatorsAliases: false,
